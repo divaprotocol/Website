@@ -40,7 +40,7 @@ export default function Header() {
         </AppBar>
       )}
       <Toolbar sx={{ justifyContent: "flex-end" }}>
-      <Button variant="contained" href="https://docs.divaprotocol.io/"  target="_blank" sx={{mr:"55px", mt:"40px"}}   >
+      <Button variant="contained" href="https://docs.divaprotocol.io/"  target="_blank" sx={{mr:"55px", mt:"40px", minHeight:"55px", fontSize:"1rem"}}   >
         LAUNCH TESTNET APP
         </Button>
       </Toolbar>
