@@ -15,7 +15,7 @@ export default function Header() {
   }, [showBanner])
 
   return (
-    <Box>
+    <Box >
     <AppBar position="static" sx={{ background: 'inherit', boxShadow: 'none' }}>
       {showBanner && (
         <AppBar
@@ -40,7 +40,9 @@ export default function Header() {
         </AppBar>
       )}
       <Toolbar sx={{ justifyContent: "flex-end" }}>
-      <Button variant="contained" href="https://docs.divaprotocol.io/"  target="_blank" >LAUNCH TESTNET APP</Button>
+      <Button variant="contained" href="https://docs.divaprotocol.io/"  target="_blank" sx={{mr:"55px", mt:"40px"}}   >
+        LAUNCH TESTNET APP
+        </Button>
       </Toolbar>
     </AppBar>
   </Box>
