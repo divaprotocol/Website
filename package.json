@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "author": "The Diva Team",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.8.3",
+    "@mui/material": "^5.8.3"
+  },
   "private": true,
   "workspaces": [
     "packages/**/*"

@@ -7,6 +7,7 @@ import { ReadingIcon } from '../components/ReadingIcon';
 import { getAllPosts, getAllSlugs } from './api/getPosts'
 import Link from 'next/link';
 import { DESCRIPTION, HOME, TITLE } from '../constants';
+import Header from '../components/Header';
 
 export type Post = {
   author: string;
@@ -38,6 +39,7 @@ export const getStaticProps = async () => {
 const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return (
     <>
+    
       <Head>
         <title>Diva Protocol - Derivatives on the Ethereum blockchain</title>
         <meta name="description" content={DESCRIPTION} />
@@ -50,8 +52,8 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
         <meta property="og:image" content={`${HOME}/logo.svg`} />
         <meta property="og:description" content={DESCRIPTION} />
       </Head>
-
       <main className="moving-gradient text-white overflow-auto">
+      <Header/>
         <div className="flex h-full flex-col">
           <figure className="h-3/4 md:h-full p-10 md:p-0 flex flex-col md:justify-center md:items-center">
             <DivaLogo
