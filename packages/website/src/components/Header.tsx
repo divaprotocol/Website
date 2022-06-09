@@ -23,7 +23,7 @@ export default function Header() {
           sx={{ background: '#3393E0', boxShadow: 'none' }}
         >
           <Box textAlign="center">
-            <Button href="https://docs.divaprotocol.io/" sx={{ color: '#FFFFFF' }}>
+            <Button href="https://docs.divaprotocol.io/"  target="_blank" sx={{ color: '#FFFFFF' }}>
               🚀 Learn how to earn $DIVA tokens for trying out the app
             </Button>
             <Button
@@ -40,7 +40,7 @@ export default function Header() {
         </AppBar>
       )}
       <Toolbar sx={{ justifyContent: "flex-end" }}>
-      <Button variant="contained" href="https://docs.divaprotocol.io/" >LAUNCH TESTNET APP</Button>
+      <Button variant="contained" href="https://docs.divaprotocol.io/"  target="_blank" >LAUNCH TESTNET APP</Button>
       </Toolbar>
     </AppBar>
   </Box>
