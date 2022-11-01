@@ -19,7 +19,7 @@ out some bugs that we wouldn't have spotted otherwise.
 
 Here some key testnet statistics to highlight:
 
-- Total contingent pools created: **170k**
+- Total contingent pools created: **170.0k**
 - Unique addresses participated: **26.1k**
 - Number accounts that completed all tasks: **13.8k**
 - Discord users: **33k** (vs. 800 before the testnet)
@@ -27,7 +27,75 @@ Here some key testnet statistics to highlight:
 ## DIVA token reward
 The most important metric that testnet participants are eagerly waiting for is the DIVA token reward that they receive for their participation. 
 The reward announcement got delayed as we introduced an [additional verification step](#https://www.divaprotocol.io/posts/diva-verification-announcement)
-to address the community's concern that some users may have used multiple accounts to increase their reward and dilute the reward of those using a single account.  
+to address the community's concern that some users may have used multiple accounts to increase their reward and dilute the reward of those using a single account.
+
+Let's briefly 
+
+## Verification process
+Let's recap the timeline:
+* 8th October: announcement of the verification process on Discord and Twitter
+* 14th October: the verification process started
+* 17th October: the verificatoin process ended
+* 18th October: we opened a verification-issues channel where users that encountered technical issues during the verification process could report their case.  
+
+
+
+* Users that verified on first attempt
+* User that were blocked on first attempt because of using a VPN but got verified on second attempt
+* Holders of an 888Whales NFT
+* Quiz winners 
+* Users that 
+
+Out of the 26.1k accounts that participated in the testnet, roughly 13.7k participants were considered eligible.
+
+
+roughly 14.0k managed to verify with the Double Counter bot. The following users were automatically considered verified:
+
+
+If an account has been suspected to be a multi-account, none of the related accounts is eligible. 
+
+If a user was blocked due to the use of a VPN but managed to verify without, it was considered verified.
+
+Exceptions:
+
+* Users that reached out in the verification-issues channel because they encountered technical issues or missed the verification, were added manually
+
+
+To keep the verification process efficient and private, we have decided to go with the Double Counter bot. All verification attempts have been logged and served as the 
+basis for our analysis.
+ 
+* Registered: only users that registered their wallet in our Discord's #register channel 
+* Verified: Users that got verified directly by the Double Counter bot, are holding an 888Whales NFT or are part of the quiz leaderboard
+
+Users that have been verified after being blocked have been investigated on a manual basis. Some of them were unlocked. 
+
+
+The DIVA Token claim has been allocated to users that have completed below.
+
+
+
+
+Some users that have been blocked initially but were able to register afterwards
+
+* **Registered**: You had to register
+* **Verified**: 
+* **888Whale NFT holder**: 
+* **Quiz winners**: 
+
+Rules:
+* Registered and verified 
+OR 
+* Registered
+* AND Verified OR 888Whales NFT holder OR Quiz winner
+* AND Verified and manually unblocked
+
+After excluding multi-accounts, testnet participants have collected a total of 80m points which results in the following rewards for testnet users:
+
+- **4.4** DIVA tokens per completed task (200 points)
+- **100 DIVA** tokens for full completion (4500 points)
+- **200 DIVA tokens** for full completion and ownership of an 888Whale NFT (9000 points)
+
+You can check your eligibility status.
 
 The verification process resulted in c. 50% of all registered accounts that interacted with the DIVA App being verified. 
 
@@ -36,22 +104,12 @@ Let us shed some light on the verification process:
 We understand that despite the announcement 6 days ahead of the a verification process and a 3 day verification window, some users have missed the verification process due to 
 personal reasons. Those that reached out via discord were added manually to the list of verified users. 
 
-After adjusting for multi-accounts, testnet participants have collected a total of 80m points which results in the following rewards for testnet users:
-
-- **4.4** DIVA tokens per completed task (200 points)
-- **100 DIVA** tokens for full completion (4500 points)
-- **200 DIVA tokens** for full completion and ownership of an 888Whale NFT (9000 points)
 
 * Opened an issues channel in our discord to give users a chance to report if they had technical issues or missed the verification process. 
 * Whale holders and quiz participants were automatically verified, even if they missed it.
 
 
-Rules:
-* Registered and verified 
-OR 
-* Registered
-* AND Verified OR 888Whales NFT holder OR Quiz winner
-* AND Verified and manually unblocked
+
 
 
 ## DIVA token reward
