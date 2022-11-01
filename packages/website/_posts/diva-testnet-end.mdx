@@ -31,14 +31,14 @@ Here some key testnet statistics to highlight:
 
 ## DIVA token reward
 The most important metric that testnet participants are eagerly waiting for is the DIVA token reward that they receive for their participation. 
-As the reward announcement got delayed due to the [additional verification step](#https://www.divaprotocol.io/posts/diva-verification-announcement)
+As the reward announcement got delayed due to the [additional verification step](https://www.divaprotocol.io/posts/diva-verification-announcement)
 requested by our community to address the problem of multi-accounts, we don't want you to wait any longer. Here the rewards:
 
 - **4.4** DIVA tokens per completed task (200 points)
 - **100 DIVA** tokens for full completion (4500 points)
 - **200 DIVA tokens** for full completion and ownership of an 888Whale NFT (9000 points)
 
-You can check your reward [here](#https://www.divaprotocol.io/). Overall, a total of 1.12m DIVA tokens has been allocated to more than 13'600 users, 
+You can check your reward [here](https://www.divaprotocol.io/). Overall, a total of 1.12m DIVA tokens has been allocated to more than 13'600 users, 
 12% more than originally planned due to rounding up the rewards.
 
 Tokens can be claimed once the token is launched which is expected to coincide with the mainnet launch of the protocol in Q1 2023.
@@ -55,12 +55,17 @@ Let's recap the timeline:
 * 14th October: start of the verification process
 * 17th October: end of the verification process
 
-Users that are eligible for the reward:
-* Users that registered their wallet with the #testnet bot during the testnet phase
-* Users that got verified by the Double Counter bot on first attempt
-* User that were blocked on first attempt because of using a VPN but got verified by the Double Counter bot on second attempt
-* Holders of an 888Whales NFT
+Registered accounts that fall in one of the following buckets were considerd verified:
+* Accounts that got verified by the Double Counter bot on first attempt
+* Accounts that were blocked on first attempt because of using a VPN but got verified by the Double Counter bot on second attempt
+* Accounts that hold an [888Whales NFT](https://opensea.io/collection/888whales)
 * Quiz winners
+
+Roughly 2'000 accounts were blocked by the Double Counter bot during the verification process. We went through all the cases to study the patterns used by 
+multi-accounts. Cognizant of households, that may have share that share the same WiFi those where it was not clear. 
+
+During this exercise we have gained valuable insights into how to catch multi-accounts. To avoid giving those users ideas how to circumvent it, we have decided not to 
+share the exact details of our analysis.
 
 
 Despite giving sufficient heads-up and a three day verification window, we are aware that some community members were not able to verify due to personal issues. To address 
