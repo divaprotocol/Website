@@ -11,7 +11,7 @@ import { GetStaticProps } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { useEffect, useState } from "react";
 import { RandomVerticalSvgLine } from "../../components/RandomVerticalSvgLine";
-import Layout from "../../components/layout/Layout";
+import PageLayout from "../../components/pageLayout/PageLayout";
 
 export async function getStaticPaths() {
   const posts = getAllPosts();
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 const PostPage = ({ source, post }: PostPageProps) => {
   return (
-    <Layout>
+    <PageLayout>
       <Head>
         <title>Diva Protocol - {post.title}</title>
         <meta name="description" content={post.description} />
@@ -97,7 +97,7 @@ const PostPage = ({ source, post }: PostPageProps) => {
           <MDXRemote {...source} components={components} />
         </div>
       </article>
-    </Layout>
+    </PageLayout>
   );
 };
 

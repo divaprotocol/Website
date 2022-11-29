@@ -4,7 +4,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { getAllPosts } from "../api/getPosts";
-import Layout from "../../components/layout/Layout";
+import PageLayout from "../../components/pageLayout/PageLayout";
 import BlogCard from "../../components/Section/BlogCard";
 import FeaturedBlogPost from "../../components/Section/FeaturedBlogPost";
 import { Post } from "..";
@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
 export default function Blog({ posts }: { posts: Post[] }) {
   const featured = posts.find((v) => v.featured === true);
   return (
-    <Layout>
+    <PageLayout>
       <Box
         px={["20px", "30px", "50px", "65px", "80px"]}
         justifyContent="center"
@@ -54,6 +54,6 @@ export default function Blog({ posts }: { posts: Post[] }) {
           ))}
         </SimpleGrid>
       </Box>
-    </Layout>
+    </PageLayout>
   );
 }

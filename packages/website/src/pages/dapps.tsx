@@ -1,5 +1,5 @@
-import Layout from "../components/layout/Layout";
+import PageLayout from "../components/pageLayout/PageLayout";
 
 export default function dApps() {
-  return <Layout>dApps</Layout>;
+  return <PageLayout>dApps</PageLayout>;
 }

@@ -1,8 +1,9 @@
 import React from "react"
 import Head from "next/head"
+import { Navigation } from "./Navigation";
 
-const Layout = ({ children }: React.PropsWithChildren<{}>) => {
-	return (
+const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
+  return (
     <>
       <Head>
         <title>DIVA Protocol</title>
@@ -18,11 +19,12 @@ const Layout = ({ children }: React.PropsWithChildren<{}>) => {
         />
         <meta property="og:image" content="/images/featuresbg.png" />
       </Head>
-      <div className="flex-col justify-between min-h-full font-body text-base">
+      <div className="flex-col justify-between min-h-full font-body text-base bg-black text-white py-12">
+        <Navigation />
         {children}
       </div>
     </>
   );
-}
+};
 
-export default Layout
+export default PageLayout

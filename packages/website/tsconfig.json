@@ -20,8 +20,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/pages/about.tsx",
-    "src/components/layout/Footer.tsx",
-    "src/components/layout/NavBar.tsx",
+    "src/components/pageLayout/Footer.tsx",
+    "src/components/pageLayout/NavBar.tsx",
     "src/pages/posts/index.js"
   ],
   "exclude": ["node_modules"]

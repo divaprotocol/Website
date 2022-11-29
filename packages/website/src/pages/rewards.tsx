@@ -6,10 +6,10 @@ import { AlertIcon } from "@chakra-ui/react";
 /**
  * TODO: load rewards via ajax
  */
-import Layout from "../components/layout/Layout";
+import PageLayout from "../components/pageLayout/PageLayout";
 import { ConnectWalletButton } from "../components/ConnectWalletButton";
-import { H1 } from "../components/Header";
-import { Paragraph } from "../components/typography/Paragraph";
+import { H } from "../components/typography/H";
+import { P } from "../components/typography/P";
 
 const Rewards = () => {
   const userAddress = useAppSelector(selectUserAddress);
@@ -36,19 +36,21 @@ const Rewards = () => {
     });
   }, [rewards, userAddress]);
   return (
-    <Layout>
+    <PageLayout>
       <div>
         <div>
-          <H1>$DIVA Token Claim</H1>
-          <Paragraph>
+          <H as="h1" size="lg">
+            $DIVA Token Claim
+          </H>
+          <P>
             $DIVA is the governance token for DIVA Protocol.
-          </Paragraph>
+          </P>
         </div>
         {userAddress === undefined && (
           <>
-            <Paragraph>
+            <P>
               Connect your wallet to determine your eligibility.
-            </Paragraph>
+            </P>
           </>
         )}
         {userAddress !== undefined && rewardInfo == null && (
@@ -80,14 +82,14 @@ const Rewards = () => {
               <div>
                 <div>
                   <div>
-                    <Paragraph>Total Testnet Points</Paragraph>
-                    <Paragraph>{rewardInfo.points}</Paragraph>
+                    <P>Total Testnet Points</P>
+                    <P>{rewardInfo.points}</P>
                   </div>
                   <div>
-                    <Paragraph>Your $DIVA token reward</Paragraph>
-                    <Paragraph>
+                    <P>Your $DIVA token reward</P>
+                    <P>
                       {Number(rewardInfo.reward).toFixed(1)}
-                    </Paragraph>
+                    </P>
                   </div>
                 </div>
               </div>
@@ -104,7 +106,7 @@ const Rewards = () => {
         {userAddress !== undefined && rewardInfo.reward === undefined && (
           <div>
             <AlertIcon />
-            <Paragraph>You were not registered</Paragraph>
+            <P>You were not registered</P>
           </div>
         )}
 
@@ -112,7 +114,7 @@ const Rewards = () => {
           <ConnectWalletButton />
         </div>
       </div>
-    </Layout>
+    </PageLayout>
   );
 };
 
