@@ -30,6 +30,11 @@ module.exports = {
       serif: ["Roboto Mono", "sans-serif"],
       body: ["Roboto Mono", "sans-serif"],
     },
+    color: {
+      white: "#fff",
+      blue: "#0038FF",
+      teal: "#16E3D8",
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

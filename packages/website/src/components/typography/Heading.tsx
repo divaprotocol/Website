@@ -1,7 +1,7 @@
 import React from "react";
 import { PropsWithChildren } from "react";
 
-export const H = (
+export const Heading = (
   props: PropsWithChildren<{
     as: "h1" | "h2" | "h3";
     size?: "sm" | "lg" | "xl";
@@ -15,6 +15,6 @@ export const H = (
   return React.createElement(props.as, {
     ...props,
     className:
-      /*tw*/ "font-sans font-medium " + (classNames[props.size] || "text-lg"),
+      /*tw*/ "font-serif tracking-tight font-medium " + (classNames[props.size] || "text-lg"),
   });
 };

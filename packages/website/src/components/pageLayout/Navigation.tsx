@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Navigation = () => {
   return (
-    <nav className="flex flex-row justify-between w-full pl-7 pr-7 pb-24">
+    <nav className="flex flex-row justify-between w-full pl-7 pr-7 pb-24 relative z-10">
       <span>
         <Image alt="Diva Logo" src="/DIVALogo.png" width={131} height={24} />
       </span>

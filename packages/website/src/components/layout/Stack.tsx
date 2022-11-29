@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export const Stack = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+  { vertical, ...props}: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
     vertical?: boolean;
   }
 ) => {
@@ -12,7 +12,7 @@ export const Stack = (
       className={
         (props.className || "") +
         " " +
-        (props.vertical ? "flex flex-row space-x-4" : "space-y-7 flex flex-col")
+        (vertical ? "flex flex-row space-x-4" : "space-y-7 flex flex-col")
       }
     >
       {props.children}

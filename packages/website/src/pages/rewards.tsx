@@ -8,8 +8,8 @@ import { AlertIcon } from "@chakra-ui/react";
  */
 import PageLayout from "../components/pageLayout/PageLayout";
 import { ConnectWalletButton } from "../components/ConnectWalletButton";
-import { H } from "../components/typography/H";
-import { P } from "../components/typography/P";
+import { Heading } from "../components/typography/Heading";
+import { Paragraph } from "../components/typography/Paragraph";
 
 const Rewards = () => {
   const userAddress = useAppSelector(selectUserAddress);
@@ -39,18 +39,18 @@ const Rewards = () => {
     <PageLayout>
       <div>
         <div>
-          <H as="h1" size="lg">
+          <Heading as="h1" size="lg">
             $DIVA Token Claim
-          </H>
-          <P>
+          </Heading>
+          <Paragraph>
             $DIVA is the governance token for DIVA Protocol.
-          </P>
+          </Paragraph>
         </div>
         {userAddress === undefined && (
           <>
-            <P>
+            <Paragraph>
               Connect your wallet to determine your eligibility.
-            </P>
+            </Paragraph>
           </>
         )}
         {userAddress !== undefined && rewardInfo == null && (
@@ -82,14 +82,14 @@ const Rewards = () => {
               <div>
                 <div>
                   <div>
-                    <P>Total Testnet Points</P>
-                    <P>{rewardInfo.points}</P>
+                    <Paragraph>Total Testnet Points</Paragraph>
+                    <Paragraph>{rewardInfo.points}</Paragraph>
                   </div>
                   <div>
-                    <P>Your $DIVA token reward</P>
-                    <P>
+                    <Paragraph>Your $DIVA token reward</Paragraph>
+                    <Paragraph>
                       {Number(rewardInfo.reward).toFixed(1)}
-                    </P>
+                    </Paragraph>
                   </div>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const Rewards = () => {
         {userAddress !== undefined && rewardInfo.reward === undefined && (
           <div>
             <AlertIcon />
-            <P>You were not registered</P>
+            <Paragraph>You were not registered</Paragraph>
           </div>
         )}
 

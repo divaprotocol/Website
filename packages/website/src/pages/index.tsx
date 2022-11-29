@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { Stack } from "../components/layout/Stack";
 import PageLayout from "../components/pageLayout/PageLayout";
-import { H } from "../components/typography/H";
-import { P } from "../components/typography/P";
+import { Heading } from "../components/typography/Heading";
+import { Highlight } from "../components/typography/Highlight";
+import { Paragraph } from "../components/typography/Paragraph";
 import { Button } from "../components/ui/Button";
 
 export type Post = {
@@ -23,19 +24,36 @@ export type Post = {
 export default function Home() {
   return (
     <PageLayout>
-      <Stack className="items-center">
-        <Image alt="Background image" src="/bgimg1.png" fill className="z-0 object-cover"  />
-        <H as="h1" size="xl">
-          Powering the world of Derivatives
-        </H>
-        <P>
-          DIVA Protocol is a decentralized and permissionless piece of
-          infrastructure that allows its users to create and settle fully
-          customizable financial derivative contracts peer-to-peer.
-        </P>
-        <Stack vertical className="pt-5">
-          <Button>Documentation</Button> <Button>Explore dApps</Button>
+      <Image
+        alt="Background image"
+        src="/bgimg1.png"
+        fill
+        className="object-cover z-0"
+      />
+      <div className="relative h-screen">
+        <Stack className="items-center relative tecxt-center">
+          <Heading as="h1" size="xl">
+            Powering the world of <Highlight>Derivatives</Highlight>
+          </Heading>
+          <Paragraph className="text-center">
+            DIVA Protocol is a decentralized and permissionless piece of
+            infrastructure that allows its users to create and settle fully
+            customizable financial derivative contracts peer-to-peer.
+          </Paragraph>
+          <Stack vertical className="pt-5">
+            <Button primary>Documentation</Button>{" "}
+            <Button>Explore dApps</Button>
+          </Stack>
         </Stack>
+      </div>
+      <Stack className="items-center relative text-center">
+        <Heading as="h2" size="lg">
+          DIVA Protocol powered Applications
+        </Heading>
+        <Paragraph className="text-center">
+          Applications that you can be built on top of DIVA Protocol. No smart
+          contract programming skills required.
+        </Paragraph>
       </Stack>
     </PageLayout>
   );
