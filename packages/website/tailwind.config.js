@@ -18,7 +18,7 @@ module.exports = {
       }),
     },
     fontSize: {
-      sm: "0.8rem",
+      sm: "0.9rem",
       base: "1rem",
       lg: "1.125rem",
       xl: "1.75rem",
