@@ -1,13 +1,15 @@
 import { useAppSelector } from "../redux/hooks";
 import { selectUserAddress } from "../redux/appSlice";
 import { useEffect, useState } from "react";
-import { Alert, AlertIcon, Box, Button, ButtonGroup, Container, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { AlertIcon } from "@chakra-ui/react";
 
 /**
  * TODO: load rewards via ajax
  */
 import Layout from "../components/layout/Layout";
 import { ConnectWalletButton } from "../components/ConnectWalletButton";
+import { H1 } from "../components/Header";
+import { Paragraph } from "../components/typography/Paragraph";
 
 const Rewards = () => {
   const userAddress = useAppSelector(selectUserAddress);
@@ -25,142 +27,91 @@ const Rewards = () => {
   }, [userAddress]);
   useEffect(() => {
     (rewards as any[]).forEach((reward) => {
-      if (userAddress && reward.address.toLowerCase() === userAddress.toLowerCase()) {
+      if (
+        userAddress &&
+        reward.address.toLowerCase() === userAddress.toLowerCase()
+      ) {
         setRewardInfo(reward);
       }
     });
   }, [rewards, userAddress]);
   return (
     <Layout>
-      <Stack
-        style={{
-          flexDirection: "column",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center",
-          color: "white",
-          textAlign: "center",
-        }}
-				height={["80vh", "80vh", "50vh", "50vh"]}
-        spacing={8}
-      >
-        <Box textAlign={"center"}>
-          <Heading paddingBottom="8">$DIVA Token Claim</Heading>
-          <Text>$DIVA is the governance token for DIVA Protocol.</Text>
-        </Box>
+      <div>
+        <div>
+          <H1>$DIVA Token Claim</H1>
+          <Paragraph>
+            $DIVA is the governance token for DIVA Protocol.
+          </Paragraph>
+        </div>
         {userAddress === undefined && (
           <>
-            <Text variant="body1" paddingBottom={18}>
+            <Paragraph>
               Connect your wallet to determine your eligibility.
-            </Text>
+            </Paragraph>
           </>
         )}
         {userAddress !== undefined && rewardInfo == null && (
-          <Alert
-            status="error"
-            color="black"
-            width={"auto"}
-            padding={22}
-            fontSize={"large"}
-          >
+          <div>
             <AlertIcon />
             Connected account was not registered for the testnet
-          </Alert>
+          </div>
         )}
         {userAddress !== undefined &&
           rewardInfo.reward !== undefined &&
           rewardInfo.reward !== "" && (
-            <Alert
-              status="success"
-              color="black"
-              width={"auto"}
-              padding={22}
-              fontSize={"large"}
-            >
+            <div>
               <AlertIcon />
               You are eligible for token claim, below are the details of your
               participation.
-            </Alert>
+            </div>
           )}
 
         {userAddress !== undefined && rewardInfo.reward === "" && (
-          <Alert
-            status="error"
-            color="black"
-            width={"auto"}
-            padding={22}
-            fontSize={"large"}
-          >
+          <div>
             <AlertIcon />
             {"You are not eligible. Reason: " + rewardInfo.comment}
-          </Alert>
+          </div>
         )}
         {userAddress !== undefined &&
           rewardInfo.reward !== undefined &&
           rewardInfo.reward !== "" && (
-            <Box
-              borderRadius={4}
-              style={{
-                maxWidth: "fit-content",
-                border: "1px solid #1B3448",
-                background:
-                  "linear-gradient(180deg, #051827 0%, rgba(1, 12, 39, 0) 100%)",
-              }}
-            >
-              <Container>
-                <Stack spacing={8} padding={18}>
-                  <Stack
-                    direction={"row"}
-                    spacing={8}
-                    sx={{
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text>Total Testnet Points</Text>
-                    <Text>{rewardInfo.points}</Text>
-                  </Stack>
-                  <Stack
-                    direction={"row"}
-                    spacing={8}
-                    sx={{
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text color="common.white">Your $DIVA token reward</Text>
-                    <Text color="common.white">
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <Paragraph>Total Testnet Points</Paragraph>
+                    <Paragraph>{rewardInfo.points}</Paragraph>
+                  </div>
+                  <div>
+                    <Paragraph>Your $DIVA token reward</Paragraph>
+                    <Paragraph>
                       {Number(rewardInfo.reward).toFixed(1)}
-                    </Text>
-                  </Stack>
-                </Stack>
-              </Container>
-            </Box>
+                    </Paragraph>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         {userAddress !== undefined &&
           rewardInfo.reward !== undefined &&
           rewardInfo.reward !== "" && (
-            <Alert
-              status="info"
-              color="black"
-              width={"auto"}
-              padding={22}
-              fontSize={"large"}
-            >
+            <div>
               <AlertIcon />
               You will be able to claim your rewards once the token launches
-            </Alert>
+            </div>
           )}
         {userAddress !== undefined && rewardInfo.reward === undefined && (
-          <Alert status="error" width={"auto"} padding={22} fontSize={"large"}>
+          <div>
             <AlertIcon />
-            <Text color="black">You were not registered</Text>
-          </Alert>
+            <Paragraph>You were not registered</Paragraph>
+          </div>
         )}
 
-        <Box paddingBottom={20}>
+        <div>
           <ConnectWalletButton />
-        </Box>
-      </Stack>
+        </div>
+      </div>
     </Layout>
   );
 };
