@@ -15,6 +15,6 @@ export const Heading = (
   return React.createElement(props.as, {
     ...props,
     className:
-      /*tw*/ "font-serif tracking-tight font-medium " + (classNames[props.size] || "text-lg"),
+      /*tw*/ "text-white font-serif tracking-tight font-medium " + (classNames[props.size] || "text-lg"),
   });
 };

@@ -7,7 +7,7 @@ export const Paragraph = (
 ) => {
   return (
     <p
-      className={`leading-7 tracking-wider text-white opacity-50 max-w-3xl ${props.className}`}
+      className={`leading-7 tracking-wider max-w-3xl ${props.className}`}
     >
       {props.children}
     </p>
