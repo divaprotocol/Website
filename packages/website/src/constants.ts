@@ -52,6 +52,8 @@ export const config = {
   [SupportedChainId.GOERLI]: {
     divaAddress: "0x8f138cfC5de71FCde7FdeCd87EAC6Aa6A536Bf85",
     divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1",
+    divaTokenAddress: "0x4a8B350A902414083124378db90cB79dD327CFe0",
+    claimDivaAddress: "0xaC1Ba2Cca0523c262A23bb2243D8401FA5456a13",
     balanceCheckAddress: "0x9293ff9733AC7666A8251564C083191c3DA8BE19",
     exchangeProxy: "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
     whitelistAddress: "0x017aA6E15e406b85b8b1dF322e39444D819C8F43",
@@ -124,7 +126,7 @@ export const config = {
 // array of all chains id
 export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = Object.values(
   SupportedChainId
-).filter((id) => typeof id === 'number') as SupportedChainId[]
+).filter((id) => typeof id === "number") as SupportedChainId[];
 
 // current supported chain
-export const CURRENT_SUPPORTED_CHAIN_ID = [SupportedChainId.ROPSTEN]
+export const CURRENT_SUPPORTED_CHAIN_ID = [SupportedChainId.ROPSTEN];
