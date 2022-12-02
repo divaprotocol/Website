@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useCallback, useEffect } from "react";
 import { Stack } from "../components/layout/Stack";
 import PageLayout from "../components/pageLayout/PageLayout";
 import { Heading } from "../components/typography/Heading";
@@ -6,6 +7,8 @@ import { Highlight } from "../components/typography/Highlight";
 import { Paragraph } from "../components/typography/Paragraph";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
+import { Particles } from "react-particles";
+import { loadFull } from "tsparticles";
 
 export type Post = {
   author: string;
@@ -23,16 +26,71 @@ export type Post = {
 };
 
 export default function Home() {
+  const particlesInit = useCallback(async (engine) => {
+    console.log(engine);
+    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+    // starting from v2 you can add only the features you need reducing the bundle size
+    await loadFull(engine);
+  }, []);
   return (
     <PageLayout>
-      <Image
-        alt="Background image"
-        src="/bgimg1.png"
-        fill
-        className="object-cover z-0"
+      <Particles
+        canvasClassName={
+          /*tw*/ `absolute top left-0  bg-gradient-to-t  from-black via-slate-800 to-black w-full`
+        }
+        init={particlesInit}
+        style={{}}
+        params={{
+          style: { position: "absolute" },
+          particles: {
+            color: {
+              value: "#3970b6",
+            },
+            links: {
+              color: "#3970b6",
+              distance: 270,
+              enable: true,
+              opacity: 0.8,
+              width: 0.8,
+            },
+            collisions: {
+              enable: true,
+            },
+            move: {
+              direction: "none",
+              enable: true,
+              outModes: {
+                default: "bounce",
+              },
+              random: true,
+              speed: 0.3,
+              straight: false,
+            },
+            number: {
+              density: {
+                enable: true,
+                area: 800,
+              },
+              value: 60,
+            },
+            opacity: {
+              value: 0.5,
+            },
+            shape: {
+              type: "circle",
+            },
+            size: {
+              value: { min: 1, max: 3 },
+            },
+          },
+        }}
       />
-      <div className="relative h-screen">
-        <Stack className="items-center relative tecxt-center">
+      <div
+        className={`relative h-[calc(100vh-5rem)] flex flex-row justify-center
+      items-center bg-gradient-to-t from-[rgba(0,0,0,.7)] via-transparent radial-gradient-1`}
+      >
+        <Stack className="items-center relative">
           <Heading as="h1" size="xl">
             Powering the world of <Highlight>Derivatives</Highlight>
           </Heading>
@@ -47,7 +105,7 @@ export default function Home() {
           </Stack>
         </Stack>
       </div>
-      <Stack className="items-center relative text-center">
+      <Stack className="items-center relative text-center pt-20">
         <Heading as="h2" size="lg">
           DIVA Protocol powered Applications
         </Heading>
@@ -57,7 +115,7 @@ export default function Home() {
         </Paragraph>
       </Stack>
 
-      <Stack vertical className="pt-20">
+      <Stack vertical className="pt-20 container max-w-7xl m-auto space-x-12">
         <Card>
           <Stack>
             <Image
@@ -112,7 +170,7 @@ export default function Home() {
         <Button>Learn more</Button>
       </div>
 
-      <Stack>
+      <Stack className="container max-w-7xl m-auto pt-32">
         <Heading as="h3" size="lg">
           Protocol <Highlight>Features</Highlight>
         </Heading>

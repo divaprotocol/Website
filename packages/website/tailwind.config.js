@@ -6,6 +6,9 @@ module.exports = {
       md: "768px",
     },
     extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {

@@ -8,6 +8,7 @@ const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
       <Head>
         <title>DIVA Protocol</title>
         <link rel="icon" href="/logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content="DIVA Protocol is a decentralized and permissionless piece of infrastructure that allows its users to create and settle fully customizable financial derivative contracts peer-to-peer."
@@ -19,8 +20,8 @@ const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
         />
         <meta property="og:image" content="/images/featuresbg.png" />
       </Head>
-      <div className="flex-col justify-between min-h-full font-body text-base bg-black text-slate-400">
-        <div className="max-w-7xl m-auto text-center  py-12 px-3 ">
+      <div className="flex-col justify-between min-h-full font-body text-base bg-black text-slate-400 min-w-full max-w-full">
+        <div className="text-center  py-12">
           <Navigation />
           {children}
         </div>
