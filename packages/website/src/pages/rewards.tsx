@@ -68,9 +68,11 @@ const Rewards = () => {
         method: "GET",
       });
       const json = await res.json();
-      setRewards(json);
+      setRewardInfo(json.userReward);
     };
-    get();
+    if (userAddress) {
+      get();
+    }
   }, [userAddress]);
   useEffect(() => {
     (rewards as any[]).forEach((reward) => {
