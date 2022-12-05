@@ -53,7 +53,7 @@ export const config = {
     divaAddress: "0x8f138cfC5de71FCde7FdeCd87EAC6Aa6A536Bf85",
     divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1",
     divaTokenAddress: "0x4a8B350A902414083124378db90cB79dD327CFe0",
-    claimDivaAddress: "0x2f4218C9262216B7B73A76334e5A98F3eF71A61c",
+    claimDivaAddress: "0xFf84aEcC89517180d55dAff2809Ec80B99d036Eb",
     balanceCheckAddress: "0x9293ff9733AC7666A8251564C083191c3DA8BE19",
     exchangeProxy: "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
     whitelistAddress: "0x017aA6E15e406b85b8b1dF322e39444D819C8F43",

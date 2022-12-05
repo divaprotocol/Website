@@ -43,7 +43,7 @@ export default async function handler(
   const generator = new MerkleGenerator(DIVA_TOKEN_DECIMALS, airdrop);
   const { merkleRoot, merkleTree } = await generator.process();
   const leaf: Buffer = generateLeaf(
-    userReward.address,
+    getAddress(userReward.address),
     parseUnits(
       (userReward.reward || "0").toString(),
       DIVA_TOKEN_DECIMALS
