@@ -2,10 +2,8 @@ import path from "path";
 import { promises as fs } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getAddress, parseUnits } from "ethers/lib/utils";
-import { generateLeaf } from "../../../util/merkle";
-import MerkleGenerator from "../../../util/merkleGenerator";
-
-const DIVA_TOKEN_DECIMALS = 18;
+import MerkleGenerator from "../../../util/merkleGeneratorVesting";
+import { DIVA_TOKEN_DECIMALS, LINEAR_VESTING_TIME } from "../../../constants";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,28 +24,29 @@ export default async function handler(
   );
 
   if (!userReward) {
-    res.status(204);
+    res.status(204).send("not registered account");
   }
 
-  const airdrop: Record<string, string> = {};
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // `reward` is converted into an integer with 18 decimals inside `merkleGenerator.ts` file
-  allRewards.forEach((Object: any) => {
-    const formattedAddress = getAddress(Object.address);
-
-    airdrop[formattedAddress] = Object.reward.toString() || "0";
+  const tokenClaimables = allRewards.map((object: any) => {
+    return {
+      address: getAddress(object.address),
+      amount: parseUnits(
+        object.reward.toString() || "0",
+        DIVA_TOKEN_DECIMALS
+      ).toString(),
+      time: LINEAR_VESTING_TIME,
+    };
   });
 
-  // Create the generate & process it
-  const generator = new MerkleGenerator(DIVA_TOKEN_DECIMALS, airdrop);
-  const { merkleRoot, merkleTree } = await generator.process();
-  const leaf: Buffer = generateLeaf(
+  const generator = new MerkleGenerator(tokenClaimables);
+  const { merkleTree } = await generator.process();
+  const leaf: Buffer = generator.generateLeaf(
     getAddress(userReward.address),
     parseUnits(
       (userReward.reward || "0").toString(),
       DIVA_TOKEN_DECIMALS
-    ).toString()
+    ).toString(),
+    LINEAR_VESTING_TIME.toString()
   );
   // Generate proof
   const proof: string[] = merkleTree.getHexProof(leaf);

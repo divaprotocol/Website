@@ -1,13 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
-// import keccak256 from 'keccak256'; // Keccak256 hashing
 import MerkleTree from "merkletreejs"; // MerkleTree.js
-import {
-  getAddress,
-  parseUnits,
-  solidityKeccak256,
-  keccak256,
-} from "ethers/lib/utils"; // Ethers utils
+import { getAddress, keccak256, solidityKeccak256 } from "ethers/lib/utils"; // Ethers utils
 
 // Airdrop recipient addresses and scaled token values
 type AirdropRecipient = {
@@ -15,40 +9,43 @@ type AirdropRecipient = {
   address: string;
   // Scaled-to-decimals token value
   value: string;
+  // time in seconds
+  time: string;
 };
 
 export default class Generator {
   // Airdrop recipients
   recipients: AirdropRecipient[] = [];
 
-  /**
-   * Setup generator
-   * @param {number} decimals of token
-   * @param {Record<string, number>} airdrop address to token claim mapping
-   */
-  constructor(decimals: number, airdrop: any) {
+  constructor(airdrop: any) {
     // For each airdrop entry
-    for (const [address, tokens] of Object.entries(airdrop)) {
+    airdrop.map((object) => {
       // Push:
       this.recipients.push({
         // Checksum address
-        address: getAddress(address),
-        // Scaled number of tokens claimable by recipient
-        value: parseUnits(tokens.toString(), decimals).toString(),
+        address: getAddress(object.address),
+        // Number of tokens claimable by recipient; scaling is done in ClaimDIVALinearVesting.test.ts
+        value: object.amount.toString(),
+
+        time: object.time.toString(),
       });
-    }
+    });
   }
 
   /**
-   * Generate Merkle Tree leaf from address and value
+   * Generate Merkle Tree leaf from address, value and vesting time
    * @param {string} address of airdrop claimee
    * @param {string} value of airdrop tokens to claimee
+   * @param {string} time vesting period in seconds
    * @returns {Buffer} Merkle Tree node
    */
-  generateLeaf(address: string, value: string): Buffer {
+  generateLeaf(address: string, value: string, time: string): Buffer {
     return Buffer.from(
       // Hash in appropriate Merkle format
-      solidityKeccak256(["address", "uint256"], [address, value]).slice(2),
+      solidityKeccak256(
+        ["address", "uint256", "uint256"],
+        [address, value, time]
+      ).slice(2),
       "hex"
     );
   }
@@ -59,8 +56,8 @@ export default class Generator {
     // Generate merkle tree
     const merkleTree = new MerkleTree(
       // Generate leafs
-      this.recipients.map(({ address, value }) =>
-        this.generateLeaf(address, value)
+      this.recipients.map(({ address, value, time }) =>
+        this.generateLeaf(address, value, time)
       ),
       // Hashing function
       keccak256,
