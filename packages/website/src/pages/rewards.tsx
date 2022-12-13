@@ -63,18 +63,6 @@ const Rewards = () => {
   const [rewardInfo, setRewardInfo] = useState<any>({});
   const [rewards, setRewards] = useState<any[]>([]);
   useEffect(() => {
-    const get = async () => {
-      const res = await fetch(`/api/rewards/${userAddress}`, {
-        method: "GET",
-      });
-      const json = await res.json();
-      setRewardInfo(json.userReward);
-    };
-    if (userAddress) {
-      get();
-    }
-  }, [userAddress]);
-  useEffect(() => {
     (rewards as any[]).forEach((reward) => {
       if (
         userAddress &&
