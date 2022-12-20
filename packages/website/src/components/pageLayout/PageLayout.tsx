@@ -21,7 +21,7 @@ const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
         <meta property="og:image" content="/images/featuresbg.png" />
       </Head>
       <div className="flex-col justify-between min-h-full font-body text-base bg-black text-slate-400 min-w-full max-w-full">
-        <div className="text-center  py-12">
+        <div className="text-center  py-12 px-8">
           <Navigation />
           {children}
         </div>
