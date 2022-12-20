@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useCallback, useEffect } from "react";
 import { Stack } from "../components/layout/Stack";
 import PageLayout from "../components/pageLayout/PageLayout";
 import { Heading } from "../components/typography/Heading";
@@ -7,8 +6,6 @@ import { Highlight } from "../components/typography/Highlight";
 import { Paragraph } from "../components/typography/Paragraph";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
-import { Particles } from "react-particles";
-import { loadFull } from "tsparticles";
 
 export type Post = {
   author: string;
@@ -26,66 +23,8 @@ export type Post = {
 };
 
 export default function Home() {
-  const particlesInit = useCallback(async (engine) => {
-    console.log(engine);
-    // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(engine);
-  }, []);
   return (
     <PageLayout>
-      <Particles
-        canvasClassName={
-          /*tw*/ `absolute top left-0  bg-gradient-to-t  from-black via-slate-800 to-black w-full`
-        }
-        init={particlesInit}
-        style={{}}
-        params={{
-          style: { position: "absolute" },
-          particles: {
-            color: {
-              value: "#3970b6",
-            },
-            links: {
-              color: "#3970b6",
-              distance: 270,
-              enable: true,
-              opacity: 0.8,
-              width: 0.8,
-            },
-            collisions: {
-              enable: true,
-            },
-            move: {
-              direction: "none",
-              enable: true,
-              outModes: {
-                default: "bounce",
-              },
-              random: true,
-              speed: 0.3,
-              straight: false,
-            },
-            number: {
-              density: {
-                enable: true,
-                area: 800,
-              },
-              value: 60,
-            },
-            opacity: {
-              value: 0.5,
-            },
-            shape: {
-              type: "circle",
-            },
-            size: {
-              value: { min: 1, max: 3 },
-            },
-          },
-        }}
-      />
       <div
         className={`relative h-[calc(100vh-5rem)] flex flex-row justify-center
       items-center bg-gradient-to-t from-[rgba(0,0,0,.7)] via-transparent radial-gradient-1`}
@@ -107,20 +46,21 @@ export default function Home() {
       </div>
       <Stack className="items-center relative text-center pt-20">
         <Heading as="h2" size="lg">
-          DIVA Protocol powered Applications
+          <Highlight>DIVA Protocol</Highlight> powered Applications
         </Heading>
         <Paragraph className="text-center text-lg">
           Applications that you can be built on top of DIVA Protocol. No smart
           contract programming skills required.
         </Paragraph>
       </Stack>
-
-      <Stack vertical className="pt-20 container max-w-7xl m-auto space-x-12">
+      <Stack
+        vertical
+        className="pt-20 container max-w-7xl m-auto space-x-12 text-left"
+      >
         <Card>
           <Stack>
             <Image
               alt="Insurance Products"
-              className="self-center"
               width="100"
               height="100"
               src="/icons/InsuranceProducts.svg"
@@ -137,7 +77,6 @@ export default function Home() {
           <Stack>
             <Image
               alt="Structured Products"
-              className="self-center"
               width="100"
               height="100"
               src="/icons/StructuredProducts.svg"
@@ -153,7 +92,6 @@ export default function Home() {
           <Stack>
             <Image
               alt="Prediction Markets"
-              className="self-center"
               width="100"
               height="100"
               src="/icons/Prediction.svg"
@@ -169,63 +107,61 @@ export default function Home() {
       <div className="py-11 pb-24 flex justify-center">
         <Button>Learn more</Button>
       </div>
-
       <Stack className="container max-w-7xl m-auto pt-32">
         <Heading as="h3" size="lg">
           Protocol <Highlight>Features</Highlight>
         </Heading>
         <div className="relative">
-          <div className="absolute w-full h-full flex content-center items-center flex-col">
-            <Image
-              src="/icons/Protocol.png"
-              className="h-full z-0 max-h-full max-w-fit self-center"
-              width="1300"
-              height="900"
-              alt="Diva Sphere"
-            />
-          </div>
-
           <Stack vertical className="relative justify-between">
             <Stack className="w-1/3">
-              <Card>
-                <Heading as="h3">Permissionless</Heading>
-                <Paragraph>
-                  Anyone can create and settle derivatives on anything without
-                  permission.
-                </Paragraph>
-              </Card>
-              <Card>
-                <Heading as="h3">Tradeable</Heading>
-                <Paragraph>
-                  Position tokens are ERC20 and can be easily integrated into
-                  any CEX or DEX.
-                </Paragraph>
-              </Card>
+              <div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+                <div className="bg-black p-8 rounded-lg">
+                  <Heading as="h3">Permissionless</Heading>
+                  <Paragraph>
+                    Anyone can create and settle derivatives on anything without
+                    permission.
+                  </Paragraph>
+                </div>
+              </div>
+              <div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+                <div className="bg-black p-8 rounded-lg">
+                  <Heading as="h3">Tradeable</Heading>
+                  <Paragraph>
+                    Position tokens are ERC20 and can be easily integrated into
+                    any CEX or DEX.
+                  </Paragraph>
+                </div>
+              </div>
             </Stack>
             <Stack className="w-1/3">
-              <Card>
-                <Heading as="h3">Fully collateralized</Heading>
-                <Paragraph>
-                  Eliminates counterparty risk and margin calls and gives users
-                  a safe and frictionless experience.
-                </Paragraph>
-              </Card>
-              <Card>
-                <Heading as="h3">Highly customizable</Heading>
-                <Paragraph>
-                  Flexible payoff profiles, any reference asset, oracle
-                  agnostic, any ERC20 as collateral.
-                </Paragraph>
-              </Card>
+              <div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+                <div className="bg-black p-8 rounded-lg">
+                  <Heading as="h3">Fully collateralized</Heading>
+                  <Paragraph>
+                    Eliminates counterparty risk and margin calls and gives
+                    users a safe and frictionless experience.
+                  </Paragraph>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+                <div className="bg-black p-8 rounded-lg">
+                  <Heading as="h3">Highly customizable</Heading>
+                  <Paragraph>
+                    Flexible payoff profiles, any reference asset, oracle
+                    agnostic, any ERC20 as collateral.
+                  </Paragraph>
+                </div>
+              </div>
             </Stack>
           </Stack>
         </div>
 
-        <Stack>
+        <Stack className="items-center space-y-24">
           <Heading as="h3" size="lg">
             How it <Highlight>Works</Highlight>
           </Heading>
-          <Card>
+          <Card className="max-w-lg">
             <Stack vertical>
               <Image
                 src="/icons/Specify.svg"
@@ -249,11 +185,60 @@ export default function Home() {
               </div>
             </Stack>
           </Card>
-
-          <Card>
+          <Stack vertical className="space-x-36">
+            <Card className="max-w-lg mb-20">
+              <Stack vertical>
+                <Image
+                  src="/icons/SignAndShare.svg"
+                  height="300"
+                  width="300"
+                  alt="Sign and Share"
+                />
+                <div className="text-left space-y-4">
+                  <div className="space-y-2">
+                    <Highlight className="font-sans italic inline-block">
+                      Step 2:
+                    </Highlight>
+                    <Heading as="h3" size="sm">
+                      Sign & Share
+                    </Heading>
+                  </div>
+                  <Paragraph>
+                    Sign the offer with your private key and share it with
+                    counterparties via email, chat or social media.
+                  </Paragraph>
+                </div>
+              </Stack>
+            </Card>
+            <Card className="max-w-lg mt-20">
+              <Stack vertical>
+                <Image
+                  src="/icons/Fill.svg"
+                  height="300"
+                  width="300"
+                  alt="Fill"
+                />
+                <div className="text-left space-y-4">
+                  <div className="space-y-2">
+                    <Highlight className="font-sans italic inline-block">
+                      Step 2:
+                    </Highlight>
+                    <Heading as="h3" size="sm">
+                      Fill
+                    </Heading>
+                  </div>
+                  <Paragraph>
+                    The derivative contract is created on-chain once a
+                    counterparty accepts your offer.
+                  </Paragraph>
+                </div>
+              </Stack>
+            </Card>
+          </Stack>
+          <Card className="max-w-lg">
             <Stack vertical>
               <Image
-                src="/icons/SignAndShare.png"
+                src="/icons/Redeem.svg"
                 height="300"
                 width="300"
                 alt="Sign and Share"
@@ -274,6 +259,124 @@ export default function Home() {
               </div>
             </Stack>
           </Card>
+          <Button>
+            <span className="flex space-x-3 items-center">
+              <Image
+                className="-m-5 mr-0"
+                src="/icons/Play.svg"
+                height="37"
+                width="37"
+                alt="Play video"
+              />
+              <span>Watch Video</span>
+            </span>
+          </Button>
+        </Stack>
+
+        <Stack className="container max-w-7xl m-auto pt-32 space-y-20">
+          <Heading as="h3" size="lg">
+            Our <Highlight>Partners</Highlight>
+          </Heading>
+
+          <Stack vertical className="space-x-10 justify-center items-center">
+            <Image
+              src="/logos/darley-logo.png"
+              height="90"
+              width="300"
+              alt="Darley"
+            />
+            <span className="block [width:1px] h-24 bg-white bg-opacity-10"></span>
+
+            <Image
+              src="/logos/dwf.png"
+              height="90"
+              width="300"
+              alt="Dwf Labs"
+            />
+          </Stack>
+          <Stack
+            vertical
+            className="space-x-7 justify-center items-center py-20 border-t border-white border-opacity-10"
+          >
+            <Paragraph className="pr-7">Supported Networks:</Paragraph>
+            <span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
+              <Image
+                src="/logos/polygon.png"
+                height="24"
+                width="100"
+                alt="Polygon Labs"
+              />
+            </span>
+            <span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
+              <Image
+                src="/logos/eth.png"
+                height="24"
+                width="132"
+                alt="Ethereum"
+              />
+            </span>
+            <span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
+              <Image
+                src="/logos/arbitr.png"
+                height="24"
+                width="126"
+                alt="Arbitrum"
+              />
+            </span>
+          </Stack>
+        </Stack>
+        <Stack className="container max-w-7xl m-auto pt-32 space-y-20">
+          <div className="m-auto space-y-8">
+            <Heading as="h3" size="lg">
+              Join the <Highlight>Conversation</Highlight>
+            </Heading>
+            <Paragraph>
+              Our global and vibrant community drives the success of the
+              Protocol. Join the conversation on Discord and Twitter to stay up
+              to date on the latest community news.
+            </Paragraph>
+          </div>
+          <Stack vertical className="justify-center space-x-10">
+            <Card className="max-w-lg p-10">
+              <Stack vertical className="space-x-10">
+                <Image
+                  className="flex-shrink-0"
+                  src="/icons/Twitter.svg"
+                  height="136"
+                  width="136"
+                  alt="Discord"
+                />
+                <div className="text-left space-y-4 flex-shrink">
+                  <Heading as="h3" size="sm">
+                    Twitter
+                  </Heading>
+                  <Paragraph>
+                    Follow the latest news from DIVA Protocol
+                  </Paragraph>
+                </div>
+              </Stack>
+            </Card>
+
+            <Card className="max-w-lg p-10">
+              <Stack vertical className="space-x-10">
+                <Image
+                  className="flex-shrink-0"
+                  src="/icons/Discord.svg"
+                  height="136"
+                  width="136"
+                  alt="Discord"
+                />
+                <div className="text-left space-y-4 flex-shrink">
+                  <Heading as="h3" size="sm">
+                    Discord
+                  </Heading>
+                  <Paragraph>
+                    Ask questions and engage with the DIVA Community
+                  </Paragraph>
+                </div>
+              </Stack>
+            </Card>
+          </Stack>
         </Stack>
       </Stack>
     </PageLayout>
