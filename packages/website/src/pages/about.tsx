@@ -11,8 +11,8 @@ import { Button } from "../components/ui/Button";
 export default function About() {
   return (
     <PageLayout>
-      <Stack className="space-y-32 py-40">
-        <Stack vertical className="justify-center space-x-20">
+      <Stack className="space-y-36 py-40">
+        <Stack vertical className="justify-center space-x-24">
           <Image
             className="mt-10"
             src="/illustrations/Mission.svg"
@@ -71,26 +71,26 @@ export default function About() {
             The team that planted the seeds.
           </Paragraph>
           <div className="grid grid-cols-4 gap-10">
-            <Avatar src="/team/alex.png" name="Alexander Coha" />
-            <Avatar src="/team/sambit.png" name="Sambit Rath" />
-            <Avatar src="/team/richard.png" name="Richard Wise" />
-            <Avatar src="/team/harsh.png" name="Harsh Koshti" />
-            <Avatar src="/team/evan.png" name="Evan Schoening" />
-            <Avatar src="/team/ayaz.png" name="Ayaz Sky" />
-            <Avatar src="/team/precious.png" name="Precious Elisha" />
-            <Avatar src="/team/ashis.png" name="Ashis Kumar" />
-            <Avatar src="/team/manvir.png" name="Manvir Schneider" />
-            <Avatar src="/team/tarun.png" name="Tarun Yadav" />
-            <Avatar src="/team/sahil.png" name="Sahil Kumar Nanda" />
-            <Avatar src="/team/wlad.png" name="Wladimir Weinbender" />
-            <Avatar src="/team/sascha.png" name="Sascha ?" />
-            <Avatar src="/team/julian.png" name="Julian Krispel" />
-            <Avatar src="/team/kerry.png" name="Kerry Hideo" />
+            <Avatar src="/team/alex.png" name="Alex" />
+            <Avatar src="/team/sambit.png" name="Sambit" />
+            <Avatar src="/team/richard.png" name="Richard" />
+            <Avatar src="/team/harsh.png" name="Harsh" />
+            <Avatar src="/team/evan.png" name="Evan" />
+            <Avatar src="/team/ayaz.png" name="Ayaz" />
+            <Avatar src="/team/precious.png" name="Precious" />
+            <Avatar src="/team/ashis.png" name="Ashis" />
+            <Avatar src="/team/manvir.png" name="Manvir" />
+            <Avatar src="/team/tarun.png" name="Tarun" />
+            <Avatar src="/team/sahil.png" name="Sahil" />
+            <Avatar src="/team/wlad.png" name="Wladimir" />
+            <Avatar src="/team/sascha.png" name="Sascha" />
+            <Avatar src="/team/julian.png" name="Julian" />
+            <Avatar src="/team/kerry.png" name="Kerry" />
           </div>
         </Stack>
 
-        <Card className="max-w-3xl self-center p-12">
-          <Stack className="justify-center items-center space-y-10">
+        <Card className="max-w-3xl self-center py-12 px-16">
+          <Stack className="justify-center items-center space-y-12">
             <Heading as="h2" size="lg">
               <Highlight>Build</Highlight>
             </Heading>

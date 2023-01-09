@@ -1,147 +1,55 @@
-import {
-  Box,
-  chakra,
-  Container,
-  Link,
-  SimpleGrid,
-  Stack,
-  HStack,
-  Text,
-  VisuallyHidden,
-  Input,
-  IconButton,
-  Image,
-  Flex,
-} from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { FaGithub, FaTwitter, FaDiscord } from "react-icons/fa";
-import { BiMailSend } from "react-icons/bi";
-import { logo } from "../../../public/images/DivaLogo";
+import { Stack } from "../layout/Stack";
+import Image from "next/image";
+import Link from "next/link";
 
-const Logo = (props) => {
+export function Footer() {
   return (
-    <Box>
-      <Image src="../DIVALogo.png" alt="DivaLogo" />
-    </Box>
-  );
-};
-
-const SocialButton = ({ children, label, href }) => {
-  return (
-    <chakra.button
-      bg={"whiteAlpha.100"}
-      rounded={"full"}
-      w={8}
-      h={8}
-      cursor={"pointer"}
-      as={"a"}
-      href={href}
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      _hover={{
-        bg: "whiteAlpha.200",
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
-
-const ListHeader = ({ children }) => {
-  return (
-    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
-      {children}
-    </Text>
-  );
-};
-
-export const Footer = () => {
-  return (
-    <Box bg="#1E1D1D" color="white">
-      <Box py={10} px={10}>
-        <Stack maxW={"6xl"} mx="auto">
-          <SimpleGrid columns={[1, 4, 4, 4, 4]} spacing="8">
-            <Stack>
-              <Box>
-                <Logo color={"white"} />
-              </Box>
-            </Stack>
-            <Stack
-              mx={["none", "none", "none", "auto", "auto"]}
-              align={"flex-start"}
-            >
-              <Link href={"/about"}>
-                About Us
-              </Link>
-              <Link
-                isExternal
-                href={"https://docs.divaprotocol.io/"}
-              >
-                Docs
-              </Link>
-              <Link href={"/token"}>
-                Token
-              </Link>
-              <Link href={"/posts"}>
-                Blog
-              </Link>
-            </Stack>
-            <Stack
-              mx={["none", "none", "none", "auto", "auto"]}
-              align={"flex-start"}
-            >
-              {/*<Link href={"#"}>Whitepaper</Link>*/}
-              <Link
-                isExternal
-                href={"https://docs.divaprotocol.io/"}
-              >
-                DIVA Slide Deck
-              </Link>
-              <Link
-                isExternal
-                href={
-                  "https://docs.divaprotocol.io/for-developers/technical-resources"
-                }
-              >
-                Peckshield Audit
-              </Link>
-            </Stack>
-            <Stack
-              align={["flex-start", "flex-start", "center", "center", "center"]}
-            >
-              <Stack direction={"row"} spacing={2}>
-                <SocialButton
-                  label={"Twitter"}
-                  href={"https://twitter.com/divaprotocol_io"}
-                >
-                  <FaTwitter />
-                </SocialButton>
-                {/*<SocialButton label={"Github"} href={""}>
-                <FaGithub />
-              </SocialButton>*/}
-                <SocialButton
-                  label={"Discord"}
-                  href={"https://discord.gg/DE5b8ZeJjK"}
-                >
-                  <FaDiscord />
-                </SocialButton>
-              </Stack>
-            </Stack>
-          </SimpleGrid>
+    <footer className="pt-32 text-white font-sans text-opacity-80">
+      <Stack
+        vertical
+        className="space-x-16 justify-between px-20 py-10 border-b border-white border-opacity-10"
+      >
+        <Image src="/DivaLogo.svg" height="136" width="136" alt="Diva Logo" />
+        <Stack vertical className="space-x-10 flex-wrap">
+          <span>About us</span>
+          <span>Docs</span>
+          <span>Token</span>
+          <span>Blog</span>
+          <span>Whitepaper</span>
+          <span>DIVA Slide Deck</span>
+          <span>Peckshield Audit</span>
         </Stack>
-      </Box>
-      <Flex justifyContent="center" bg="#161616" py={5}>
-        <Stack
-          align="center"
-          direction={["column", "column", "row", "row", "row"]}
-        >
-          {/*<Link href={"#"}>Privacy Policy</Link>*/}
-          {/*<Link href={"#"}>© DIVA Protocol</Link>*/}
-          {/*<Link href={"#"}>Terms & Conditions</Link>*/}
+      </Stack>
+      <Stack vertical className="space-x-16 justify-between px-20 py-10">
+        <span>© DIVA Finance</span>
+        <Stack vertical>
+          <Link href="">
+            <Image
+              src="/logos/twitter.svg"
+              height="24"
+              width="24"
+              alt="Twitter"
+            />
+          </Link>
+
+          <Link href="">
+            <Image
+              src="/logos/discord.svg"
+              height="27"
+              width="27"
+              alt="Discord"
+            />
+          </Link>
+          <Link href="">
+            <Image
+              src="/logos/github.svg"
+              height="22"
+              width="22"
+              alt="Github"
+            />
+          </Link>
         </Stack>
-      </Flex>
-    </Box>
+      </Stack>
+    </footer>
   );
-};
+}
