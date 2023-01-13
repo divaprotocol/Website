@@ -69,7 +69,7 @@ export const WorkSection = () => {
           />
         </Stack>
 
-        <HStack
+        {/*<HStack
           spacing={"5"}
           as="button"
           py="10px"
@@ -89,7 +89,7 @@ export const WorkSection = () => {
           <Box pr="2" fontSize={"21"} textAlign="center">
             Watch Video
           </Box>
-        </HStack>
+        </HStack>*/}
       </Stack>
     </Stack>
   );
