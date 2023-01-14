@@ -65,7 +65,7 @@ export const TokenSection = () => {
           >
             <Link
               style={{ textDecoration: "none" }}
-              href="https://docs.divaprotocol.io/introduction/what-is-diva-token"
+              href="https://www.divaprotocol.io/posts/diva-tokenomics"
               isExternal
             >
               <Button
@@ -79,6 +79,7 @@ export const TokenSection = () => {
                 fontFamily={"body"}
                 fontSize="16px"
                 fontWeight={"500"}
+                _hover={{ bg: "none" }}
               >
                 LEARN MORE
               </Button>
@@ -105,7 +106,7 @@ export const TokenSection = () => {
           </Stack>
         </Stack>
       </Stack>
-      <VStack spacing="24px" pt="5rem" pb="10rem">
+      <Box pt="5rem" pb="10rem">
         <Heading
           textAlign={"center"}
           lineHeight={1.1}
@@ -115,26 +116,7 @@ export const TokenSection = () => {
         >
           More details coming soon!
         </Heading>
-        <Link
-          style={{ textDecoration: "none" }}
-          href="https://www.divaprotocol.io/posts/diva-tokenomics"
-        >
-          <Button
-            textAlign={"center"}
-            color="#00C2FF"
-            rightIcon={<TbArrowUpRight />}
-            borderColor="{Linear Gradient rgba(0, 194, 255, 1) rgba(0, 56, 255, 1)}"
-            variant="outline"
-            size={["sm", "sm", "lg", "lg", "lg"]}
-            fontFamily={"body"}
-            fontSize="16px"
-            fontWeight={"500"}
-            _hover={{ bg: "none" }}
-          >
-            <q>Meanwhile, read our blog post</q>
-          </Button>
-        </Link>
-      </VStack>
+      </Box>
     </Box>
   );
 };
