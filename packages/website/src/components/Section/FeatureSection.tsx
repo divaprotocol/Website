@@ -153,7 +153,7 @@ export const FeatureSection = () => {
                 width={["90%", "70%", "100%", "100%", "100%"]}
               >
                 Flexible payoff profiles, any reference asset, oracle agnostic,
-                any ERC20 as collateral
+                any ERC20 as collateral, KYC/AML compliance on demand
               </Text>
             </VStack>
           </Stack>
