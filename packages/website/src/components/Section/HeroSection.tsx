@@ -56,8 +56,8 @@ export const HeroSection = () => {
           fontSize={["sm", "sm", "xl", "xl", "xl"]}
           lineHeight={["none", "none", "6", "6", "6"]}
         >
-          DIVA Protocol is a decentralized and permissionless piece of
-          infrastructure that allows its users to create and settle fully
+          DIVA Protocol is a smart contract based operating system 
+          that allows its users to create and settle fully 
           customizable financial derivative contracts peer-to-peer
         </Text>
 

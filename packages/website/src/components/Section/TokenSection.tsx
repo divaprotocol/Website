@@ -6,6 +6,7 @@ import {
   Image,
   Box,
   Link,
+  VStack,
 } from "@chakra-ui/react";
 
 import { TbArrowUpRight } from "react-icons/tb";
@@ -50,17 +51,21 @@ export const TokenSection = () => {
             fontSize={["sm", "sm", "xl", "xl", "xl"]}
             lineHeight={["none", "none", "6", "6", "6"]}
           >
-            DIVA is the native token that is used to govern the DIVA Protocol.
-            There will be a maximum of 100m tokens in circulation. The
-            tokenomics were designed to be simple and at the same time flexible
-            enough to adapt to the various stages of the protocol lifecycle as
-            well as constantly changing market conditions. Holding DIVA tokens
-            allows users to vote on how to spend the DIVA treasury funds.
+            $DIVA is the native token that is used to govern the DIVA Protocol. 
+            The token model was designed to enable efficient and effective 
+            governance and offer flexibility to adapt to 
+            the various stages of the protocol lifecycle and constantly changing 
+            market conditions. There will be a maximum of 100m tokens in circulation.
+            40% will be released over 2 years and the remaining 60% over 30 years.
           </Text>
 
-          <Stack direction="row" spacing={6}>
+          <Stack
+            direction={["column", "column", "row", "row", "row"]}
+            spacing={6}
+          >
             <Link
-              href="https://docs.divaprotocol.io/introduction/what-is-diva-token"
+              style={{ textDecoration: "none" }}
+              href="https://www.divaprotocol.io/posts/diva-tokenomics"
               isExternal
             >
               <Button
@@ -74,11 +79,15 @@ export const TokenSection = () => {
                 fontFamily={"body"}
                 fontSize="16px"
                 fontWeight={"500"}
+                _hover={{ bg: "none" }}
               >
                 LEARN MORE
               </Button>
             </Link>
-            <Link href="https://divaprotocol.io/rewards">
+            <Link
+              style={{ textDecoration: "none" }}
+              href="https://divaprotocol.io/rewards"
+            >
               <Button
                 textAlign={"center"}
                 bg="linear-gradient(270deg, #00C2FF 0%, #0038FF 100%)"
