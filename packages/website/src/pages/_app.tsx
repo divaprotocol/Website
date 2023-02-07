@@ -9,9 +9,13 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 const App = ({ Component, pageProps }) => {
 	return (
-		<ChakraProvider theme={theme}>
-			<Component {...pageProps} />
-		</ChakraProvider>
+		<Provider store={store}>
+			<ConnectionProvider>
+				<ChakraProvider theme={theme}>
+					<Component {...pageProps} />
+				</ChakraProvider>
+			</ConnectionProvider>
+		</Provider>
 	)
 }
 
