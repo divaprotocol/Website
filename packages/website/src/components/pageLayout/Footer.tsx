@@ -68,7 +68,7 @@ export function Footer() {
 			<Stack
 				vertical
 				className="space-x-16 justify-between px-20 items-center h-20">
-				<span>© DIVA Finance</span>
+				<span>© DIVA Protocol</span>
 			</Stack>
 			<div
 				style={{

@@ -64,7 +64,8 @@ const FAQItem = ({ title, body }) => (
 							textAlign="left"
 							fontWeight={['350', '350', '350', '700', '700']}
 							fontSize={20}
-							color="white">
+							color="white"
+							className="font-sans">
 							{title}
 						</Box>
 						{isExpanded ? (
@@ -73,7 +74,11 @@ const FAQItem = ({ title, body }) => (
 							<AddIcon color="white" fontSize="12px" />
 						)}
 					</AccordionButton>
-					<AccordionPanel fontSize={16} color="#A4A4A4" textAlign="left">
+					<AccordionPanel
+						fontSize={16}
+						color="#A4A4A4"
+						textAlign="left"
+						className="font-serif">
 						{body}
 					</AccordionPanel>
 				</>

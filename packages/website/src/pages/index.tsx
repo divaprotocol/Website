@@ -35,7 +35,7 @@ export default function Home() {
 					<Heading as="h1" size="xl">
 						Powering the world of <Highlight>Derivatives</Highlight>
 					</Heading>
-					<Paragraph className="text-center text-lg">
+					<Paragraph className="text-center text-lg opacity-60">
 						DIVA Protocol is a decentralized and permissionless piece of
 						infrastructure that allows its users to create and settle fully
 						customizable financial derivative contracts peer-to-peer.
@@ -192,7 +192,14 @@ export default function Home() {
 							width={1051}
 							height={543}
 							alt="Features"
-							className="absolute -top-[350px] right-[110px] opacity-100"
+							className="absolute -top-[350px] right-[110px] opacity-100 z-10"
+						/>
+						<Image
+							src={'/illustrations/lines.svg'}
+							width={1051}
+							height={543}
+							alt="Features"
+							className="absolute top-[80px] right-[110px] opacity-30"
 						/>
 						{/* left ellipse */}
 						<div
@@ -257,7 +264,8 @@ export default function Home() {
 							marginTop: '-100px',
 						}}
 					/>
-					<Button>
+					{/* uncomment when the video is available */}
+					{/* <Button>
 						<span className="flex space-x-3 items-center">
 							<Image
 								className="-m-5 mr-0"
@@ -268,7 +276,7 @@ export default function Home() {
 							/>
 							<span>Watch Video</span>
 						</span>
-					</Button>
+					</Button> */}
 				</Stack>
 
 				{/* partners */}
@@ -288,21 +296,32 @@ export default function Home() {
 							filter: 'blur(142px)',
 						}}></div>
 
-					<Stack vertical className="space-x-10 justify-center items-center">
-						<Image
-							src="/logos/darley-logo.png"
-							height="90"
-							width="300"
-							alt="Darley"
-						/>
+					<Stack
+						vertical
+						className="space-x-10 justify-center items-center pt-12 z-10">
+						<a
+							href="https://www.darleytechnologies.com/"
+							target={'_blank'}
+							rel={'noreferrer'}>
+							<Image
+								src="/logos/darley-logo.png"
+								height="90"
+								width="300"
+								alt="Darley"
+							/>
+						</a>
 						<span className="block [width:1px] h-24 bg-white bg-opacity-10"></span>
-
-						<Image
-							src="/logos/dwf.png"
-							height="90"
-							width="300"
-							alt="Dwf Labs"
-						/>
+						<a
+							href="https://www.dwf-labs.com/"
+							target={'_blank'}
+							rel={'noreferrer'}>
+							<Image
+								src="/logos/dwf.png"
+								height="90"
+								width="300"
+								alt="Dwf Labs"
+							/>
+						</a>
 					</Stack>
 					<Stack
 						vertical
