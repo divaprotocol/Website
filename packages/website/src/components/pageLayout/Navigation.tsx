@@ -13,7 +13,7 @@ export const Navigation = () => {
 					<Link href="/about">About Us</Link>
 				</li>
 				<li>
-					<Link href="/dApps">dApps</Link>
+					<Link href="/dapps">dApps</Link>
 				</li>
 				<li>
 					<Link href="/rewards">Reward</Link>
