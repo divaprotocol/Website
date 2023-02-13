@@ -1,10 +1,10 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { Box, SimpleGrid, Link } from '@chakra-ui/react'
 import { getAllPosts } from '../api/getPosts'
 import PageLayout from '../../components/pageLayout/PageLayout'
-// import BlogCard from "../../components/Section/BlogCard";
-// import FeaturedBlogPost from "../../components/Section/FeaturedBlogPost";
+import BlogCard from '../../components/Section/BlogCard'
+import FeaturedBlogPost from '../../components/Section/FeaturedBlogPost'
 import { Post } from '..'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { format } from 'date-fns'
 
 export const getStaticProps = async () => {
@@ -32,19 +32,17 @@ export default function Blog({ posts }: { posts: Post[] }) {
 				px={['20px', '30px', '50px', '65px', '80px']}
 				justifyContent="center"
 				w="100%">
-				{/* {featured != null && <FeaturedBlogPost post={featured} />} */}
+				{featured != null && <FeaturedBlogPost post={featured} />}
 				<SimpleGrid columns={[1, 2, 2, 3, 4]} spacing="2rem">
 					{posts?.map((post) => (
-						<Link key={post.slug} href={`/posts/${post.slug}`} passHref>
-							<a>
-								{/* <BlogCard
-                  coverImageAlt={post.coverImageDescription}
-                  title={post.title}
-                  coverImage={post.coverImage}
-                  author={post.author}
-                  publishedAt={post.date}
-                /> */}
-							</a>
+						<Link key={post.slug} href={`/posts/${post.slug}`}>
+							<BlogCard
+								coverImageAlt={post.coverImageDescription}
+								title={post.title}
+								coverImage={post.coverImage}
+								author={post.author}
+								publishedAt={post.date}
+							/>
 						</Link>
 					))}
 				</SimpleGrid>

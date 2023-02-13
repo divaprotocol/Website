@@ -64,8 +64,12 @@ export default function dApps() {
 				<Stack
 					vertical
 					className="justify-center items-center gap-32 h-[728px] relative">
-					<Grid templateColumns="repeat(2, 1fr)" gap={10} className="h-[752px]">
-						<Card className="w-[500px] h-[299px] p-0">
+					<Grid
+						templateColumns="repeat(2, 1fr)"
+						gap={10}
+						columnGap={20}
+						className="h-[752px]">
+						<Card className="w-[500px] h-[299px] p-0 pt-0 pl-0 pr-0">
 							<Card className="w-full h-[120px] flex flex-col justify-center pr-10 pl-8">
 								<Flex justifyContent={'space-between'} alignItems={'center'}>
 									<Flex alignItems={'center'}>
@@ -101,30 +105,24 @@ export default function dApps() {
 								on anything.
 							</Paragraph>
 						</Card>
-						<Card className="w-[500px] h-[288px] bg-transparent p-0 flex">
-							<Image
-								src={'/illustrations/comingSoonApp.svg'}
-								width={500}
-								height={288}
-								alt="coming soon"
-							/>
-						</Card>
-						<Card className="w-[500px] h-[288px] bg-transparent p-0 flex">
-							<Image
-								src={'/illustrations/comingSoonApp.svg'}
-								width={500}
-								height={288}
-								alt="coming soon"
-							/>
-						</Card>
-						<Card className="w-[500px] h-[288px] bg-transparent p-0 flex">
-							<Image
-								src={'/illustrations/comingSoonApp.svg'}
-								width={500}
-								height={288}
-								alt="coming soon"
-							/>
-						</Card>
+						<Image
+							src={'/illustrations/comingSoonApp.svg'}
+							width={500}
+							height={288}
+							alt="coming soon"
+						/>
+						<Image
+							src={'/illustrations/comingSoonApp.svg'}
+							width={500}
+							height={288}
+							alt="coming soon"
+						/>
+						<Image
+							src={'/illustrations/comingSoonApp.svg'}
+							width={500}
+							height={288}
+							alt="coming soon"
+						/>
 					</Grid>
 					<div
 						style={{
