@@ -86,7 +86,7 @@ export default function dApps() {
 											<div className="font-sans text-xl text-white">
 												DIVA App
 											</div>
-											<div className="text-base font-sans opacity-50 font-bold">
+											<div className="text-base font-sans opacity-50 font-semibold">
 												Short app description
 											</div>
 										</Flex>

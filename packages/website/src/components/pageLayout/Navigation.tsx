@@ -1,11 +1,11 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import constants from '../../constants/index'
+import { Link } from '@chakra-ui/react'
 
 export const Navigation = () => {
 	return (
-		<nav className="flex flex-row justify-between w-full relative z-10 px-12">
-			<Link href={'/'}>
+		<nav className="flex flex-row justify-between w-full relative z-12 px-12">
+			<Link href="/">
 				<Image alt="Diva Logo" src="/DIVALogo.png" width={131} height={24} />
 			</Link>
 			<ul className="space-x-4 flex flex-row">

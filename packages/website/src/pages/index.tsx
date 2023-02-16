@@ -38,7 +38,7 @@ export default function Home() {
 					<Paragraph className="text-center text-lg opacity-60">
 						DIVA Protocol is a decentralized and permissionless piece of
 						infrastructure that allows its users to create and settle fully
-						customizable financial derivative contracts peer-to-peer.
+						customizable derivative contracts peer-to-peer.
 					</Paragraph>
 					<Stack vertical className="pt-5">
 						<a
@@ -58,7 +58,7 @@ export default function Home() {
 								</Flex>
 							</Button>
 						</a>
-						<Link href="/dapps" className="hover:no-underline">
+						<Link href="/dapps" className="hover:no-underline z-10">
 							<Button>Explore dApps</Button>
 						</Link>
 					</Stack>
@@ -165,7 +165,7 @@ export default function Home() {
 				<Heading as="h3" size="lg">
 					Protocol <Highlight>Features</Highlight>
 				</Heading>
-				<div className="relative pt-32 ">
+				<div className="relative pt-32">
 					<Stack vertical className="relative justify-between">
 						<Stack className="w-1/3">
 							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
@@ -180,7 +180,7 @@ export default function Home() {
 							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Tradeable</Heading>
-									<Paragraph>
+									<Paragraph className="opacity-60">
 										Position tokens are ERC20 and can be easily integrated into
 										any CEX or DEX.
 									</Paragraph>
@@ -229,7 +229,7 @@ export default function Home() {
 							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Fully collateralized</Heading>
-									<Paragraph>
+									<Paragraph className="opacity-60">
 										Eliminates counterparty risk and margin calls and gives
 										users a safe and frictionless experience.
 									</Paragraph>
@@ -239,7 +239,7 @@ export default function Home() {
 							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Highly customizable</Heading>
-									<Paragraph>
+									<Paragraph className="opacity-60">
 										Flexible payoff profiles, any reference asset, oracle
 										agnostic, any ERC20 as collateral.
 									</Paragraph>
@@ -363,7 +363,7 @@ export default function Home() {
 						<Heading as="h3" size="lg">
 							Join the <Highlight>Conversation</Highlight>
 						</Heading>
-						<Paragraph>
+						<Paragraph className="opacity-60">
 							Our global and vibrant community drives the success of the
 							Protocol. Join the conversation on Discord and Twitter to stay up
 							to date on the latest community news.

@@ -62,7 +62,7 @@ const FAQItem = ({ title, body }) => (
 						<Box
 							flex="1"
 							textAlign="left"
-							fontWeight={['350', '350', '350', '700', '700']}
+							fontWeight={['350', '350', '350', '500', '500']}
 							fontSize={20}
 							color="white"
 							className="font-sans">

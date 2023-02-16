@@ -9,13 +9,11 @@ import { Avatar } from '../components/Avatar'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
 import { Flex, Link } from '@chakra-ui/react'
-import constants from '../constants/index'
-// import { TokenSection } from "../components/Section/TokenSection";
 
 export default function token() {
 	return (
 		<PageLayout>
-			<Stack className="">
+			<Stack>
 				<Stack
 					vertical
 					className="justify-center items-center gap-32 h-[728px]">
@@ -30,7 +28,7 @@ export default function token() {
 							The DIVA
 							<Highlight> Token</Highlight>
 						</Heading>
-						<Paragraph className="font-serif opacity-50 text-lg">
+						<Paragraph className="font-serif opacity-60 text-lg">
 							We envision a world where financial institutions are built on top
 							of open-source decentralized protocols and allow everyone with an
 							internet connection to access basic financial services in a
@@ -57,7 +55,7 @@ export default function token() {
 							</Link>
 							<Link href="/rewards" className="hover:no-underline">
 								<Button primary>
-									<Flex className="hover:no-underline">claim $DIVA</Flex>
+									<Flex className="hover:no-underline">Claim $DIVA</Flex>
 								</Button>
 							</Link>
 						</Stack>
