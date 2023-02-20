@@ -8,7 +8,7 @@ export const Navigation = () => {
 			<Link href="/">
 				<Image alt="Diva Logo" src="/DIVALogo.png" width={131} height={24} />
 			</Link>
-			<ul className="space-x-4 flex flex-row">
+			<ul className="space-x-4 flex flex-row ">
 				<li>
 					<Link href="/about">About Us</Link>
 				</li>
