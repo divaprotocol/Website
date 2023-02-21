@@ -12,12 +12,12 @@ const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta
 					name="description"
-					content="DIVA Protocol is a decentralized and permissionless piece of infrastructure that allows its users to create and settle fully customizable financial derivative contracts peer-to-peer."
+					content="DIVA Protocol is a smart contract based operating system that allows its users to create and settle fully customizable financial derivative contracts peer-to-peer."
 				/>
 				<meta property="og:title" content="DIVA Protocol" />
 				<meta
 					property="og:description"
-					content="DIVA Protocol is a decentralized and permissionless piece of infrastructure that allows its users to create and settle fully customizable financial derivative contracts peer-to-peer."
+					content="DIVA Protocol is a smart contract based operating system that allows its users to create and settle fully customizable financial derivative contracts peer-to-peer."
 				/>
 				<meta property="og:image" content="/images/featuresbg.png" />
 			</Head>
