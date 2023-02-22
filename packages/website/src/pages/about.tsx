@@ -144,7 +144,8 @@ export default function About() {
 					<Paragraph className="text-center opacity-50 pb-10">
 						The team that planted the seeds.
 					</Paragraph>
-					<div className="grid grid-cols-4 gap-10 justify-center">
+					{/* <div className="grid grid-cols-4 gap-10 place-content-center"> */}
+					<div className="flex flex-wrap gap-20 max-w-[808px] justify-center">
 						<Avatar src="/team/alex.png" name="Alex" />
 						<Avatar src="/team/sambit.png" name="Sambit" />
 						<Avatar src="/team/richard.png" name="Richard" />

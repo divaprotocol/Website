@@ -15,7 +15,7 @@ const FAQSection = () => {
 	return (
 		<Stack className="container max-w-7xl m-auto space-y-20 relative pt-32">
 			<Heading as="h3" size="lg">
-				Frequently Asked <Highlight>Partners</Highlight>
+				Frequently Asked <Highlight>Questions</Highlight>
 			</Heading>
 			{/* left ellipse */}
 			<div

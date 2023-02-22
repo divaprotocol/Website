@@ -28,9 +28,15 @@ export default function dApps() {
 							<Highlight>dApp</Highlight> Store
 						</Heading>
 						<Paragraph className="font-serif opacity-50 text-base">
-							Explore apps built with DIVA Protocol. Learn how you can start
-							building apps on top of DIVA Protocol yourself and get them
-							featured in our app store.
+							Explore apps built with DIVA Protocol.
+							<Link
+								href={constants.documentationUrl}
+								isExternal
+								className="underline">
+								Learn{' '}
+							</Link>
+							how you can start building apps on top of DIVA Protocol yourself
+							and get them featured in our app store.
 						</Paragraph>
 					</Stack>
 					{/* left */}
@@ -86,13 +92,13 @@ export default function dApps() {
 											<div className="font-sans text-xl text-white">
 												DIVA App
 											</div>
-											<div className="text-base font-sans opacity-50 font-semibold">
+											<div className="text-base font-sans opacity-50 font-medium">
 												Short app description
 											</div>
 										</Flex>
 									</Flex>
 									<Link href={constants.appUrl} isExternal>
-										<div className="font-semibold font-sans text-base text-[#3393E0]">
+										<div className="font-medium font-sans text-base text-[#3393E0]">
 											Launch App
 										</div>
 									</Link>

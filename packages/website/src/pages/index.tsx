@@ -33,7 +33,7 @@ export default function Home() {
       items-center bg-gradient-to-t from-[rgba(0,0,0,.7)] via-transparent radial-gradient-1`}>
 				<Stack className="items-center relative">
 					<Heading as="h1" size="xl">
-						Powering the world of <Highlight>Derivatives</Highlight>
+						Powering the World of <Highlight>Derivatives</Highlight>
 					</Heading>
 					<Paragraph className="text-center text-lg opacity-60">
 						DIVA Protocol is a decentralized and permissionless piece of
@@ -67,6 +67,28 @@ export default function Home() {
 
 			{/* DIVA protocol powered applications */}
 			<div className="relative">
+				<div
+					style={{
+						position: 'absolute',
+						width: '524px',
+						height: '524px',
+						left: '-200px',
+						top: '187px',
+						background:
+							'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
+						filter: 'blur(162px)',
+					}}></div>
+				<div
+					style={{
+						position: 'absolute',
+						width: '455px',
+						height: '455px',
+						right: '250px',
+						top: '400px',
+						background:
+							'linear-gradient(116.38deg, rgba(0, 56, 255, 0.2) 6.37%, rgba(22, 227, 216, 0.2) 89.66%)',
+						filter: 'blur(162px)',
+					}}></div>
 				<Stack className="items-center relative text-center pt-20">
 					<Heading as="h2" size="lg">
 						<Highlight>DIVA Protocol</Highlight> powered Applications
@@ -79,7 +101,7 @@ export default function Home() {
 				<Stack
 					vertical
 					className="pt-20 container max-w-7xl m-auto space-x-12 text-left">
-					<Card>
+					<Card className="z-10">
 						<Stack>
 							<Image
 								alt="Insurance Products"
@@ -110,7 +132,7 @@ export default function Home() {
 							</Paragraph>
 						</Stack>
 					</Card>
-					<Card>
+					<Card className="z-10">
 						<Stack>
 							<Image
 								alt="Prediction Markets"
@@ -134,30 +156,6 @@ export default function Home() {
 						<Button>Learn more</Button>
 					</a>
 				</div>
-				{/* left ellipse */}
-				<div
-					style={{
-						position: 'absolute',
-						width: '524px',
-						height: '524px',
-						left: '-200px',
-						top: '187px',
-						background:
-							'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
-						filter: 'blur(162px)',
-					}}></div>
-				{/* right ellipse */}
-				<div
-					style={{
-						position: 'absolute',
-						width: '455px',
-						height: '455px',
-						right: '250px',
-						top: '400px',
-						background:
-							'linear-gradient(116.38deg, rgba(0, 56, 255, 0.2) 6.37%, rgba(22, 227, 216, 0.2) 89.66%)',
-						filter: 'blur(162px)',
-					}}></div>
 			</div>
 
 			{/* Protocol Features */}
