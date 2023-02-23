@@ -24,7 +24,12 @@ const BlogCard = ({
 	publishedAt: string
 }) => {
 	return (
-		<VStack spacing="6" cursor="pointer" align="flex-start" borderRadius={8}>
+		<VStack
+			spacing="6"
+			cursor="pointer"
+			align="flex-start"
+			borderRadius={8}
+			className="z-10">
 			<Image
 				src={`images/posts/${coverImage}`}
 				width="full"
@@ -36,7 +41,8 @@ const BlogCard = ({
 					fontSize="22px"
 					fontWeight="bold"
 					color="white"
-					_hover={{ textDecoration: 'underline' }}>
+					_hover={{ textDecoration: 'underline' }}
+					className="text-left">
 					{title}
 				</Heading>
 				<BlogMeta author={author} publishedAt={publishedAt} />

@@ -4,13 +4,13 @@ import { Post } from '../../pages'
 import BlogMeta from './BlogMeta'
 
 const FeaturedBlogPost = ({ post }: { post: Post }) => {
+	console.log(post)
 	return (
 		<Stack
 			spacing={{ base: 8, md: 10 }}
 			py={{ base: 20, md: 28 }}
 			direction={{ base: 'column', md: 'row' }}>
 			<Flex
-				flex={1}
 				justify={'center'}
 				align={'center'}
 				position={'relative'}
@@ -36,10 +36,10 @@ const FeaturedBlogPost = ({ post }: { post: Post }) => {
 					<a>
 						<Heading
 							lineHeight={1.1}
-							fontWeight={600}
+							fontWeight={500}
 							fontSize={{ base: '20px', sm: '30px', lg: '40px' }}
 							color="white"
-							className="p-0 m-0 mb-6">
+							className="p-0 m-0 mb-6 text-left">
 							{post.title}
 						</Heading>
 						<BlogMeta author={post.author} publishedAt={post.date} />

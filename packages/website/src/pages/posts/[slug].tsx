@@ -34,6 +34,11 @@ const components = {
 			{props.children}
 		</h2>
 	),
+	h3: (props) => (
+		<h3 {...props} className="text-white font-serif">
+			{props.children}
+		</h3>
+	),
 	p: (props) => (
 		<p {...props} className="text-white opacity-80 font-serif">
 			{props.children}
@@ -45,9 +50,19 @@ const components = {
 		</ul>
 	),
 	a: (props) => (
-		<a {...props} className="text-white opacity-80 font-serif">
+		<a {...props} className="text-white font-serif">
 			{props.children}
 		</a>
+	),
+	li: (props) => (
+		<li {...props} className="text-white font-serif">
+			{props.children}
+		</li>
+	),
+	strong: (props) => (
+		<strong {...props} className="text-white font-serif">
+			{props.children}
+		</strong>
 	),
 	Tweet,
 }
@@ -100,7 +115,7 @@ const PostPage = ({ source, post }: PostPageProps) => {
 					content="DIVA Protocol - Derivatives on the Ethereum blockchain"
 				/>
 			</Head>
-			<article className="pb-12 relative mt-10 flex flex-col items-center ">
+			<article className="pb-12 relative mt-10 flex flex-col text-left items-center">
 				<Image
 					src={`${IMAGE_PATH}${post.coverImage}`}
 					alt={post.coverImageDescription}
