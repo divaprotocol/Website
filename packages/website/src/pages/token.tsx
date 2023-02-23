@@ -29,12 +29,13 @@ export default function token() {
 							<Highlight> Token</Highlight>
 						</Heading>
 						<Paragraph className="font-serif opacity-60 text-lg">
-							We envision a world where financial institutions are built on top
-							of open-source decentralized protocols and allow everyone with an
-							internet connection to access basic financial services in a
-							permissionless way.DIVA Protocol is our contribution to this new
-							financial paradigm to enable derivative applications including
-							insurance, predictions and structured products peer-to-peer.
+							The DIVA Token acts as a voting token to elect the
+							delegate responsible for driving protocol adoption on behalf of DIVA Token holders. 
+							An innovative continuous voting mechanism provides a fully decentralized way to replace the delegate if they fail 
+							to act in the best interest of DIVA Token holders.
+							Alongside efficient and effective governance, the DIVA Token design
+							provides flexibility to adapt to the evolving needs of the protocol
+							over time.
 						</Paragraph>
 						<Stack vertical className="space-x-14 z-10">
 							<Link
