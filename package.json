@@ -5,6 +5,10 @@
   "license": "MIT",
   "dependencies": {},
   "private": true,
+  "scripts": {
+    "start": "yarn workspaces run start",
+    "dev": "yarn workspaces run dev"
+  },
   "workspaces": [
     "packages/**/*"
   ]

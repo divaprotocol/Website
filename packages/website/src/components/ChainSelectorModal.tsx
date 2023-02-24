@@ -72,14 +72,10 @@ const NetworkInfo = ({
             />*/}
           </div>
           <div>
-            <Text>{name}</Text>
-            <Text
-              sx={{
-                opacity: 0.5,
-              }}
-            >
+            <span>{name}</span>
+            <span className="opacity-50">
               {connectedChainId === chainId ? "Connected" : ""}
-            </Text>
+            </span>
           </div>
         </>
       </NetworkInfoContainer>

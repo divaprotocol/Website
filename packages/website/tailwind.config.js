@@ -6,6 +6,9 @@ module.exports = {
       md: "768px",
     },
     extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
@@ -17,16 +20,23 @@ module.exports = {
         },
       }),
     },
-    colors: {
-      current: "currentColor",
-      text: "#afbed3",
-      blue: "rgb(51, 147, 224)",
-      white: "#fff",
-      black: "#000",
+    fontSize: {
+      sm: "0.9rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.75rem",
+      "2xl": "2.374rem",
+      "3xl": "3rem",
     },
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      serif: ["Roboto Mono", "sans-serif"],
+      body: ["Roboto Mono", "sans-serif"],
+    },
+    color: {
+      white: "#fff",
+      blue: "#0038FF",
+      teal: "#16E3D8",
     },
   },
   plugins: [require("@tailwindcss/typography")],
