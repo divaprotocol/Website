@@ -105,9 +105,10 @@ export default function dApps() {
 								</Flex>
 							</Card>
 							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
-								DIVA App is a one-stop solution to create, trade and settle derivative products. 
-								It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.
-								</Paragraph>
+								{`
+									DIVA App is a one-stop solution to create, trade and settle derivative products. 
+									It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.`}
+							</Paragraph>
 						</Card>
 						<Image
 							src={'/illustrations/comingSoonApp.svg'}
@@ -149,10 +150,12 @@ export default function dApps() {
 								<Highlight>Build</Highlight>
 							</Heading>
 							<Paragraph className="opacity-50">
-								Whether you're a seasoned Web2 developer or just getting started, 
-								DIVA Protocol makes it simple to create derivative financial applications such as insurance, prediction markets, 
-								structured products or conditional donations, all without relying on traditional banking infrastructure. 
-								Embrace the future of finance and start building with DIVA today.
+								{`Whether you're a seasoned Web2 developer or just getting
+									started, DIVA Protocol makes it simple to create derivative
+									financial applications such as insurance, prediction markets,
+									structured products or conditional donations, all without
+									relying on traditional banking infrastructure. Embrace the
+									future of finance and start building with DIVA today.`}
 							</Paragraph>
 							<Stack vertical className="space-x-14">
 								<a

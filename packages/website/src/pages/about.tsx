@@ -76,7 +76,8 @@ export default function About() {
 							internet connection to access basic financial services in a
 							permissionless way. DIVA Protocol is our contribution to this new
 							financial paradigm to enable derivative applications including
-							insurance, structured products, prediction markets, swaps and more, peer-to-peer.
+							insurance, structured products, prediction markets, swaps and
+							more, peer-to-peer.
 						</Paragraph>
 					</Stack>
 				</Stack>
@@ -89,8 +90,7 @@ export default function About() {
 							DAO Mission
 						</h2>
 						<Heading as="h3" size="sm">
-							<Highlight>Foster protocol adoption </Highlight> via
-							delegation
+							<Highlight>Foster protocol adoption </Highlight> via delegation
 						</Heading>
 						{/* left  */}
 						<div
@@ -119,11 +119,13 @@ export default function About() {
 								transform: 'matrix(-1, 0, 0, 1, 0, 0)',
 							}}></div>
 						<Paragraph className="font-serif opacity-50">
-							The mission of the DIVA DAO is to expand and enhance the ecosystem surrounding the DIVA Protocol. 
-							This is achieved by providing funding for projects and initiatives that have the greatest potential 
-							to shape the future of the DIVA Protocol. To facilitate efficient and effective governance, DIVA 
-							Token holders delegate decision-making authority and access to the treasury funds to a central 
-							party through a unique continuous voting mechanism.
+							The mission of the DIVA DAO is to expand and enhance the ecosystem
+							surrounding the DIVA Protocol. This is achieved by providing
+							funding for projects and initiatives that have the greatest
+							potential to shape the future of the DIVA Protocol. To facilitate
+							efficient and effective governance, DIVA Token holders delegate
+							decision-making authority and access to the treasury funds to a
+							central party through a unique continuous voting mechanism.
 						</Paragraph>
 					</Stack>
 					<Image
@@ -195,10 +197,10 @@ export default function About() {
 								<Highlight>Build</Highlight>
 							</Heading>
 							<Paragraph className="opacity-50">
-								Whether you're a seasoned Web2 developer or just getting started, 
+								{`Whether you're a seasoned Web2 developer or just getting started, 
 								DIVA Protocol makes it simple to create derivative financial applications such as insurance, prediction markets, 
 								structured products or conditional donations, all without relying on traditional banking infrastructure. 
-								Embrace the future of finance and start building with DIVA today.
+								Embrace the future of finance and start building with DIVA today.`}
 							</Paragraph>
 							<Stack vertical className="space-x-14">
 								<a
