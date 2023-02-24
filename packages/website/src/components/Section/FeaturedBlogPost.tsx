@@ -4,7 +4,6 @@ import { Post } from '../../pages'
 import BlogMeta from './BlogMeta'
 
 const FeaturedBlogPost = ({ post }: { post: Post }) => {
-	console.log(post)
 	return (
 		<Stack
 			spacing={{ base: 8, md: 10 }}
@@ -26,14 +25,12 @@ const FeaturedBlogPost = ({ post }: { post: Post }) => {
 			</Flex>
 			<Stack spacing={{ base: 5, md: 10 }} className="py-6">
 				<Box>
-					<Link href={`/posts/${post.slug}`} passHref>
-						<h1 className="rounded font-serif px-4 py-2 bg-white bg-opacity-10 w-min whitespace-nowrap text-white text-sm">
-							Featured Blog Post
-						</h1>
-					</Link>
+					<h1 className="rounded font-serif px-4 py-2 bg-white bg-opacity-10 w-min whitespace-nowrap text-white text-sm">
+						Featured Blog Post
+					</h1>
 				</Box>
 				<Link href={`/posts/${post.slug}`} passHref>
-					<a>
+					<a className="z-10">
 						<Heading
 							lineHeight={1.1}
 							fontWeight={500}
