@@ -36,9 +36,8 @@ export default function Home() {
 						Powering the World of <Highlight>Derivatives</Highlight>
 					</Heading>
 					<Paragraph className="text-center text-lg opacity-60">
-						DIVA Protocol is a decentralized and permissionless piece of
-						infrastructure that allows its users to create and settle fully
-						customizable derivative contracts peer-to-peer.
+					    DIVA Protocol is a universal and highly flexible smart contract-based operating system
+						for creating and settling derivative products peer-to-peer.						
 					</Paragraph>
 					<Stack vertical className="pt-5">
 						<a
@@ -94,8 +93,11 @@ export default function Home() {
 						<Highlight>DIVA Protocol</Highlight> powered Applications
 					</Heading>
 					<Paragraph className="text-center text-lg">
-						Applications that you can be built on top of DIVA Protocol. No smart
-						contract programming skills required.
+						{/* Applications that you can be built on top of DIVA Protocol. No smart
+						contract programming skills required. */}
+						{/* Applications that can be powered by DIVA Protocol without requiring
+						any smart contract programming skills. */}
+						Build financial derivative applications without connecting to traditional banking infrastructure.
 					</Paragraph>
 				</Stack>
 				<Stack
@@ -168,19 +170,17 @@ export default function Home() {
 						<Stack className="w-1/3">
 							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
-									<Heading as="h3">Permissionless</Heading>
+									<Heading as="h3">Highly customizable</Heading>
 									<Paragraph className="opacity-60">
-										Anyone can create and settle derivatives on anything without
-										permission.
+										Users can choose any event, a wide range of payoff profiles, any oracle and any ERC20 compliant asset as collateral.
 									</Paragraph>
 								</div>
 							</div>
 							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
-									<Heading as="h3">Tradeable</Heading>
+									<Heading as="h3">Fully collateralized</Heading>
 									<Paragraph className="opacity-60">
-										Position tokens are ERC20 and can be easily integrated into
-										any CEX or DEX.
+										Eliminates counter-party risk and margin calls by requiring full collateralization, giving users a safe and frictionless experience.
 									</Paragraph>
 								</div>
 							</div>
@@ -226,20 +226,18 @@ export default function Home() {
 						<Stack className="w-1/3">
 							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
-									<Heading as="h3">Fully collateralized</Heading>
+									<Heading as="h3">Built-in compliance layer</Heading>
 									<Paragraph className="opacity-60">
-										Eliminates counterparty risk and margin calls and gives
-										users a safe and frictionless experience.
+										Possibility to restrict the transfer of the derivative assets to holders of a specific NFT, such as a KYC NFT token.
 									</Paragraph>
 								</div>
 							</div>
 
 							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
-									<Heading as="h3">Highly customizable</Heading>
+									<Heading as="h3">Interoperable</Heading>
 									<Paragraph className="opacity-60">
-										Flexible payoff profiles, any reference asset, oracle
-										agnostic, any ERC20 as collateral.
+										Derivatives are represented as ERC20 tokens and can be seamlessly integrated into any existing CEX and DEX infrastructure.
 									</Paragraph>
 								</div>
 							</div>

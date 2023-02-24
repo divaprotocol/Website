@@ -29,8 +29,7 @@ export default function About() {
 						</h1>
 						<Heading as="h2" size="sm">
 							<Highlight>Establish DIVA Protocol</Highlight> as the operation
-							system for derivative applications in the decentralized financial
-							world
+							system for derivative applications
 						</Heading>
 						{/* left most */}
 						<div
@@ -75,9 +74,10 @@ export default function About() {
 							We envision a world where financial institutions are built on top
 							of open-source decentralized protocols and allow everyone with an
 							internet connection to access basic financial services in a
-							permissionless way.DIVA Protocol is our contribution to this new
+							permissionless way. DIVA Protocol is our contribution to this new
 							financial paradigm to enable derivative applications including
-							insurance, predictions and structured products peer-to-peer.
+							insurance, structured products, prediction markets, swaps and
+							more, peer-to-peer.
 						</Paragraph>
 					</Stack>
 				</Stack>
@@ -90,8 +90,7 @@ export default function About() {
 							DAO Mission
 						</h2>
 						<Heading as="h3" size="sm">
-							<Highlight>Foster adoption of DIVA Protocol</Highlight> by
-							steering treasury resources
+							<Highlight>Foster protocol adoption </Highlight> via delegation
 						</Heading>
 						{/* left  */}
 						<div
@@ -120,11 +119,13 @@ export default function About() {
 								transform: 'matrix(-1, 0, 0, 1, 0, 0)',
 							}}></div>
 						<Paragraph className="font-serif opacity-50">
-							The DIVA DAO’s primary mission is to grow the ecosystem around
-							DIVA Protocol by steering treasury funds towards projects and
-							initiatives that have the most impact on the future of DIVA
-							Protocol. This includes providing grants to teams that build
-							tooling,infrastructure and applications around DIVA Protocol.
+							The mission of the DIVA DAO is to expand and enhance the ecosystem
+							surrounding the DIVA Protocol. This is achieved by providing
+							funding for projects and initiatives that have the greatest
+							potential to shape the future of the DIVA Protocol. To facilitate
+							efficient and effective governance, DIVA Token holders delegate
+							decision-making authority and access to the treasury funds to a
+							central party through a unique continuous voting mechanism.
 						</Paragraph>
 					</Stack>
 					<Image
@@ -196,12 +197,10 @@ export default function About() {
 								<Highlight>Build</Highlight>
 							</Heading>
 							<Paragraph className="opacity-50">
-								DIVA Protocol is a smart contract that takes care of all the
-								logic used to create and settle derivative assets. As a Web2
-								developer, you do not need to have any knowledge of writing
-								smart contracts in Solidity. You can fully focus on building the
-								best user experiences for creating and settling insurance,
-								prediction or structured products.
+								{`Whether you're a seasoned Web2 developer or just getting started, 
+								DIVA Protocol makes it simple to create derivative financial applications such as insurance, prediction markets, 
+								structured products or conditional donations, all without relying on traditional banking infrastructure. 
+								Embrace the future of finance and start building with DIVA today.`}
 							</Paragraph>
 							<Stack vertical className="space-x-14">
 								<a

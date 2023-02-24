@@ -105,10 +105,9 @@ export default function dApps() {
 								</Flex>
 							</Card>
 							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
-								DIVA App is the first implementation of an app that uses DIVA
-								Protocol as the underlying technology. It’s a universal app that
-								allows its users to create, trade and settle derivative assets
-								on anything.
+								{`
+									DIVA App is a one-stop solution to create, trade and settle derivative products. 
+									It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.`}
 							</Paragraph>
 						</Card>
 						<Image
@@ -151,12 +150,12 @@ export default function dApps() {
 								<Highlight>Build</Highlight>
 							</Heading>
 							<Paragraph className="opacity-50">
-								DIVA Protocol is a smart contract that takes care of all the
-								logic used to create and settle derivative assets. As a Web2
-								developer, you do not need to have any knowledge of writing
-								smart contracts in Solidity. You can fully focus on building the
-								best user experiences for creating and settling insurance,
-								prediction or structured products.
+								{`Whether you're a seasoned Web2 developer or just getting
+									started, DIVA Protocol makes it simple to create derivative
+									financial applications such as insurance, prediction markets,
+									structured products or conditional donations, all without
+									relying on traditional banking infrastructure. Embrace the
+									future of finance and start building with DIVA today.`}
 							</Paragraph>
 							<Stack vertical className="space-x-14">
 								<a
