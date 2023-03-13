@@ -53,7 +53,7 @@ export default function Home() {
 							</Paragraph>
 						</motion.div>
 						<motion.div variants={textVariant(1.2)}>
-							<Stack vertical className="pt-5">
+							<Stack className="pt-5" vertical>
 								<a
 									href="https://docs.divaprotocol.io/"
 									target={'_blank'}

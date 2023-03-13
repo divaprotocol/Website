@@ -14,16 +14,18 @@ import Link from 'next/link'
 export default function About() {
 	return (
 		<PageLayout>
-			<Stack className="space-y-10 pt-40 pb-6">
-				<Stack vertical className="justify-center space-x-20 gap-32 relative">
+			<Stack className="space-y-10 mt-16 md:pt-40 pb-6">
+				<Stack
+					vertical
+					className="justify-center space-x-20 md:gap-32 relative flex-col md:flex-row">
 					<Image
-						className="mt-10"
+						className="mt-10 order-last"
 						src="/illustrations/Mission.svg"
 						width={459}
 						height={453}
 						alt="Mission"
 					/>
-					<Stack className="text-left max-w-lg">
+					<Stack className="text-left max-w-lg m-0" style={{ margin: 0 }}>
 						<h1 className="rounded font-sans px-4 py-2 bg-white bg-opacity-10 w-min whitespace-nowrap text-white text-sm">
 							Our Vision
 						</h1>
@@ -84,7 +86,7 @@ export default function About() {
 
 				<Stack
 					vertical
-					className="justify-center space-x-20 gap-32 pt-40 relative">
+					className="justify-center space-x-20 md:gap-32 pt-40 relative flex-col md:flex-row">
 					<Stack className="text-left max-w-lg">
 						<h2 className="rounded font-sans px-4 py-2 bg-white bg-opacity-10 w-min whitespace-nowrap text-white text-sm">
 							DAO Mission
@@ -146,7 +148,7 @@ export default function About() {
 						The team that planted the seeds.
 					</Paragraph>
 					{/* <div className="grid grid-cols-4 gap-10 place-content-center"> */}
-					<div className="flex flex-wrap gap-20 max-w-[808px] justify-center">
+					<div className="flex flex-wrap gap-10 md:gap-20 max-w-[808px] justify-center">
 						<Avatar src="/team/alex.png" name="Alex" />
 						<Avatar src="/team/sambit.png" name="Sambit" />
 						<Avatar src="/team/richard.png" name="Richard" />
@@ -191,8 +193,8 @@ export default function About() {
 				</Stack>
 
 				<Stack className="pt-60 relative">
-					<Card className="max-w-3xl self-center py-12 px-16">
-						<Stack className="justify-center items-center space-y-12">
+					<Card className="max-w-3xl self-center md:py-12 md:px-16">
+						<Stack className="justify-center items-center md:space-y-12">
 							<Heading as="h2" size="lg">
 								<Highlight>Build</Highlight>
 							</Heading>
@@ -202,7 +204,9 @@ export default function About() {
 								structured products or conditional donations, all without relying on traditional banking infrastructure. 
 								Embrace the future of finance and start building with DIVA today.`}
 							</Paragraph>
-							<Stack vertical className="space-x-14">
+							<Stack
+								vertical
+								className="space-x-14 flex-col md:flex-row gap-4 md:gap-0 justify-center items-center">
 								<a
 									href={constants.documentationUrl}
 									target={'_blank'}
@@ -220,8 +224,10 @@ export default function About() {
 										</Flex>
 									</Button>
 								</a>
-								<Link href="/dapps" className="hover:no-underline">
-									<Button>Explore Apps</Button>
+								<Link href="/dapps" className="hover:no-underline m-0">
+									<Button className="w-full md:w-auto" innerClassName="w-full">
+										Explore Apps
+									</Button>
 								</Link>
 							</Stack>
 						</Stack>
