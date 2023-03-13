@@ -5,6 +5,7 @@ export interface ButtonProps {
 	primary?: boolean
 	className?: string
 	onClick?: () => void
+	innerClassName?: string
 }
 
 export const Button = (props: PropsWithChildren<ButtonProps>) => {
@@ -20,7 +21,9 @@ export const Button = (props: PropsWithChildren<ButtonProps>) => {
 		<button
 			className={`${className} ${props.className}`}
 			onClick={props.onClick}>
-			<span className={innerClassName}>{props.children}</span>
+			<span className={`${innerClassName} ${props.innerClassName}`}>
+				{props.children}
+			</span>
 		</button>
 	)
 }

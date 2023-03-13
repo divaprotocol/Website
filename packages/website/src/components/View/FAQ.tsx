@@ -54,7 +54,7 @@ const FAQSection = () => {
 }
 
 const FAQItem = ({ title, body }) => (
-	<Card className="py-2 my-4 px-5 w-[70%]">
+	<Card className="py-2 my-4 px-0 md:px-5 w-[100%] md:w-[70%]">
 		<AccordionItem borderRadius="16px" mx="auto" border={'none'}>
 			{({ isExpanded }) => (
 				<>
