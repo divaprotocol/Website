@@ -10,7 +10,7 @@ import { Flex } from '@chakra-ui/react'
 import FAQSection from '../components/View/FAQ'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { fadeIn, slideIn, staggerContainer, textVariant } from '../util/motion'
+import { staggerContainer, textVariant } from '../util/motion'
 
 export type Post = {
 	author: string
