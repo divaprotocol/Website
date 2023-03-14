@@ -4,18 +4,10 @@ import Link from 'next/link'
 import { Grid } from '@chakra-ui/react'
 import constants from '../../constants/index'
 import { motion } from 'framer-motion'
-import { footerVariants } from '../../util/motion'
 
 export function Footer() {
 	return (
-		<motion.footer
-			variants={footerVariants}
-			initial="hidden"
-			whileInView="show"
-			viewport={{
-				once: true,
-			}}
-			className="mt-32 text-white font-sans text-opacity-80 relative md:h-[233px] overflow-y-hidden bg-[rgba(255, 255, 255, 0.06)] w-screen ">
+		<footer className="mt-32 text-white font-sans text-opacity-80 relative md:h-[233px] overflow-y-hidden bg-[rgba(255, 255, 255, 0.06)] w-screen overflow-hidden">
 			<Stack
 				vertical
 				className="md:space-x-16 justify-between px-8 md:px-20 py-8 md:py-10 border-b border-white border-opacity-10 flex-col md:flex-row gap-8 ">
@@ -83,7 +75,7 @@ export function Footer() {
 					filter: 'blur(162px)',
 					zIndex: -1,
 				}}></div>
-		</motion.footer>
+		</footer>
 	)
 }
 

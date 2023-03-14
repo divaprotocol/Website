@@ -5,7 +5,8 @@ const constants = {
 
     documentationUrl: "https://docs.divaprotocol.io/",
     appUrl: "https://app.diva.finance/",
-    peckShieldAudit: 'https://docs.divaprotocol.io/for-developers/technical-resources'
+    peckShieldAudit: 'https://docs.divaprotocol.io/for-developers/technical-resources',
+    divaDonate: "https://www.divadonate.xyz/"
 }
 
 export default constants;

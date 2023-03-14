@@ -16,7 +16,7 @@ export default function token() {
 			<Stack>
 				<Stack
 					vertical
-					className="justify-center items-center gap-32 h-[728px]">
+					className="justify-center items-center md:gap-32 md:h-[728px] flex-col md:flex-row">
 					<Image
 						src="/illustrations/DivaToken.svg"
 						width={459}
@@ -29,19 +29,20 @@ export default function token() {
 							<Highlight> Token</Highlight>
 						</Heading>
 						<Paragraph className="font-serif opacity-60 text-lg">
-							The DIVA Token acts as a voting token to elect the
-							delegate responsible for driving protocol adoption on behalf of DIVA Token holders. 
-							An innovative continuous voting mechanism provides a fully decentralized way to replace the delegate if they fail 
-							to act in the best interest of DIVA Token holders.
-							Alongside efficient and effective governance, the DIVA Token design
-							provides flexibility to adapt to the evolving needs of the protocol
-							over time.
+							The DIVA Token acts as a voting token to elect the delegate
+							responsible for driving protocol adoption on behalf of DIVA Token
+							holders. An innovative continuous voting mechanism provides a
+							fully decentralized way to replace the delegate if they fail to
+							act in the best interest of DIVA Token holders. Alongside
+							efficient and effective governance, the DIVA Token design provides
+							flexibility to adapt to the evolving needs of the protocol over
+							time.
 						</Paragraph>
 						<Stack vertical className="space-x-14 z-10">
 							<Link
 								href="https://www.divaprotocol.io/posts/diva-tokenomics"
 								className="hover:no-underline">
-								<Button className="bg-transparent">
+								<Button className="bg-transparent p-2">
 									<Flex className="hover:no-underline">
 										Learn More
 										<Image
@@ -86,7 +87,8 @@ export default function token() {
 								'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
 							filter: 'blur(131.902px)',
 							transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-						}}></div>
+						}}
+						className="hidden md:block"></div>
 					{/* right */}
 					<div
 						style={{
@@ -99,7 +101,8 @@ export default function token() {
 								'linear-gradient(116.38deg, rgba(0, 56, 255, 0.17) 6.37%, rgba(22, 227, 216, 0.17) 89.66%)',
 							filter: 'blur(131.902px)',
 							transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-						}}></div>
+						}}
+						className="hidden md:block"></div>
 				</Stack>
 
 				{/* <Stack>More details coming soon!</Stack> */}

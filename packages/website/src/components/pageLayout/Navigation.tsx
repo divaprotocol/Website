@@ -9,7 +9,6 @@ import {
 	Stack,
 	Collapse,
 	Icon,
-	Link,
 	Popover,
 	PopoverTrigger,
 	PopoverContent,
@@ -20,6 +19,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import { navVariants } from '../../util/motion'
+import Link from 'next/link'
 interface NavItem {
 	label: string
 	href?: string
@@ -73,7 +73,7 @@ export default function Navigation() {
 						base: 'space-between',
 					}}>
 					<Flex flex={{ base: 1 }} justify={{ base: 'start', md: 'start' }}>
-						<Link href="/">
+						<Link href="/" className="cursor-pointer">
 							<Box
 								width={{
 									base: '100px',
@@ -83,7 +83,7 @@ export default function Navigation() {
 									base: '20px',
 									md: '24px',
 								}}
-								className="relative">
+								className="relative cursor-pointer">
 								<Image alt="Diva Logo" src="/DIVALogo.png" fill />
 							</Box>
 						</Link>
@@ -119,25 +119,15 @@ export default function Navigation() {
 }
 
 const DesktopNav = () => {
-	const linkColor = useColorModeValue('#F2F2F2', '#F2F2F2')
-	const linkHoverColor = useColorModeValue('gray.200', 'white')
-
 	return (
 		<Stack direction={'row'} spacing={4}>
 			{NAV_ITEMS.map((navItem) => (
-				<Box key={navItem.label}>
+				<Box key={navItem.label} className="text-[#f4f4f4] opacity-75">
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
 							<Link
-								p={2}
 								href={navItem.href ?? '#'}
-								fontSize={'sm'}
-								fontWeight={500}
-								color={linkColor}
-								_hover={{
-									textDecoration: 'none',
-									color: linkHoverColor,
-								}}>
+								className="p-2 text-sm font-medium ">
 								{navItem.label}
 							</Link>
 						</PopoverTrigger>
@@ -153,7 +143,8 @@ const MobileNav = () => {
 		<Stack
 			bg={useColorModeValue('transparent', 'gray.800')}
 			p={4}
-			display={{ md: 'none' }}>
+			display={{ md: 'none' }}
+			className="text-left text-[#f4f4f4] opacity-75 gap-3">
 			{NAV_ITEMS.map((navItem) => (
 				<MobileNavItem key={navItem.label} {...navItem} />
 			))}
@@ -162,19 +153,12 @@ const MobileNav = () => {
 }
 
 const MobileNavItem = ({ label, href }: NavItem) => {
-	const { isOpen, onToggle } = useDisclosure()
-
 	return (
 		<Stack spacing={4}>
 			<Flex
-				py={2}
 				as={Link}
 				href={href ?? '#'}
-				justify={'space-between'}
-				align={'center'}
-				_hover={{
-					textDecoration: 'underline',
-				}}>
+				className="py-2 text-sm font-medium justify-center items-center gap-3">
 				<Text fontWeight={600} color={useColorModeValue('white', 'gray.200')}>
 					{label}
 				</Text>
