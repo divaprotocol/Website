@@ -153,8 +153,7 @@ export default function dApps() {
 								</Flex>
 							</Card>
 							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
-								{`A novel donation model enabled by blockchain technology
-Powered by DIVA Protocol.`}
+								{`A platform that facilitates conditional donations to financially support communities that are impacted by climate change, powered by DIVA Protocol.`}
 							</Paragraph>
 						</Card>
 						<Image
