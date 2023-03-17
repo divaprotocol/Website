@@ -201,7 +201,7 @@ export default function Home() {
 						vertical
 						className="relative justify-between flex-wrap gap-8 md:gap-0">
 						<Stack className="md:w-1/3 flex-wrap">
-							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+							<div className="bg-gradient-to-l rounded-lg from-transparent to-[#00c2ff91] md:from-[#00c2ff91] bg-opacity-30 md:to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Highly customizable</Heading>
 									<Paragraph className="opacity-60">
@@ -271,7 +271,7 @@ export default function Home() {
 								</div>
 							</div>
 
-							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+							<div className="bg-gradient-to-r rounded-lg from-transparent md:from-[#00c2ff91] bg-opacity-30 to-[#00c2ff91] md:to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Interoperable</Heading>
 									<Paragraph className="opacity-60">

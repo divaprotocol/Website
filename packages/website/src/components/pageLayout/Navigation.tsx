@@ -23,6 +23,7 @@ import Link from 'next/link'
 interface NavItem {
 	label: string
 	href?: string
+	isExternal?: boolean
 }
 
 const NAV_ITEMS: Array<NavItem> = [
@@ -41,6 +42,7 @@ const NAV_ITEMS: Array<NavItem> = [
 	{
 		label: 'Docs',
 		href: constants.documentationUrl,
+		isExternal: true,
 	},
 	{
 		label: 'Token',
@@ -125,11 +127,21 @@ const DesktopNav = () => {
 				<Box key={navItem.label} className="text-[#f4f4f4] opacity-75">
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
-							<Link
-								href={navItem.href ?? '#'}
-								className="p-2 text-sm font-medium ">
-								{navItem.label}
-							</Link>
+							{navItem.isExternal ? (
+								<a
+									target={'_blank'}
+									href={navItem.href ?? '#'}
+									className="p-2 text-sm font-medium "
+									rel="noreferrer">
+									{navItem.label}
+								</a>
+							) : (
+								<Link
+									href={navItem.href ?? '#'}
+									className="p-2 text-sm font-medium ">
+									{navItem.label}
+								</Link>
+							)}
 						</PopoverTrigger>
 					</Popover>
 				</Box>
@@ -152,17 +164,28 @@ const MobileNav = () => {
 	)
 }
 
-const MobileNavItem = ({ label, href }: NavItem) => {
+const MobileNavItem = ({ label, href, isExternal }: NavItem) => {
+	const color = useColorModeValue('white', 'gray.200')
 	return (
 		<Stack spacing={4}>
-			<Flex
-				as={Link}
-				href={href ?? '#'}
-				className="py-2 text-sm font-medium justify-center items-center gap-3">
-				<Text fontWeight={600} color={useColorModeValue('white', 'gray.200')}>
+			{isExternal ? (
+				<a
+					target={'_blank'}
+					href={href ?? '#'}
+					className="text-base font-bold justify-center items-center gap-3"
+					rel="noreferrer">
 					{label}
-				</Text>
-			</Flex>
+				</a>
+			) : (
+				<Flex
+					as={Link}
+					href={href ?? '#'}
+					className="py-2 text-sm font-medium justify-center items-center gap-3">
+					<Text fontWeight={600} color={color}>
+						{label}
+					</Text>
+				</Flex>
+			)}
 		</Stack>
 	)
 }
