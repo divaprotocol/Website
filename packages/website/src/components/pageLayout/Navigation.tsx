@@ -127,21 +127,14 @@ const DesktopNav = () => {
 				<Box key={navItem.label} className="text-[#f4f4f4] opacity-75">
 					<Popover trigger={'hover'} placement={'bottom-start'}>
 						<PopoverTrigger>
-							{navItem.isExternal ? (
-								<a
-									target={'_blank'}
-									href={navItem.href ?? '#'}
-									className="p-2 text-sm font-medium "
-									rel="noreferrer">
+							<Link
+								href={navItem.href ?? '#'}
+								className="p-2 text-sm font-medium"
+								passHref>
+								<a target={navItem.isExternal ? '_blank' : '_parent'}>
 									{navItem.label}
 								</a>
-							) : (
-								<Link
-									href={navItem.href ?? '#'}
-									className="p-2 text-sm font-medium ">
-									{navItem.label}
-								</Link>
-							)}
+							</Link>
 						</PopoverTrigger>
 					</Popover>
 				</Box>
@@ -168,24 +161,17 @@ const MobileNavItem = ({ label, href, isExternal }: NavItem) => {
 	const color = useColorModeValue('white', 'gray.200')
 	return (
 		<Stack spacing={4}>
-			{isExternal ? (
-				<a
-					target={'_blank'}
-					href={href ?? '#'}
-					className="text-base font-bold justify-center items-center gap-3"
-					rel="noreferrer">
-					{label}
-				</a>
-			) : (
-				<Flex
-					as={Link}
-					href={href ?? '#'}
-					className="py-2 text-sm font-medium justify-center items-center gap-3">
+			<Flex
+				as={Link}
+				href={href ?? '#'}
+				className="py-2 text-sm font-medium justify-center items-center gap-3"
+				passHref>
+				<a target={isExternal ? '_blank' : '_parent'}>
 					<Text fontWeight={600} color={color}>
 						{label}
 					</Text>
-				</Flex>
-			)}
+				</a>
+			</Flex>
 		</Stack>
 	)
 }
