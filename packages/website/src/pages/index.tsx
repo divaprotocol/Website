@@ -11,6 +11,7 @@ import FAQSection from '../components/View/FAQ'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { staggerContainer, textVariant } from '../util/motion'
+import { useBreakpointValue } from '@chakra-ui/react'
 
 export type Post = {
 	author: string
@@ -28,6 +29,8 @@ export type Post = {
 }
 
 export default function Home() {
+	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
+
 	return (
 		<PageLayout>
 			<motion.div
@@ -127,8 +130,8 @@ export default function Home() {
 					</Paragraph>
 				</Stack>
 				<Stack
-					vertical
-					className="pt-20 container max-w-7xl m-auto space-x-0 md:space-x-12 text-left flex-wrap md:flex-nowrap gap-4 md:gap-0 justify-center items-center">
+					vertical={variant === 'base' ? false : true}
+					className="pt-20 container max-w-7xl m-auto md:space-x-12 text-left">
 					<Card className="z-10 min-h-[338px] w-[100%]">
 						<Stack>
 							<Image
@@ -474,8 +477,8 @@ export default function Home() {
 							filter: 'blur(162px)',
 						}}></div>
 					<Stack
-						vertical
-						className="justify-center space-x-0 md:space-x-16 z-10 flex-col md:flex-row gap-8">
+						vertical={variant === 'base' ? false : true}
+						className="justify-center z-10">
 						<a
 							href="https://twitter.com/divaprotocol_io"
 							target={'_blank'}

@@ -12,7 +12,7 @@ export const Stack = ({
 			className={
 				(vertical ? 'flex flex-row space-x-4' : 'space-y-7 flex flex-col') +
 				' ' +
-				(props.className || '')
+				props.className
 			}>
 			{props.children}
 		</div>

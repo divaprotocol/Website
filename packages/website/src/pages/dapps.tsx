@@ -5,12 +5,14 @@ import { Heading } from '../components/typography/Heading'
 import { Highlight } from '../components/typography/Highlight'
 import { Paragraph } from '../components/typography/Paragraph'
 import { Card } from '../components/ui/Card'
-import { Flex, Grid, Link } from '@chakra-ui/react'
+import { Flex, Grid, Link, useBreakpointValue } from '@chakra-ui/react'
 import constants from '../constants/index'
 import { Button } from '../components/ui/Button'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-export default function dApps() {
+export default function DApps() {
+	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
+
 	return (
 		<PageLayout>
 			<Stack className="justify-center">
@@ -197,9 +199,7 @@ export default function dApps() {
 									relying on traditional banking infrastructure. Embrace the
 									future of finance and start building with DIVA today.`}
 							</Paragraph>
-							<Stack
-								vertical
-								className="space-x-14 flex-col md:flex-row gap-4 md:gap-0 justify-center items-center">
+							<Stack vertical={variant === 'base' ? false : true}>
 								<a
 									href={constants.documentationUrl}
 									target={'_blank'}

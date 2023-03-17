@@ -7,11 +7,13 @@ import { Paragraph } from '../components/typography/Paragraph'
 import { Avatar } from '../components/Avatar'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
-import { Flex } from '@chakra-ui/react'
+import { Flex, useBreakpointValue } from '@chakra-ui/react'
 import constants from '../constants/index'
 import Link from 'next/link'
 
 export default function About() {
+	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
+
 	return (
 		<PageLayout>
 			<Stack className="space-y-10 mt-16 md:pt-40 pb-6">
@@ -204,9 +206,7 @@ export default function About() {
 								structured products or conditional donations, all without relying on traditional banking infrastructure. 
 								Embrace the future of finance and start building with DIVA today.`}
 							</Paragraph>
-							<Stack
-								vertical
-								className="space-x-14 flex-col md:flex-row gap-4 md:gap-0 justify-center items-center">
+							<Stack vertical={variant === 'base' ? false : true}>
 								<a
 									href={constants.documentationUrl}
 									target={'_blank'}
