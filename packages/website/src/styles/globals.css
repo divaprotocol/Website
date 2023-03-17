@@ -1,55 +1,34 @@
-/*
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap');
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #01000B;
-  color: #888;
-}
-
-main {
-}
-
-html, body, #__next, main {
-  height: 100%;
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital@0;1&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-.moving-gradient {
-	background: linear-gradient(-45deg, rgb(0, 25, 41), #01000B, #00281e, rgb(48, 0, 0), rgb(0, 25, 41));
-	background-size: 400% 400%;
-	animation: gradient 50s ease infinite;
-	height: 100vh;
+html {
+  font-size: 16px;
+  background: #000;
 }
 
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+body {
+  font-family: Roboto Mono, sans-serif;
+  font-weight: normal;
 }
+
+html, body, #__next, main, #tsparticles {
+  height: 100%;
+  width: 100%;
+}
+
+.radial-gradient-1:after {
+  content: ' ';
+  position: absolute;
+  width: 90vh;
+  height: 120vh;
+  top: 0vh;
+  right: -5vh;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(#6219c038 0%, transparent 70%);
+}
+
+
