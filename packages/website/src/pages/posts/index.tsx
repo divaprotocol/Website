@@ -30,7 +30,7 @@ export default function Blog({ posts }: { posts: Post[] }) {
 		<PageLayout>
 			<div className="relative">
 				<Box
-					px={['20px', '30px', '50px', '65px', '80px']}
+					px={['0px', '30px', '50px', '65px', '80px']}
 					justifyContent="center"
 					w="100%">
 					{featured != null && <FeaturedBlogPost post={featured} />}

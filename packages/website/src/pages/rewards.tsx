@@ -25,7 +25,8 @@ const RewardPageBlobs = () => (
 					'linear-gradient(116.38deg, rgba(0, 56, 255, 0.2) 6.37%, rgba(22, 227, 216, 0.2) 89.66%)',
 				filter: 'blur(131.902px)',
 				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-			}}></div>
+			}}
+			className="hidden md:block"></div>
 		<div
 			style={{
 				position: 'absolute',
@@ -38,7 +39,6 @@ const RewardPageBlobs = () => (
 				filter: 'blur(131.902px)',
 				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
 			}}></div>
-
 		<div
 			style={{
 				position: 'absolute',
@@ -50,7 +50,8 @@ const RewardPageBlobs = () => (
 					'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
 				filter: 'blur(131.902px)',
 				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-			}}></div>
+			}}
+			className="hidden md:block"></div>
 	</>
 )
 
@@ -92,7 +93,8 @@ const Rewards = () => {
 					zIndex: 10,
 				}}
 				height={['80vh']}
-				spacing={8}>
+				spacing={8}
+				className="overflow-hidden">
 				<div>
 					<Heading as="h2" size="lg">
 						$DIVA Token

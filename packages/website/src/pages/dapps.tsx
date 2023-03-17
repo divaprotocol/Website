@@ -5,17 +5,20 @@ import { Heading } from '../components/typography/Heading'
 import { Highlight } from '../components/typography/Highlight'
 import { Paragraph } from '../components/typography/Paragraph'
 import { Card } from '../components/ui/Card'
-import { Flex, Grid, Link } from '@chakra-ui/react'
+import { Flex, Grid, Link, useBreakpointValue } from '@chakra-ui/react'
 import constants from '../constants/index'
 import { Button } from '../components/ui/Button'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
-export default function dApps() {
+export default function DApps() {
+	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
+
 	return (
 		<PageLayout>
 			<Stack className="justify-center">
 				<Stack
 					vertical
-					className="justify-center items-center gap-32 h-[728px]">
+					className="justify-center items-center gap-32 h-[728px] flex-col md:flex-row">
 					<Image
 						className="mt-10"
 						src="/illustrations/Apps.svg"
@@ -64,19 +67,23 @@ export default function dApps() {
 								'linear-gradient(116.38deg, rgba(0, 56, 255, 0.17) 6.37%, rgba(22, 227, 216, 0.17) 89.66%)',
 							filter: 'blur(131.902px)',
 							transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-						}}></div>
+						}}
+						className="hidden lg:block"></div>
 				</Stack>
 
 				<Stack
 					vertical
-					className="justify-center items-center gap-32 h-[728px] relative">
+					className="justify-center items-center gap-32 md:h-[728px] relative">
 					<Grid
-						templateColumns="repeat(2, 1fr)"
+						templateColumns={{
+							base: 'repeat(1, 1fr)',
+							md: 'repeat(2, 1fr)',
+						}}
 						gap={10}
 						columnGap={20}
-						className="h-[752px]">
-						<Card className="w-[500px] h-[299px] p-0 pt-0 pl-0 pr-0">
-							<Card className="w-full h-[120px] flex flex-col justify-center pr-10 pl-8">
+						className="md:h-[752px]">
+						<Card className="md:w-[500px] md:h-[299px] p-0 pt-0 pl-0 pr-0">
+							<Card className="w-full h-[90px] md:h-[120px] flex flex-col justify-center p-1 pr-3 md:p-5 md:pr-10 md:pl-8">
 								<Flex justifyContent={'space-between'} alignItems={'center'}>
 									<Flex alignItems={'center'}>
 										<Image
@@ -89,18 +96,22 @@ export default function dApps() {
 											flexDirection={'column'}
 											justifyContent={'flex-start'}
 											className="text-left">
-											<div className="font-sans text-xl text-white">
+											<div className="font-sans text-lg md:text-xl text-white">
 												DIVA App
 											</div>
-											<div className="text-base font-sans opacity-50 font-medium">
+											{/* <div className="text-base font-sans opacity-50 font-medium">
 												Short app description
-											</div>
+											</div> */}
 										</Flex>
 									</Flex>
-									<Link href={constants.appUrl} isExternal>
-										<div className="font-medium font-sans text-base text-[#3393E0]">
+									<Link
+										href={constants.appUrl}
+										isExternal
+										className="md:flex justify-center items-center gap-3">
+										<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
 											Launch App
 										</div>
+										<ExternalLinkIcon className="md:hidden" />
 									</Link>
 								</Flex>
 							</Card>
@@ -110,12 +121,43 @@ export default function dApps() {
 									It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.`}
 							</Paragraph>
 						</Card>
-						<Image
-							src={'/illustrations/comingSoonApp.svg'}
-							width={500}
-							height={288}
-							alt="coming soon"
-						/>
+						<Card className="md:w-[500px] md:h-[299px] p-0 pt-0 pl-0 pr-0">
+							<Card className="w-full h-[90px] md:h-[120px] flex flex-col justify-center p-2 pr-3 md:p-5 md:pr-10 md:pl-8">
+								<Flex justifyContent={'space-between'} alignItems={'center'}>
+									<Flex alignItems={'center'} gap={4}>
+										<Image
+											src="/logos/diva-donate.svg"
+											width={52}
+											height={52}
+											alt={'diva donate'}
+										/>
+										<Flex
+											flexDirection={'column'}
+											justifyContent={'flex-start'}
+											className="text-left">
+											<div className="font-sans text-lg md:text-xl text-white">
+												DIVA Donate
+											</div>
+											{/* <div className="text-base font-sans opacity-50 font-medium">
+												Short app description
+											</div> */}
+										</Flex>
+									</Flex>
+									<Link
+										href={constants.divaDonate}
+										isExternal
+										className="md:flex justify-center items-center gap-3">
+										<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
+											Launch App
+										</div>
+										<ExternalLinkIcon className="md:hidden" />
+									</Link>
+								</Flex>
+							</Card>
+							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
+								{`A platform that facilitates conditional donations to financially support communities that are impacted by climate change, powered by DIVA Protocol.`}
+							</Paragraph>
+						</Card>
 						<Image
 							src={'/illustrations/comingSoonApp.svg'}
 							width={500}
@@ -144,7 +186,7 @@ export default function dApps() {
 				</Stack>
 
 				<Stack className="pt-60 relative">
-					<Card className="max-w-3xl self-center py-12 px-16">
+					<Card className="max-w-3xl self-center md:py-12 md:px-16">
 						<Stack className="justify-center items-center space-y-12">
 							<Heading as="h2" size="lg">
 								<Highlight>Build</Highlight>
@@ -157,7 +199,7 @@ export default function dApps() {
 									relying on traditional banking infrastructure. Embrace the
 									future of finance and start building with DIVA today.`}
 							</Paragraph>
-							<Stack vertical className="space-x-14">
+							<Stack vertical={variant === 'base' ? false : true}>
 								<a
 									href={constants.documentationUrl}
 									target={'_blank'}
@@ -175,8 +217,10 @@ export default function dApps() {
 										</Flex>
 									</Button>
 								</a>
-								<Link href="/dapps" className="hover:no-underline">
-									<Button>Explore Apps</Button>
+								<Link href="/dapps" className="hover:no-underline w-full">
+									<Button className="w-full" innerClassName="w-full">
+										Explore Apps
+									</Button>
 								</Link>
 							</Stack>
 						</Stack>

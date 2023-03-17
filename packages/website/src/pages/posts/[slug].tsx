@@ -123,7 +123,7 @@ const PostPage = ({ source, post }: PostPageProps) => {
 					height={post.coverImageHeight}
 					className="rounded-2xl"
 				/>
-				<div className="pt-12 prose max-w-2xl m-auto text-white px-10">
+				<div className="pt-12 prose w-[100%] md:max-w-2xl m-auto text-white md:px-10">
 					<h1 className="text-white">{post.title}</h1>
 					<p className="text-slate text-white opacity-50">
 						By{' '}

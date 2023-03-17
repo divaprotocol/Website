@@ -9,6 +9,9 @@ import { Card } from '../components/ui/Card'
 import { Flex } from '@chakra-ui/react'
 import FAQSection from '../components/View/FAQ'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { staggerContainer, textVariant } from '../util/motion'
+import { useBreakpointValue } from '@chakra-ui/react'
 
 export type Post = {
 	author: string
@@ -26,45 +29,68 @@ export type Post = {
 }
 
 export default function Home() {
+	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
+
 	return (
 		<PageLayout>
-			<div
-				className={`relative h-[calc(100vh-5rem)] flex flex-row justify-center
+			<motion.div
+				variants={staggerContainer(0.1, 1)}
+				initial="hidden"
+				whileInView="show"
+				viewport={{ once: true, amount: 0.25 }}>
+				<div
+					className={`relative h-[calc(100vh-5rem)] flex flex-row justify-center
       items-center bg-gradient-to-t from-[rgba(0,0,0,.7)] via-transparent radial-gradient-1`}>
-				<Stack className="items-center relative">
-					<Heading as="h1" size="xl">
-						Powering the World of <Highlight>Derivatives</Highlight>
-					</Heading>
-					<Paragraph className="text-center text-lg opacity-60">
-					    DIVA Protocol is a universal and highly flexible smart contract-based operating system
-						for creating and settling derivative products peer-to-peer.						
-					</Paragraph>
-					<Stack vertical className="pt-5">
-						<a
-							href="https://docs.divaprotocol.io/"
-							target={'_blank'}
-							rel="noreferrer">
-							<Button primary>
-								<Flex className="hover:no-underline">
-									Documentation
-									<Image
-										src="/icons/ArrowRight.svg"
-										width={12}
-										height={10}
-										alt={'arrow right'}
-										className="ml-2"
-									/>
-								</Flex>
-							</Button>
-						</a>
-						<Link href="/dapps" className="hover:no-underline z-10">
-							<Button>Explore dApps</Button>
-						</Link>
+					<Stack className="items-center relative">
+						<motion.h1
+							variants={textVariant(1.1)}
+							className="text-white font-serif tracking-tight font-medium text-3xl">
+							Powering the World of <Highlight>Derivatives</Highlight>
+						</motion.h1>
+						<motion.div variants={textVariant(1.2)}>
+							<Paragraph className="text-center text-lg opacity-60">
+								DIVA Protocol is a universal and highly flexible smart
+								contract-based operating system for creating and settling
+								derivative products peer-to-peer.
+							</Paragraph>
+						</motion.div>
+						<motion.div variants={textVariant(1.2)}>
+							<Stack className="pt-5" vertical>
+								<a
+									href="https://docs.divaprotocol.io/"
+									target={'_blank'}
+									rel="noreferrer">
+									<Button
+										primary
+										className="w-full md:w-auto"
+										innerClassName="px-3 py-3 md:px-8 md:py-4">
+										<Flex className="hover:no-underline text-base md-text-auto">
+											Documentation
+											<Image
+												src="/icons/ArrowRight.svg"
+												width={12}
+												height={10}
+												alt={'arrow right'}
+												className="ml-2"
+											/>
+										</Flex>
+									</Button>
+								</a>
+								<Link href="/dapps" className="hover:no-underline z-10">
+									<Button
+										className="w-full md:w-auto"
+										innerClassName="px-3 py-3 md:px-8 md:py-4 w-full">
+										Explore dApps
+									</Button>
+								</Link>
+							</Stack>
+						</motion.div>
 					</Stack>
-				</Stack>
-			</div>
+				</div>
+			</motion.div>
 
 			{/* DIVA protocol powered applications */}
+
 			<div className="relative">
 				<div
 					style={{
@@ -89,21 +115,24 @@ export default function Home() {
 						filter: 'blur(162px)',
 					}}></div>
 				<Stack className="items-center relative text-center pt-20">
-					<Heading as="h2" size="lg">
+					<motion.h1
+						variants={textVariant(0.5)}
+						className="text-white font-serif tracking-tight font-medium text-2xl">
 						<Highlight>DIVA Protocol</Highlight> powered Applications
-					</Heading>
+					</motion.h1>
 					<Paragraph className="text-center text-lg">
 						{/* Applications that you can be built on top of DIVA Protocol. No smart
 						contract programming skills required. */}
 						{/* Applications that can be powered by DIVA Protocol without requiring
 						any smart contract programming skills. */}
-						Build financial derivative applications without connecting to traditional banking infrastructure.
+						Build financial derivative applications without connecting to
+						traditional banking infrastructure.
 					</Paragraph>
 				</Stack>
 				<Stack
-					vertical
-					className="pt-20 container max-w-7xl m-auto space-x-12 text-left">
-					<Card className="z-10">
+					vertical={variant === 'base' ? false : true}
+					className="pt-20 container max-w-7xl m-auto md:space-x-12 text-left">
+					<Card className="z-10 min-h-[338px] w-[100%]">
 						<Stack>
 							<Image
 								alt="Insurance Products"
@@ -119,7 +148,8 @@ export default function Home() {
 							</Paragraph>
 						</Stack>
 					</Card>
-					<Card>
+
+					<Card className="z-10 min-h-[338px] w-[100%]">
 						<Stack>
 							<Image
 								alt="Structured Products"
@@ -134,7 +164,8 @@ export default function Home() {
 							</Paragraph>
 						</Stack>
 					</Card>
-					<Card className="z-10">
+
+					<Card className="z-10 min-h-[338px] w-[100%]">
 						<Stack>
 							<Image
 								alt="Prediction Markets"
@@ -161,18 +192,24 @@ export default function Home() {
 			</div>
 
 			{/* Protocol Features */}
+
 			<Stack className="container max-w-7xl m-auto pt-32">
-				<Heading as="h3" size="lg">
+				<motion.h1
+					variants={textVariant(1.1)}
+					className="text-white font-serif tracking-tight font-medium text-2xl">
 					Protocol <Highlight>Features</Highlight>
-				</Heading>
+				</motion.h1>
 				<div className="relative pt-32">
-					<Stack vertical className="relative justify-between">
-						<Stack className="w-1/3">
-							<div className="bg-gradient-to-l rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+					<Stack
+						vertical
+						className="relative justify-between flex-wrap gap-8 md:gap-0">
+						<Stack className="md:w-1/3 flex-wrap">
+							<div className="bg-gradient-to-l rounded-lg from-transparent to-[#00c2ff91] md:from-[#00c2ff91] bg-opacity-30 md:to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Highly customizable</Heading>
 									<Paragraph className="opacity-60">
-										Users can choose any event, a wide range of payoff profiles, any oracle and any ERC20 compliant asset as collateral.
+										Users can choose any event, a wide range of payoff profiles,
+										any oracle and any ERC20 compliant asset as collateral.
 									</Paragraph>
 								</div>
 							</div>
@@ -180,7 +217,9 @@ export default function Home() {
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Fully collateralized</Heading>
 									<Paragraph className="opacity-60">
-										Eliminates counter-party risk and margin calls by requiring full collateralization, giving users a safe and frictionless experience.
+										Eliminates counter-party risk and margin calls by requiring
+										full collateralization, giving users a safe and frictionless
+										experience.
 									</Paragraph>
 								</div>
 							</div>
@@ -190,14 +229,14 @@ export default function Home() {
 							width={1051}
 							height={543}
 							alt="Features"
-							className="absolute -top-[350px] right-[110px] opacity-100 z-10"
+							className="absolute -top-[350px] right-[110px] opacity-100 z-10 hidden md:block "
 						/>
 						<Image
 							src={'/illustrations/lines.svg'}
 							width={1051}
 							height={543}
 							alt="Features"
-							className="absolute top-[80px] right-[110px] opacity-30"
+							className="absolute top-[80px] right-[110px] opacity-30 hidden md:block"
 						/>
 						{/* left ellipse */}
 						<div
@@ -223,33 +262,39 @@ export default function Home() {
 									'linear-gradient(116.38deg, rgba(0, 56, 255, 0.16) 6.37%, rgba(22, 227, 216, 0.16) 89.66%)',
 								filter: 'blur(162px)',
 							}}></div>
-						<Stack className="w-1/3">
+						<Stack className="md:w-1/3 flex-wrap">
 							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Built-in compliance layer</Heading>
 									<Paragraph className="opacity-60">
-										Possibility to restrict the transfer of the derivative assets to holders of a specific NFT, such as a KYC NFT token.
+										Possibility to restrict the transfer of the derivative
+										assets to holders of a specific NFT, such as a KYC NFT
+										token.
 									</Paragraph>
 								</div>
 							</div>
 
-							<div className="bg-gradient-to-r rounded-lg from-[#00c2ff91] bg-opacity-30 to-transparent overflow-hidden [padding:1px] shadow-2xl">
+							<div className="bg-gradient-to-r rounded-lg from-transparent md:from-[#00c2ff91] bg-opacity-30 to-[#00c2ff91] md:to-transparent overflow-hidden [padding:1px] shadow-2xl">
 								<div className="bg-black p-8 rounded-lg">
 									<Heading as="h3">Interoperable</Heading>
 									<Paragraph className="opacity-60">
-										Derivatives are represented as ERC20 tokens and can be seamlessly integrated into any existing CEX and DEX infrastructure.
+										Derivatives are represented as ERC20 tokens and can be
+										seamlessly integrated into any existing CEX and DEX
+										infrastructure.
 									</Paragraph>
 								</div>
 							</div>
 						</Stack>
 					</Stack>
 				</div>
-
 				{/* how it's works */}
-				<Stack className="items-center pt-32">
-					<Heading as="h3" size="lg">
+				<Stack className="items-center pt-32 relative">
+					<motion.h1
+						variants={textVariant(1.1)}
+						className="text-white font-serif tracking-tight font-medium text-2xl">
 						How it <Highlight>Works</Highlight>
-					</Heading>
+					</motion.h1>
+
 					<Image
 						src={'/illustrations/steps.svg'}
 						width={1266}
@@ -257,9 +302,58 @@ export default function Home() {
 						alt="steps"
 						priority={true}
 						style={{
-							marginTop: '-100px',
+							marginTop: '-00px',
 						}}
+						className="hidden md:block"
 					/>
+					<Stack className="md:hidden pt-10">
+						<Image
+							src={'/illustrations/step1.svg'}
+							width={600}
+							height={244}
+							alt="steps"
+						/>
+						<Image
+							src={'/illustrations/step2.svg'}
+							width={600}
+							height={244}
+							alt="steps"
+						/>
+						<Image
+							src={'/illustrations/step3.svg'}
+							width={600}
+							height={244}
+							alt="steps"
+						/>
+						<Image
+							src={'/illustrations/step4.svg'}
+							width={600}
+							height={244}
+							alt="steps"
+						/>
+						<div
+							style={{
+								position: 'absolute',
+								width: '528px',
+								height: '528px',
+								left: '-400px',
+								bottom: '-250px',
+								background:
+									'linear-gradient(116.38deg, rgba(0, 56, 255, 0.18) 6.37%, rgba(22, 227, 216, 0.18) 89.66%)',
+								filter: 'blur(162px)',
+							}}></div>
+						<div
+							style={{
+								position: 'absolute',
+								width: '474px',
+								height: '474px',
+								right: '-230px',
+								bottom: '100px',
+								background:
+									'linear-gradient(116.38deg, rgba(0, 56, 255, 0.16) 6.37%, rgba(22, 227, 216, 0.16) 89.66%)',
+								filter: 'blur(162px)',
+							}}></div>
+					</Stack>
 					{/* uncomment when the video is available */}
 					{/* <Button>
 						<span className="flex space-x-3 items-center">
@@ -274,12 +368,14 @@ export default function Home() {
 						</span>
 					</Button> */}
 				</Stack>
-
 				{/* partners */}
 				<Stack className="container max-w-7xl m-auto pt-32 space-y-20 relative">
-					<Heading as="h3" size="lg">
+					<motion.h1
+						variants={textVariant(1.1)}
+						className="text-white font-serif tracking-tight font-medium text-2xl">
 						Our <Highlight>Partners</Highlight>
-					</Heading>
+					</motion.h1>
+
 					<div
 						style={{
 							position: 'absolute',
@@ -321,44 +417,48 @@ export default function Home() {
 					</Stack>
 					<Stack
 						vertical
-						className="space-x-7 justify-center items-center py-20 border-t border-white border-opacity-10">
-						<Paragraph className="pr-7">Supported Networks:</Paragraph>
-						<span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
-							<Image
-								src="/logos/polygon.png"
-								height="24"
-								width="100"
-								alt="Polygon Labs"
-							/>
-						</span>
-						<span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
-							<Image
-								src="/logos/eth.png"
-								height="24"
-								width="132"
-								alt="Ethereum"
-							/>
-						</span>
-						<span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
-							<Image
-								src="/logos/arbitr.png"
-								height="24"
-								width="126"
-								alt="Arbitrum"
-							/>
-						</span>
+						className="md:space-x-7 justify-center items-center py-20 border-t border-white border-opacity-10 flex-col md:flex-row">
+						<Paragraph className="md:pr-7 md:mt-6">
+							Supported Networks:
+						</Paragraph>
+						<Stack className="flex-col md:flex-row mt-8 md:mt-0 gap-2 justify-center items-center">
+							<span className="rounded-md bg-white bg-opacity-10 p-2 px-4 md:mt-7">
+								<Image
+									src="/logos/polygon.png"
+									height="24"
+									width="100"
+									alt="Polygon Labs"
+								/>
+							</span>
+							<span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
+								<Image
+									src="/logos/eth.png"
+									height="24"
+									width="132"
+									alt="Ethereum"
+								/>
+							</span>
+							<span className="rounded-md bg-white bg-opacity-10 p-2 px-4">
+								<Image
+									src="/logos/arbitr.png"
+									height="24"
+									width="126"
+									alt="Arbitrum"
+								/>
+							</span>
+						</Stack>
 					</Stack>
 				</Stack>
-
 				{/* FAQ */}
 				<FAQSection />
-
 				{/* join the conversation */}
 				<Stack className="container max-w-7xl m-auto space-y-20 pt-32 relative pb-16">
 					<div className="m-auto space-y-10 mb-10">
-						<Heading as="h3" size="lg">
+						<motion.h1
+							variants={textVariant(1.1)}
+							className="text-white font-serif tracking-tight font-medium text-2xl">
 							Join the <Highlight>Conversation</Highlight>
-						</Heading>
+						</motion.h1>
 						<Paragraph className="opacity-60">
 							Our global and vibrant community drives the success of the
 							Protocol. Join the conversation on Discord and Twitter to stay up
@@ -376,12 +476,14 @@ export default function Home() {
 								'linear-gradient(116.38deg, rgba(0, 56, 255, 0.33) 6.37%, rgba(22, 227, 216, 0.33) 89.66%)',
 							filter: 'blur(162px)',
 						}}></div>
-					<Stack vertical className="justify-center space-x-16 z-10">
+					<Stack
+						vertical={variant === 'base' ? false : true}
+						className="justify-center z-10">
 						<a
 							href="https://twitter.com/divaprotocol_io"
 							target={'_blank'}
 							rel="noreferrer">
-							<Card className="max-w-lg p-10  hover:shadow-md hover:shadow-[#03242F]">
+							<Card className="max-w-lg md:p-10 hover:shadow-md hover:shadow-[#03242F]">
 								<Stack
 									vertical
 									className="space-x-10"
@@ -412,7 +514,7 @@ export default function Home() {
 							href="https://discord.com/invite/DE5b8ZeJjK"
 							target="_blank"
 							rel="noreferrer">
-							<Card className="max-w-lg p-10 hover:shadow-md hover:shadow-[#03242F]">
+							<Card className="max-w-lg md:p-10 hover:shadow-md hover:shadow-[#03242F]">
 								<Stack vertical className="space-x-10">
 									<Image
 										className="flex-shrink-0"
