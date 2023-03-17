@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 import MerkleTree from "merkletreejs"; // MerkleTree.js
 import { getAddress, keccak256, solidityKeccak256 } from "ethers/lib/utils"; // Ethers utils
 
