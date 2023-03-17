@@ -1,7 +1,19 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Alert, AlertIcon, Button, Stack } from "@chakra-ui/react";
+import { BigNumber, ethers } from "ethers";
+import { isAddress, parseUnits } from "ethers/lib/utils";
+
+import ClaimDivaLinearVestingABI from "../abi/ClaimDivaLinearVestingABI.json";
+import {
+  config,
+  DIVA_TOKEN_DECIMALS,
+  LINEAR_VESTING_TIME,
+  ZERO_BIGNUMBER,
+} from "../constants";
 import { useAppSelector } from "../redux/hooks";
 import { selectUserAddress } from "../redux/appSlice";
-import { useEffect, useState } from "react";
-import { Alert, AlertIcon, Stack } from "@chakra-ui/react";
+import { useConnectionContext } from "../hooks/useConnectionContext";
+import { toStringFixed } from "../util/bn";
 
 /**
  * TODO: load rewards via ajax
@@ -60,18 +72,179 @@ const RewardPageBlobs = () => (
 
 const Rewards = () => {
   const userAddress = useAppSelector(selectUserAddress);
+  const { provider, chainId } = useConnectionContext();
   const [rewardInfo, setRewardInfo] = useState<any>({});
-  const [rewards, setRewards] = useState<any[]>([]);
+  const [proof, setProof] = useState<string[]>([]);
+  const [isClaiming, setIsClaiming] = useState<boolean>(false);
+  const [trigger, setTrigger] = useState<boolean>(false);
+  const [claimedAmount, setClaimedAmount] = useState<BigNumber>(
+    BigNumber.from(-1)
+  );
+  const [availableDrawDownAmount, setAvailableDrawDownAmount] =
+    useState<BigNumber>(ZERO_BIGNUMBER);
+  const [claimPeriodStarts, setClaimPeriodStarts] = useState<number>(0);
+  const [count, setCount] = useState<number>(0);
+
   useEffect(() => {
-    (rewards as any[]).forEach((reward) => {
-      if (
-        userAddress &&
-        reward.address.toLowerCase() === userAddress.toLowerCase()
-      ) {
-        setRewardInfo(reward);
+    setCount((count) => count + 1);
+    const interval = setInterval(() => {
+      setCount((count) => count + 1);
+    }, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const claimDivaLinearVesting = useMemo(
+    () =>
+      provider && chainId && config[chainId]?.claimDivaLinearVestingAddress
+        ? new ethers.Contract(
+            config[chainId]?.claimDivaLinearVestingAddress,
+            ClaimDivaLinearVestingABI,
+            isAddress(userAddress) ? provider?.getSigner() : provider
+          )
+        : null,
+    [chainId, provider, userAddress]
+  );
+
+  const rewardBN = useMemo(
+    () =>
+      rewardInfo && rewardInfo.reward
+        ? parseUnits(rewardInfo.reward.toString() || "0", DIVA_TOKEN_DECIMALS)
+        : ZERO_BIGNUMBER,
+    [rewardInfo]
+  );
+
+  const immediateClaimableAmount = useMemo(
+    () => rewardBN?.mul(40).div(100),
+    [rewardBN]
+  );
+
+  const currentTimestamp = useMemo(() => Math.floor(+new Date() / 1000), []);
+
+  const claimableAmount = useMemo(
+    () =>
+      currentTimestamp <= claimPeriodStarts
+        ? ZERO_BIGNUMBER
+        : currentTimestamp > claimPeriodStarts + LINEAR_VESTING_TIME
+        ? rewardBN?.sub(claimedAmount)
+        : claimedAmount.gt(0)
+        ? availableDrawDownAmount
+        : claimedAmount.eq(0)
+        ? immediateClaimableAmount?.add(availableDrawDownAmount)
+        : ZERO_BIGNUMBER,
+    [
+      availableDrawDownAmount,
+      immediateClaimableAmount,
+      claimedAmount,
+      currentTimestamp,
+      claimPeriodStarts,
+      rewardBN,
+    ]
+  );
+
+  const claimable = useMemo(
+    () =>
+      rewardBN &&
+      claimDivaLinearVesting &&
+      trigger &&
+      claimPeriodStarts &&
+      currentTimestamp &&
+      currentTimestamp > claimPeriodStarts,
+    [
+      rewardBN,
+      claimDivaLinearVesting,
+      trigger,
+      claimPeriodStarts,
+      currentTimestamp,
+    ]
+  );
+
+  useEffect(() => {
+    const get = async () => {
+      const res = await fetch(`/api/rewards/${userAddress}`, {
+        method: "GET",
+      });
+      if (res.status === 200) {
+        const json = await res.json();
+        setRewardInfo(json.userReward);
+        setProof(json.proof);
       }
-    });
-  }, [rewards, userAddress]);
+    };
+    if (isAddress(userAddress)) {
+      get();
+    }
+  }, [userAddress]);
+
+  useEffect(() => {
+    const getTrigger = async () => {
+      setTrigger(await claimDivaLinearVesting.trigger());
+    };
+    const getClaimPeriodStarts = async () => {
+      setClaimPeriodStarts(
+        (await claimDivaLinearVesting.claimPeriodStarts()).toNumber()
+      );
+    };
+    if (claimDivaLinearVesting) {
+      Promise.all([getTrigger(), getClaimPeriodStarts()]);
+    }
+  }, [claimDivaLinearVesting, count]);
+
+  useEffect(() => {
+    const getClaimedAmount = async () => {
+      setClaimedAmount(
+        await claimDivaLinearVesting.claimedAmount(userAddress)
+      );
+    };
+    if (claimDivaLinearVesting && userAddress) {
+      getClaimedAmount();
+    }
+  }, [claimDivaLinearVesting, userAddress, count]);
+
+  useEffect(() => {
+    const getAvailableDrawDownAmount = async () => {
+      setAvailableDrawDownAmount(
+        await claimDivaLinearVesting.availableDrawDownAmount(
+          rewardBN,
+          rewardBN.sub(immediateClaimableAmount),
+          LINEAR_VESTING_TIME,
+          userAddress
+        )
+      );
+    };
+    if (
+      claimDivaLinearVesting &&
+      userAddress &&
+      rewardBN.gt(0) &&
+      immediateClaimableAmount
+    ) {
+      getAvailableDrawDownAmount();
+    }
+  }, [
+    claimDivaLinearVesting,
+    userAddress,
+    rewardBN,
+    immediateClaimableAmount,
+    count,
+  ]);
+
+  const claim = useCallback(async () => {
+    if (claimable && claimableAmount.gt(0)) {
+      setIsClaiming(true);
+      try {
+        const tx = await claimDivaLinearVesting.claimTokens(
+          rewardBN,
+          LINEAR_VESTING_TIME,
+          proof
+        );
+        await tx.wait();
+        setCount((count) => count + 1);
+      } catch (error) {
+        alert("Failed to claim.");
+        console.error(error);
+      }
+      setIsClaiming(false);
+    }
+  }, [rewardBN, claimDivaLinearVesting, claimable, proof, claimableAmount]);
+
   return (
     <PageLayout>
       <Stack
@@ -161,13 +334,48 @@ const Rewards = () => {
                       {Number(rewardInfo.reward).toFixed(1)}
                     </Paragraph>
                   </div>
+                  {claimedAmount.gt(0) && (
+                    <div>
+                      <Paragraph>You already claimed:</Paragraph>
+                      <Paragraph>
+                        {toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)}
+                      </Paragraph>
+                    </div>
+                  )}
+                  <div>
+                    <Paragraph>Claimable amount:</Paragraph>
+                    <Paragraph>
+                      {toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4)}
+                    </Paragraph>
+                  </div>
                 </div>
               </div>
             </div>
           )}
         {userAddress !== undefined &&
           rewardInfo.reward !== undefined &&
-          rewardInfo.reward !== "" && (
+          rewardInfo.reward !== "" &&
+          (claimable ? (
+            <div>
+              <Button
+                variant="outline"
+                isLoading={isClaiming}
+                disabled={claimableAmount.eq(0)}
+                type="submit"
+                value="Submit"
+                sx={{
+                  width: "120px",
+                  _hover: {
+                    background: "white",
+                    color: "black",
+                  },
+                }}
+                onClick={() => claim()}
+              >
+                Claim
+              </Button>
+            </div>
+          ) : (
             <div>
               <Alert
                 status="info"
@@ -178,7 +386,7 @@ const Rewards = () => {
                 You will be able to claim your rewards once the token launches
               </Alert>
             </div>
-          )}
+          ))}
         {userAddress !== undefined && rewardInfo.reward === undefined && (
           <div>
             <Alert
