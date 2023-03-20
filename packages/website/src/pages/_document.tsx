@@ -10,7 +10,11 @@ class MyDocument extends Document {
 		return (
 			<Html className="scroll-smooth">
 				<Head />
-				<body>
+				<body
+					style={{
+						scrollBehavior: 'smooth',
+						overflowX: 'hidden',
+					}}>
 					<Main />
 					<NextScript />
 				</body>
