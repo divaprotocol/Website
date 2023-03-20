@@ -26,8 +26,8 @@ const PageLayout = ({ children }: React.PropsWithChildren<{}>) => {
 					<Navigation />
 					{children}
 				</div>
-				<Footer />
 			</div>
+			<Footer />
 		</>
 	)
 }
