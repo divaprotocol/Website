@@ -36,7 +36,7 @@ const DAppsList: DApp[] = [
 	},
 	{
 		name: 'DIVA Viz',
-		description: `Generate your offer post to share with the world. Powered by DIVA Protocol.`,
+		description: `Built as an extension of the popular DIVA App, DIVA ViZ makes it easy to create and share eye-catching derivative product visuals on social media platforms like Twitter.`,
 		image: '/illustrations/divaApp.svg',
 		url: constants.divaViz,
 	},
