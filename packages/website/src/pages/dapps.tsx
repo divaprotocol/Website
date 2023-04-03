@@ -37,8 +37,10 @@ const DAppsList: DApp[] = [
 	{
 		name: 'DIVA Viz',
 		description: `Built as an extension of the popular DIVA App, DIVA ViZ makes it easy to create and share eye-catching derivative product visuals on social media platforms like Twitter.`,
-		image: '/illustrations/divaApp.svg',
+		image: '/logos/Viz.png',
 		url: constants.divaViz,
+		logoHeight: 52,
+		logoWidth: 52,
 	},
 ]
 
@@ -141,7 +143,7 @@ export default function DApps() {
 											</Flex>
 										</Flex>
 										<Link
-											href={constants.appUrl}
+											href={dapp.url}
 											isExternal
 											className="md:flex justify-center items-center gap-3">
 											<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
