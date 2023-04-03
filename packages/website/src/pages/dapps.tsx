@@ -65,7 +65,7 @@ export default function DApps() {
 							<Highlight>dApp</Highlight> Store
 						</Heading>
 						<Paragraph className="font-serif opacity-50 text-base">
-							Explore apps built with DIVA Protocol.
+							Explore apps built with DIVA Protocol.{' '}
 							<Link
 								href={constants.documentationUrl}
 								isExternal
