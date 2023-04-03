@@ -10,6 +10,40 @@ import constants from '../constants/index'
 import { Button } from '../components/ui/Button'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 
+interface DApp {
+	name: string
+	description: string
+	image: string
+	url: string
+	logoHeight?: number
+	logoWidth?: number
+}
+
+const DAppsList: DApp[] = [
+	{
+		name: 'DIVA App',
+		description: `DIVA App is a one-stop solution to create, trade and settle derivative products. It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.`,
+		image: '/illustrations/divaApp.svg',
+		url: constants.appUrl,
+	},
+	{
+		name: 'DIVA Donate',
+		description: `A platform that facilitates conditional donations to financially support communities that are impacted by climate change, powered by DIVA Protocol.`,
+		image: '/logos/diva-donate.svg',
+		url: constants.divaDonate,
+		logoHeight: 52,
+		logoWidth: 52,
+	},
+	{
+		name: 'DIVA Viz',
+		description: `Built as an extension of the popular DIVA App, DIVA ViZ makes it easy to create and share eye-catching derivative product visuals on social media platforms like Twitter.`,
+		image: '/logos/Viz.png',
+		url: constants.divaViz,
+		logoHeight: 52,
+		logoWidth: 52,
+	},
+]
+
 export default function DApps() {
 	const variant = useBreakpointValue({ base: 'base', md: 'desktop' })
 
@@ -31,7 +65,7 @@ export default function DApps() {
 							<Highlight>dApp</Highlight> Store
 						</Heading>
 						<Paragraph className="font-serif opacity-50 text-base">
-							Explore apps built with DIVA Protocol.
+							Explore apps built with DIVA Protocol.{' '}
 							<Link
 								href={constants.documentationUrl}
 								isExternal
@@ -82,88 +116,49 @@ export default function DApps() {
 						gap={10}
 						columnGap={20}
 						className="md:h-[752px]">
-						<Card className="md:w-[500px] md:h-[299px] p-0 pt-0 pl-0 pr-0">
-							<Card className="w-full h-[90px] md:h-[120px] flex flex-col justify-center p-1 pr-3 md:p-5 md:pr-10 md:pl-8">
-								<Flex justifyContent={'space-between'} alignItems={'center'}>
-									<Flex alignItems={'center'}>
-										<Image
-											src="/illustrations/divaApp.svg"
-											width={72}
-											height={72}
-											alt={'diva app'}
-										/>
-										<Flex
-											flexDirection={'column'}
-											justifyContent={'flex-start'}
-											className="text-left">
-											<div className="font-sans text-lg md:text-xl text-white">
-												DIVA App
-											</div>
-											{/* <div className="text-base font-sans opacity-50 font-medium">
+						{DAppsList.map((dapp, index) => (
+							<Card
+								key={index}
+								className="md:w-[500px] md:h-[299px] p-0 pt-0 pl-0 pr-0">
+								<Card className="w-full h-[90px] md:h-[120px] flex flex-col justify-center p-1 pr-3 md:p-5 md:pr-10 md:pl-8">
+									<Flex justifyContent={'space-between'} alignItems={'center'}>
+										<Flex alignItems={'center'}>
+											<Image
+												src={dapp.image}
+												width={dapp.logoWidth ?? 72}
+												height={dapp.logoWidth ?? 72}
+												alt={'diva app'}
+												className={`${dapp.logoWidth && 'mr-4'}`}
+											/>
+											<Flex
+												flexDirection={'column'}
+												justifyContent={'flex-start'}
+												className="text-left">
+												<div className="font-sans text-lg md:text-xl text-white">
+													{dapp.name}
+												</div>
+												{/* <div className="text-base font-sans opacity-50 font-medium">
 												Short app description
 											</div> */}
+											</Flex>
 										</Flex>
-									</Flex>
-									<Link
-										href={constants.appUrl}
-										isExternal
-										className="md:flex justify-center items-center gap-3">
-										<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
-											Launch App
-										</div>
-										<ExternalLinkIcon className="md:hidden" />
-									</Link>
-								</Flex>
-							</Card>
-							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
-								{`
-									DIVA App is a one-stop solution to create, trade and settle derivative products. 
-									It's combining three protocols, DIVA, 0x and Tellor Protocol to offer users a fully decentralized experience.`}
-							</Paragraph>
-						</Card>
-						<Card className="md:w-[500px] md:h-[299px] p-0 pt-0 pl-0 pr-0">
-							<Card className="w-full h-[90px] md:h-[120px] flex flex-col justify-center p-2 pr-3 md:p-5 md:pr-10 md:pl-8">
-								<Flex justifyContent={'space-between'} alignItems={'center'}>
-									<Flex alignItems={'center'} gap={4}>
-										<Image
-											src="/logos/diva-donate.svg"
-											width={52}
-											height={52}
-											alt={'diva donate'}
-										/>
-										<Flex
-											flexDirection={'column'}
-											justifyContent={'flex-start'}
-											className="text-left">
-											<div className="font-sans text-lg md:text-xl text-white">
-												DIVA Donate
+										<Link
+											href={dapp.url}
+											isExternal
+											className="md:flex justify-center items-center gap-3">
+											<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
+												Launch App
 											</div>
-											{/* <div className="text-base font-sans opacity-50 font-medium">
-												Short app description
-											</div> */}
-										</Flex>
+											<ExternalLinkIcon className="md:hidden" />
+										</Link>
 									</Flex>
-									<Link
-										href={constants.divaDonate}
-										isExternal
-										className="md:flex justify-center items-center gap-3">
-										<div className="font-medium font-sans text-sm md:text-base text-[#3393E0] hidden md:block">
-											Launch App
-										</div>
-										<ExternalLinkIcon className="md:hidden" />
-									</Link>
-								</Flex>
+								</Card>
+								<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
+									{dapp.description}
+								</Paragraph>
 							</Card>
-							<Paragraph className="opacity-50 px-8 py-4 text-left text-sm font-serif">
-								{`A platform that facilitates conditional donations to financially support communities that are impacted by climate change, powered by DIVA Protocol.`}
-							</Paragraph>
-						</Card>
-						<Image
-							src={'/illustrations/comingSoonApp.svg'}
-							width={500}
-							height={288}
-							alt="coming soon"
-						/>
+						))}
+
 						<Image
 							src={'/illustrations/comingSoonApp.svg'}
 							width={500}
