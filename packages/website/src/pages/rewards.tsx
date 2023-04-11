@@ -2,6 +2,7 @@ import { useAppSelector } from '../redux/hooks'
 import { selectUserAddress } from '../redux/appSlice'
 import { useEffect, useState } from 'react'
 import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
+import Image from 'next/image'
 
 /**
  * TODO: load rewards via ajax
@@ -11,6 +12,9 @@ import { ConnectWalletButton } from '../components/ConnectWalletButton'
 import { Heading } from '../components/typography/Heading'
 import { Paragraph } from '../components/typography/Paragraph'
 import { Highlight } from '../components/typography/Highlight'
+import { getShortenedAddress } from '../util/getShortenedAddress'
+import { Card } from '../components/ui/Card'
+import { Button } from '../components/ui/Button'
 
 const RewardPageBlobs = () => (
 	<>
@@ -55,10 +59,62 @@ const RewardPageBlobs = () => (
 	</>
 )
 
+const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
+	<Card className="w-[500px] h-[498px] px-0 py-0 font-sans">
+		<Stack
+			direction={'row'}
+			alignItems={'center'}
+			className="p-6 rounded-3xl"
+			style={{
+				backgroundColor: 'rgba(255, 255, 255, 0.06)',
+			}}
+			gap={5}>
+			<div>
+				<Image
+					src="/illustrations/avatar.svg"
+					alt="avatar"
+					width={88}
+					height={88}
+				/>
+			</div>
+			<div className="text-xl ">{getShortenedAddress(userAddress)}</div>
+		</Stack>
+		<Stack className="m-8 font-sans" gap={3}>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Testnet</div>
+				<div>{rewardInfo.points}</div>
+			</Stack>
+
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Quiz Activity</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Early Contributor</div>
+				<div>-</div>
+			</Stack>
+		</Stack>
+		<Stack
+			direction={'row'}
+			justify={'space-between'}
+			className="m-8 mt-4 border-t-[1px] pt-6 border-white/5">
+			<div className="opacity-50">$DIVA</div>
+			<div>{rewardInfo.reward.toFixed(1)}</div>
+		</Stack>
+
+		<Stack className="m-8">
+			<Button primary className="justify-center">
+				Rewards available after token launch
+			</Button>
+		</Stack>
+	</Card>
+)
+
 const Rewards = () => {
 	const userAddress = useAppSelector(selectUserAddress)
 	const [rewardInfo, setRewardInfo] = useState<any>({})
 	const [rewards, setRewards] = useState<any[]>([])
+
 	useEffect(() => {
 		const get = async () => {
 			const res = await fetch(`/api/rewards/${userAddress}`, {
@@ -69,6 +125,7 @@ const Rewards = () => {
 		}
 		get()
 	}, [userAddress])
+
 	useEffect(() => {
 		;(rewards as any[]).forEach((reward) => {
 			if (
@@ -79,6 +136,7 @@ const Rewards = () => {
 			}
 		})
 	}, [rewards, userAddress])
+
 	return (
 		<PageLayout>
 			<Stack
@@ -92,16 +150,27 @@ const Rewards = () => {
 					textAlign: 'center',
 					zIndex: 10,
 				}}
-				height={['80vh']}
+				minHeight={['80vh']}
 				spacing={8}
+				marginTop={rewardInfo.reward !== '' ? 20 : 0}
 				className="overflow-hidden">
 				<div>
+					<Stack className="justify-center items-center">
+						<Image
+							src="/icons/DivaTokenClaim.svg"
+							alt="diavToken"
+							height={128}
+							width={127}
+							className="mb-10"
+						/>
+					</Stack>
 					<Heading as="h2" size="lg">
 						$DIVA Token
 						<Highlight> Claim</Highlight>
 					</Heading>
-					<Paragraph className="mt-8">
-						$DIVA is the governance token for DIVA Protocol.
+					<Paragraph className="mt-8 opacity-60">
+						$DIVA is the new governance token for DIVA Protocol DAO. Connect
+						your wallet to determine your eligibility.
 					</Paragraph>
 				</div>
 				{userAddress === undefined && (
@@ -122,65 +191,15 @@ const Rewards = () => {
 						</Alert>
 					</div>
 				)}
-				{userAddress !== undefined &&
-					rewardInfo.reward !== undefined &&
-					rewardInfo.reward !== '' && (
-						<div>
-							<Alert
-								status="success"
-								variant="subtle"
-								className="text-black rounded-xl">
-								<AlertIcon />
-								You are eligible for token claim, below are the details of your
-								participation.
-							</Alert>
-						</div>
-					)}
 
 				{userAddress !== undefined && rewardInfo.reward === '' && (
 					<div>
-						<Alert
-							status="error"
-							variant="subtle"
-							className="text-black rounded-xl">
-							<AlertIcon />
+						<div className="rounded-xl bg-[#472709] px-10 py-2 text-[#F2994A]">
 							{'You are not eligible. Reason: ' + rewardInfo.comment}
-						</Alert>
+						</div>
 					</div>
 				)}
-				{userAddress !== undefined &&
-					rewardInfo.reward !== undefined &&
-					rewardInfo.reward !== '' && (
-						<div>
-							<div>
-								<div>
-									<div>
-										<Paragraph>Total Testnet Points</Paragraph>
-										<Paragraph>{rewardInfo.points}</Paragraph>
-									</div>
-									<div>
-										<Paragraph>Your $DIVA token reward</Paragraph>
-										<Paragraph>
-											{Number(rewardInfo.reward).toFixed(1)}
-										</Paragraph>
-									</div>
-								</div>
-							</div>
-						</div>
-					)}
-				{userAddress !== undefined &&
-					rewardInfo.reward !== undefined &&
-					rewardInfo.reward !== '' && (
-						<div>
-							<Alert
-								status="info"
-								variant="subtle"
-								className="text-black rounded-xl">
-								<AlertIcon />
-								You will be able to claim your rewards once the token launches
-							</Alert>
-						</div>
-					)}
+
 				{userAddress !== undefined && rewardInfo.reward === undefined && (
 					<div>
 						<Alert
@@ -192,10 +211,27 @@ const Rewards = () => {
 						</Alert>
 					</div>
 				)}
+				{userAddress !== undefined &&
+					rewardInfo.reward !== undefined &&
+					rewardInfo.reward !== '' && (
+						<TokenClaimInfo userAddress={userAddress} rewardInfo={rewardInfo} />
+					)}
 
-				<div className="z-10">
-					<ConnectWalletButton />
-				</div>
+				{userAddress !== undefined &&
+					rewardInfo.reward !== undefined &&
+					rewardInfo.reward !== '' && (
+						<Stack className="m-8 font-sans w-[450px]" gap={3}>
+							<Stack direction={'row'} justify={'space-between'}>
+								<div className="opacity-50">Subject to linear vesting</div>
+								<div>-</div>
+							</Stack>
+
+							<Stack direction={'row'} justify={'space-between'}>
+								<div className="opacity-50">Vesting duration</div>
+								<div>-</div>
+							</Stack>
+						</Stack>
+					)}
 			</Stack>
 			<RewardPageBlobs />
 		</PageLayout>
