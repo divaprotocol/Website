@@ -1,5 +1,3 @@
-import { useAppSelector } from '../redux/hooks'
-import { selectUserAddress } from '../redux/appSlice'
 import { useEffect, useState } from 'react'
 import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
 import Image from 'next/image'
@@ -15,6 +13,9 @@ import { Highlight } from '../components/typography/Highlight'
 import { getShortenedAddress } from '../util/getShortenedAddress'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
+import { useAccount } from 'wagmi'
+import Jazzicon from 'react-jazzicon'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const RewardPageBlobs = () => (
 	<>
@@ -60,7 +61,7 @@ const RewardPageBlobs = () => (
 )
 
 const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
-	<Card className="w-[500px] h-[498px] px-0 py-0 font-sans">
+	<Card className="w-[500px] min-h-[498px] px-0 py-0 font-sans">
 		<Stack
 			direction={'row'}
 			alignItems={'center'}
@@ -69,20 +70,15 @@ const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
 				backgroundColor: 'rgba(255, 255, 255, 0.06)',
 			}}
 			gap={5}>
-			<div>
-				<Image
-					src="/illustrations/avatar.svg"
-					alt="avatar"
-					width={88}
-					height={88}
-				/>
+			<div className="border-2 rounded-full overflow-hidden flex justify-center items-center p-1">
+				<Jazzicon diameter={88} seed={userAddress} />
 			</div>
 			<div className="text-xl ">{getShortenedAddress(userAddress)}</div>
 		</Stack>
 		<Stack className="m-8 font-sans" gap={3}>
 			<Stack direction={'row'} justify={'space-between'}>
 				<div className="opacity-50">Testnet</div>
-				<div>{rewardInfo.points}</div>
+				<div>{rewardInfo.reward.toFixed(1)}</div>
 			</Stack>
 
 			<Stack direction={'row'} justify={'space-between'}>
@@ -91,6 +87,18 @@ const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
 			</Stack>
 			<Stack direction={'row'} justify={'space-between'}>
 				<div className="opacity-50">Early Contributor</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">888Whale holder</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Ethereum ecosystem</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Other contributions/activity</div>
 				<div>-</div>
 			</Stack>
 		</Stack>
@@ -111,9 +119,9 @@ const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
 )
 
 const Rewards = () => {
-	const userAddress = useAppSelector(selectUserAddress)
 	const [rewardInfo, setRewardInfo] = useState<any>({})
 	const [rewards, setRewards] = useState<any[]>([])
+	const { address: userAddress } = useAccount()
 
 	useEffect(() => {
 		const get = async () => {
@@ -150,11 +158,11 @@ const Rewards = () => {
 					textAlign: 'center',
 					zIndex: 10,
 				}}
-				minHeight={['80vh']}
+				minHeight={['90vh']}
 				spacing={8}
 				marginTop={rewardInfo.reward !== '' ? 20 : 0}
 				className="overflow-hidden">
-				<div>
+				<div className="z-10">
 					<Stack className="justify-center items-center">
 						<Image
 							src="/icons/DivaTokenClaim.svg"
@@ -168,9 +176,17 @@ const Rewards = () => {
 						$DIVA Token
 						<Highlight> Claim</Highlight>
 					</Heading>
-					<Paragraph className="mt-8 opacity-60">
+					<Paragraph className="mt-8 opacity-60 ">
 						$DIVA is the new governance token for DIVA Protocol DAO. Connect
 						your wallet to determine your eligibility.
+						<a
+							href="https://www.divaprotocol.io/posts/diva-tokenomics"
+							className="hover:underline"
+							target="_blank"
+							rel="noreferrer">
+							Learn more
+							<ExternalLinkIcon />
+						</a>
 					</Paragraph>
 				</div>
 				{userAddress === undefined && (

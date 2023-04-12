@@ -149,6 +149,8 @@ const DesktopNav = () => {
 }
 
 const MobileNav = () => {
+	const router = useRouter()
+
 	return (
 		<Stack
 			bg={useColorModeValue('transparent', 'gray.800')}
@@ -158,6 +160,7 @@ const MobileNav = () => {
 			{NAV_ITEMS.map((navItem) => (
 				<MobileNavItem key={navItem.label} {...navItem} />
 			))}
+			{router.pathname === '/rewards' && <ConnectWalletButton />}
 		</Stack>
 	)
 }
