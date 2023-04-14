@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+
 import { Provider } from 'react-redux'
 import store from '../redux/Store'
 import { ConnectionProvider } from '../components/ConnectionProvider'
@@ -8,15 +9,15 @@ import { WagmiProvider } from '../components/RainbowKit'
 
 const App = ({ Component, pageProps }) => {
 	return (
-		<WagmiProvider>
-			<Provider store={store}>
-				<ConnectionProvider>
-					<ChakraProvider theme={theme}>
+		<Provider store={store}>
+			<ConnectionProvider>
+				<ChakraProvider theme={theme}>
+					<WagmiProvider>
 						<Component {...pageProps} />
-					</ChakraProvider>
-				</ConnectionProvider>
-			</Provider>
-		</WagmiProvider>
+					</WagmiProvider>
+				</ChakraProvider>
+			</ConnectionProvider>
+		</Provider>
 	)
 }
 

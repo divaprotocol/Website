@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
 import Image from 'next/image'
+import { useAccount } from 'wagmi'
+import Jazzicon from 'react-jazzicon'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 /**
  * TODO: load rewards via ajax
  */
 import PageLayout from '../components/pageLayout/PageLayout'
-import { ConnectWalletButton } from '../components/ConnectWalletButton'
 import { Heading } from '../components/typography/Heading'
 import { Paragraph } from '../components/typography/Paragraph'
 import { Highlight } from '../components/typography/Highlight'
 import { getShortenedAddress } from '../util/getShortenedAddress'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
-import { useAccount } from 'wagmi'
-import Jazzicon from 'react-jazzicon'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 const RewardPageBlobs = () => (
 	<>
@@ -77,28 +76,35 @@ const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
 		</Stack>
 		<Stack className="m-8 font-sans" gap={3}>
 			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Early Contributor/backer</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
 				<div className="opacity-50">Testnet</div>
 				<div>{rewardInfo.reward.toFixed(1)}</div>
 			</Stack>
-
 			<Stack direction={'row'} justify={'space-between'}>
-				<div className="opacity-50">Quiz Activity</div>
+				<div className="opacity-50">Launch partner</div>
 				<div>-</div>
 			</Stack>
 			<Stack direction={'row'} justify={'space-between'}>
-				<div className="opacity-50">Early Contributor</div>
+				<div className="opacity-50">Quiz</div>
 				<div>-</div>
 			</Stack>
 			<Stack direction={'row'} justify={'space-between'}>
-				<div className="opacity-50">888Whale holder</div>
+				<div className="opacity-50">DIVA Donate</div>
 				<div>-</div>
 			</Stack>
 			<Stack direction={'row'} justify={'space-between'}>
-				<div className="opacity-50">Ethereum ecosystem</div>
+				<div className="opacity-50">888Whales holder</div>
 				<div>-</div>
 			</Stack>
 			<Stack direction={'row'} justify={'space-between'}>
 				<div className="opacity-50">Other contributions/activity</div>
+				<div>-</div>
+			</Stack>
+			<Stack direction={'row'} justify={'space-between'}>
+				<div className="opacity-50">Ethereum ecosystem</div>
 				<div>-</div>
 			</Stack>
 		</Stack>
@@ -121,6 +127,7 @@ const TokenClaimInfo = ({ userAddress, rewardInfo }) => (
 const Rewards = () => {
 	const [rewardInfo, setRewardInfo] = useState<any>({})
 	const [rewards, setRewards] = useState<any[]>([])
+
 	const { address: userAddress } = useAccount()
 
 	useEffect(() => {

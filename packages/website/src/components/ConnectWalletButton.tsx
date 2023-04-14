@@ -2,6 +2,7 @@ import { getShortenedAddress } from '../util/getShortenedAddress'
 import { Button } from './ui/Button'
 import { useAccount } from 'wagmi'
 import { useConnectModal, useAccountModal } from '@rainbow-me/rainbowkit'
+import { Stack } from '@chakra-ui/react'
 
 export function ConnectWalletButton() {
 	const { address, isConnected } = useAccount()
@@ -9,12 +10,16 @@ export function ConnectWalletButton() {
 	const { openAccountModal } = useAccountModal()
 
 	return (
-		<Button
-			primary={isConnected ? false : true}
-			onClick={isConnected ? openAccountModal : openConnectModal}
-			className="ml-4 justify-center items-center"
-			innerClassName="">
-			{isConnected ? getShortenedAddress(address) : 'Connect Wallet'}
-		</Button>
+		<Stack flexDirection={'row'} justify={'center'} alignItems={'center'}>
+			<Button
+				primary={isConnected ? false : true}
+				onClick={isConnected ? openAccountModal : openConnectModal}
+				className="ml-4 justify-center items-center"
+				innerClassName="">
+				{isConnected
+					? getShortenedAddress(address as string)
+					: 'Connect Wallet'}
+			</Button>
+		</Stack>
 	)
 }
