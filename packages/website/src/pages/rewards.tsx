@@ -183,18 +183,22 @@ const Rewards = () => {
 						$DIVA Token
 						<Highlight> Claim</Highlight>
 					</Heading>
-					<Paragraph className="mt-8 opacity-60 ">
-						$DIVA is the new governance token for DIVA Protocol DAO. Connect
-						your wallet to determine your eligibility.
-						<a
-							href="https://www.divaprotocol.io/posts/diva-tokenomics"
-							className="hover:underline"
-							target="_blank"
-							rel="noreferrer">
-							Learn more
-							<ExternalLinkIcon />
-						</a>
-					</Paragraph>
+					{userAddress === undefined && (
+						<>						
+							<Paragraph className="mt-8 opacity-60 ">
+								$DIVA is the governance token of DIVA Protocol. Connect
+								your wallet to determine your eligibility.
+								{/* <a
+									href="https://www.divaprotocol.io/posts/diva-tokenomics"
+									className="hover:underline"
+									target="_blank"
+									rel="noreferrer">
+									Learn more
+									<ExternalLinkIcon />
+								</a> */}
+							</Paragraph>
+						</>
+					)}
 				</div>
 				{userAddress === undefined && (
 					<>
