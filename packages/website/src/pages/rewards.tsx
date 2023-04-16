@@ -4,12 +4,7 @@ import { BigNumber, ethers } from "ethers";
 import { isAddress, parseUnits } from "ethers/lib/utils";
 
 import ClaimDivaLinearVestingABI from "../abi/ClaimDivaLinearVestingABI.json";
-import {
-  config,
-  DIVA_TOKEN_DECIMALS,
-  LINEAR_VESTING_TIME,
-  ZERO_BIGNUMBER,
-} from "../constants";
+import { config, DIVA_TOKEN_DECIMALS, ZERO_BIGNUMBER } from "../constants";
 import { useAppSelector } from "../redux/hooks";
 import { selectUserAddress } from "../redux/appSlice";
 import { useConnectionContext } from "../hooks/useConnectionContext";
@@ -124,7 +119,7 @@ const Rewards = () => {
     () =>
       currentTimestamp <= claimPeriodStarts
         ? ZERO_BIGNUMBER
-        : currentTimestamp > claimPeriodStarts + LINEAR_VESTING_TIME
+        : currentTimestamp > claimPeriodStarts + rewardInfo.time
         ? rewardBN?.sub(claimedAmount)
         : claimedAmount.gt(0)
         ? availableDrawDownAmount
@@ -138,6 +133,7 @@ const Rewards = () => {
       currentTimestamp,
       claimPeriodStarts,
       rewardBN,
+      rewardInfo,
     ]
   );
 
@@ -205,7 +201,7 @@ const Rewards = () => {
         await claimDivaLinearVesting.availableDrawDownAmount(
           rewardBN,
           rewardBN.sub(immediateClaimableAmount),
-          LINEAR_VESTING_TIME,
+          rewardInfo.time,
           userAddress
         )
       );
@@ -224,15 +220,19 @@ const Rewards = () => {
     rewardBN,
     immediateClaimableAmount,
     count,
+    rewardInfo,
   ]);
 
   const claim = useCallback(async () => {
     if (claimable && claimableAmount.gt(0)) {
       setIsClaiming(true);
       try {
+        console.log(rewardBN);
+        console.log(rewardInfo.time);
+        console.log(proof);
         const tx = await claimDivaLinearVesting.claimTokens(
           rewardBN,
-          LINEAR_VESTING_TIME,
+          rewardInfo.time,
           proof
         );
         await tx.wait();
@@ -243,7 +243,14 @@ const Rewards = () => {
       }
       setIsClaiming(false);
     }
-  }, [rewardBN, claimDivaLinearVesting, claimable, proof, claimableAmount]);
+  }, [
+    rewardBN,
+    claimDivaLinearVesting,
+    claimable,
+    proof,
+    claimableAmount,
+    rewardInfo,
+  ]);
 
   return (
     <PageLayout>

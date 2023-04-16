@@ -56,9 +56,9 @@ export const config = {
   [SupportedChainId.GOERLI]: {
     divaAddress: "0x8f138cfC5de71FCde7FdeCd87EAC6Aa6A536Bf85",
     divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1",
-    divaTokenAddress: "0x4a8B350A902414083124378db90cB79dD327CFe0",
+    divaTokenAddress: "0xeA247090d391F41a2696228d0e60Fa7fb452c969",
     claimDivaLinearVestingAddress:
-      "0x5f85dab7f73e69DDCa5B4628994ebe96F116721B",
+      "0x0DABD4729bA3682062DE9887C7F879724a29B009",
     balanceCheckAddress: "0x9293ff9733AC7666A8251564C083191c3DA8BE19",
     exchangeProxy: "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
     whitelistAddress: "0x017aA6E15e406b85b8b1dF322e39444D819C8F43",
@@ -137,5 +137,4 @@ export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = Object.values(
 export const CURRENT_SUPPORTED_CHAIN_ID = [SupportedChainId.ROPSTEN];
 
 export const DIVA_TOKEN_DECIMALS = 18;
-export const LINEAR_VESTING_TIME = 60 * 60 * 24 * 30; // seconds
 export const ZERO_BIGNUMBER = BigNumber.from(0);
