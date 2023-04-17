@@ -56,9 +56,9 @@ export const config = {
   [SupportedChainId.GOERLI]: {
     divaAddress: "0x8f138cfC5de71FCde7FdeCd87EAC6Aa6A536Bf85",
     divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1",
-    divaTokenAddress: "0xeA247090d391F41a2696228d0e60Fa7fb452c969",
+    divaTokenAddress: "0xcA68992Db9d413eAd58Bd73e84E4997537C879F9",
     claimDivaLinearVestingAddress:
-      "0x0DABD4729bA3682062DE9887C7F879724a29B009",
+      "0x42C45Dca2ac0726A74F9F3c8AeBE316a9d6c2023",
     balanceCheckAddress: "0x9293ff9733AC7666A8251564C083191c3DA8BE19",
     exchangeProxy: "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
     whitelistAddress: "0x017aA6E15e406b85b8b1dF322e39444D819C8F43",
