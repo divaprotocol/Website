@@ -55,10 +55,10 @@ export const config = {
   },
   [SupportedChainId.GOERLI]: {
     divaAddress: "0x8f138cfC5de71FCde7FdeCd87EAC6Aa6A536Bf85",
-    divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1",
-    divaTokenAddress: "0xcA68992Db9d413eAd58Bd73e84E4997537C879F9",
+    divaAddressNew: "0x6cDEc9b70431bf650f3A0DDD0e246368a4C4F1E1", // why twice?
+    divaTokenAddress: "0xcA68992Db9d413eAd58Bd73e84E4997537C879F9", // why twice?
     claimDivaLinearVestingAddress:
-      "0x42C45Dca2ac0726A74F9F3c8AeBE316a9d6c2023",
+      "0x0bA350467a397A1aC133cbFe73BF5050E6Bee12b",
     balanceCheckAddress: "0x9293ff9733AC7666A8251564C083191c3DA8BE19",
     exchangeProxy: "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
     whitelistAddress: "0x017aA6E15e406b85b8b1dF322e39444D819C8F43",
