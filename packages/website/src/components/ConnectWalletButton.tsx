@@ -1,48 +1,40 @@
-import { useCallback } from "react";
-import { Button } from "@chakra-ui/react";
-
-import { useConnectionContext } from "../hooks/useConnectionContext";
-import { selectChainId, selectUserAddress } from "../redux/appSlice";
-import { useAppSelector } from "../redux/hooks";
-import { getShortenedAddress } from "../util/getShortenedAddress";
-import { INSTALL_METAMASK_LINK } from "../constants";
+import { getShortenedAddress } from '../util/getShortenedAddress'
+import { Button } from './ui/Button'
+import { useAccount, useNetwork } from 'wagmi'
+import {
+	useConnectModal,
+	useAccountModal,
+	useChainModal,
+} from '@rainbow-me/rainbowkit'
+import { Stack, useToast } from '@chakra-ui/react'
 
 export function ConnectWalletButton() {
-  const { provider, isConnected, disconnect, connect } =
-    useConnectionContext();
-  const userAddress = useAppSelector(selectUserAddress);
-  const chainId = useAppSelector(selectChainId);
+	const { address, isConnected } = useAccount()
+	const { openConnectModal } = useConnectModal()
+	const { openAccountModal } = useAccountModal()
+	const { openChainModal } = useChainModal()
+	const { chain } = useNetwork()
 
-  const inestallMetaMask = useCallback(() => {
-    window.open(INSTALL_METAMASK_LINK, "_blank").focus();
-  }, []);
-
-  return (
-    <Button
-      variant="outline"
-      isLoading={chainId == null}
-      type="submit"
-      value="Submit"
-      sx={{
-        marginLeft: "10px",
-        _hover: {
-          background: "white",
-          color: "black",
-        },
-      }}
-      onClick={() =>
-        !provider
-          ? inestallMetaMask()
-          : isConnected && userAddress
-          ? disconnect()
-          : connect()
-      }
-    >
-      {!provider
-        ? "Install MetaMask"
-        : isConnected && userAddress
-        ? getShortenedAddress(userAddress)
-        : "Connect Wallet"}
-    </Button>
-  );
+	return (
+		<Stack flexDirection={'row'} justify={'center'} alignItems={'center'}>
+			{chain?.unsupported === true ? (
+				<Button
+					onClick={openChainModal}
+					className="ml-4 justify-center items-center bg-red-500 font-serif"
+					innerClassName="bg-[#ff494a]/30">
+					Wrong Network
+				</Button>
+			) : (
+				<Button
+					primary={isConnected ? false : true}
+					onClick={isConnected ? openAccountModal : openConnectModal}
+					className="ml-4 justify-center items-center font-serif"
+					innerClassName="">
+					{isConnected
+						? getShortenedAddress(address as string)
+						: 'Connect Wallet'}
+				</Button>
+			)}
+		</Stack>
+	)
 }

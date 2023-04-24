@@ -6,6 +6,8 @@ export interface ButtonProps {
 	className?: string
 	onClick?: () => void
 	innerClassName?: string
+	disabled?: boolean
+	isLoading?: boolean
 }
 
 export const Button = (props: PropsWithChildren<ButtonProps>) => {
@@ -19,8 +21,11 @@ export const Button = (props: PropsWithChildren<ButtonProps>) => {
 	}
 	return (
 		<button
-			className={`${className} ${props.className}`}
-			onClick={props.onClick}>
+			className={`${className} ${props.className} ${
+				props.disabled && 'opacity-50 cursor-not-allowed'
+			}`}
+			onClick={props.onClick}
+			disabled={props.disabled}>
 			<span className={`${innerClassName} ${props.innerClassName}`}>
 				{props.children}
 			</span>
