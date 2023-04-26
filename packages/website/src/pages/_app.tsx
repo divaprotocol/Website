@@ -4,20 +4,17 @@ import { Provider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import store from '../redux/Store'
-import { ConnectionProvider } from '../components/ConnectionProvider'
 import { theme } from '../theme'
 import { WagmiProvider } from '../components/RainbowKit'
 
 const App = ({ Component, pageProps }) => {
 	return (
 		<Provider store={store}>
-			<ConnectionProvider>
-				<ChakraProvider theme={theme}>
-					<WagmiProvider>
-						<Component {...pageProps} />
-					</WagmiProvider>
-				</ChakraProvider>
-			</ConnectionProvider>
+			<ChakraProvider theme={theme}>
+				<WagmiProvider>
+					<Component {...pageProps} />
+				</WagmiProvider>
+			</ChakraProvider>
 		</Provider>
 	)
 }

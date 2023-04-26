@@ -2,17 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
 import { BigNumber, ethers } from 'ethers'
 import { isAddress, parseUnits } from 'ethers/lib/utils'
+import { useToast, useBreakpointValue } from '@chakra-ui/react'
+import Image from 'next/image'
+import Jazzicon from 'react-jazzicon'
 
 import ClaimDivaLinearVestingABI from '../abi/ClaimDivaLinearVestingABI.json'
 import { config, DIVA_TOKEN_DECIMALS, ZERO_BIGNUMBER } from '../constants'
-import { useAppSelector } from '../redux/hooks'
-import { selectUserAddress } from '../redux/appSlice'
-import { useConnectionContext } from '../hooks/useConnectionContext'
 import { toStringFixed } from '../util/bn'
-import { useToast } from '@chakra-ui/react'
-import Image from 'next/image'
-import Jazzicon from 'react-jazzicon'
-import { useBreakpointValue } from '@chakra-ui/react'
 
 /**
  * TODO: load rewards via ajax
@@ -79,10 +75,32 @@ const TokenClaimInfo = ({
 	claimableAmount,
 	claimedAmount,
 }) => {
-	const variant = useBreakpointValue({
-		base: 'sm',
-		md: 'md',
-	})
+	const initialRewardByCategory = {
+		'Early Contributor/backer': 0,
+		Testnet: 0,
+		'Launch partner': 0,
+		Quiz: 0,
+		'DIVA Donate': 0,
+		'888Whales holder': 0,
+		'Other contributions/activity': 0,
+		'Ethereum ecosystem': 0,
+	}
+	const [rewardByCategory, setRewardByCategory] = useState(
+		initialRewardByCategory
+	)
+
+	useEffect(() => {
+		setRewardByCategory(initialRewardByCategory)
+
+		if (rewardInfo.detailUserReward) {
+			rewardInfo.detailUserReward.map(({ category, reward }) => {
+				setRewardByCategory((rewardByCategory) => {
+					rewardByCategory[category] = reward
+					return rewardByCategory
+				})
+			})
+		}
+	}, [rewardInfo, userAddress])
 
 	return (
 		<Card className="md:w-[500px] min-h-[498px] px-0 py-0 font-sans">
@@ -99,40 +117,16 @@ const TokenClaimInfo = ({
 				</div>
 				<div className="text-xl ">{getShortenedAddress(userAddress)}</div>
 			</Stack>
+
 			<Stack className="m-8 font-sans" gap={3}>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Early Contributor/backer</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Testnet</div>
-					<div>{rewardInfo.reward.toFixed(1)}</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Launch partner</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Quiz</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">DIVA Donate</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">888Whales holder</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Other contributions/activity</div>
-					<div>-</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Ethereum ecosystem</div>
-					<div>-</div>
-				</Stack>
+				{Object.entries(rewardByCategory).map(([category, reward]) => (
+					<Stack direction={'row'} justify={'space-between'} key={category}>
+						<div className="opacity-50">{category}</div>
+						{reward > 0 ? <div>{reward}</div> : <div>-</div>}
+					</Stack>
+				))}
 			</Stack>
+
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">$DIVA</div>
@@ -141,6 +135,13 @@ const TokenClaimInfo = ({
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">Claimable amount:</div>
 					<div>{toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4)}</div>
+				</Stack>
+				<Stack direction={'row'} justify={'space-between'}>
+					<div className="opacity-50">Unclaimed amount:</div>
+					<div>
+						{rewardInfo.reward -
+							Number(toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4))}
+					</div>
 				</Stack>
 				{claimedAmount.gt(0) && (
 					<Stack direction={'row'} justify={'space-between'}>
@@ -167,7 +168,6 @@ const TokenClaimInfo = ({
 const Rewards = () => {
 	const { address: userAddress } = useAccount()
 	const { chain } = useNetwork()
-	const provider = useProvider()
 	const { data: signer, isError, isLoading } = useSigner()
 	const [rewardInfo, setRewardInfo] = useState<any>({})
 	const [proof, setProof] = useState<string[]>([])
@@ -192,14 +192,14 @@ const Rewards = () => {
 
 	const claimDivaLinearVesting = useMemo(
 		() =>
-			provider && chain?.id && config[chain?.id]?.claimDivaLinearVestingAddress
+			signer && chain?.id && config[chain?.id]?.claimDivaLinearVestingAddress
 				? new ethers.Contract(
 						config[chain?.id]?.claimDivaLinearVestingAddress,
 						ClaimDivaLinearVestingABI,
 						signer
 				  )
 				: null,
-		[chain?.id, provider, userAddress]
+		[chain, signer]
 	)
 
 	const rewardBN = useMemo(
@@ -256,6 +256,7 @@ const Rewards = () => {
 		]
 	)
 
+	// fetching the reward info from API
 	useEffect(() => {
 		const get = async () => {
 			const res = await fetch(`/api/rewards/${userAddress}`, {
@@ -324,7 +325,6 @@ const Rewards = () => {
 	])
 
 	const claim = useCallback(async () => {
-		console.log('hbvjhb')
 		if (claimable && claimableAmount.gt(0)) {
 			setIsClaiming(true)
 			try {
@@ -397,28 +397,11 @@ const Rewards = () => {
 							<Paragraph className="mt-8 opacity-60 ">
 								$DIVA is the governance token of DIVA Protocol. Connect your
 								wallet to determine your eligibility.
-								{/* <a
-									href="https://www.divaprotocol.io/posts/diva-tokenomics"
-									className="hover:underline"
-									target="_blank"
-									rel="noreferrer">
-									Learn more
-									<ExternalLinkIcon />
-								</a> */}
 							</Paragraph>
 						</>
 					)}
-					<Paragraph className="mt-8">
-						$DIVA is the governance token for DIVA Protocol.
-					</Paragraph>
 				</div>
-				{userAddress === undefined && (
-					<>
-						<Paragraph>
-							Connect your wallet to determine your eligibility.
-						</Paragraph>
-					</>
-				)}
+
 				{userAddress !== undefined && rewardInfo == null && (
 					<div>
 						<Alert
@@ -498,6 +481,31 @@ const Rewards = () => {
 							claimableAmount={claimableAmount}
 							claimedAmount={claimedAmount}
 						/>
+					)}
+
+				{userAddress !== undefined &&
+					rewardInfo.reward !== undefined &&
+					rewardInfo.reward !== '' && (
+						<Stack className="m-8 font-sans w-[450px]" gap={3}>
+							<Stack direction={'row'} justify={'space-between'}>
+								<div className="opacity-50">Subject to linear vesting</div>
+								{rewardInfo.time <= 0 ? (
+									<div>-</div>
+								) : (
+									<div>{`${rewardInfo.time / 31536000} year`}</div>
+								)}
+							</Stack>
+
+							<Stack direction={'row'} justify={'space-between'}>
+								<div className="opacity-50">Vesting duration</div>
+								{/* Subject to linear vesting" is 60% * amount */}
+								{rewardInfo?.reward ? (
+									<div>{0.6 * rewardInfo.reward}</div>
+								) : (
+									<div>-</div>
+								)}
+							</Stack>
+						</Stack>
 					)}
 			</Stack>
 			<RewardPageBlobs />
