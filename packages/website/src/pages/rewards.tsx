@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
+import { Alert, AlertIcon, Stack, Tooltip } from '@chakra-ui/react'
 import { BigNumber, ethers } from 'ethers'
 import { isAddress, parseUnits } from 'ethers/lib/utils'
 import { useToast, useBreakpointValue } from '@chakra-ui/react'
@@ -8,7 +8,7 @@ import Jazzicon from 'react-jazzicon'
 
 import ClaimDivaLinearVestingABI from '../abi/ClaimDivaLinearVestingABI.json'
 import { config, DIVA_TOKEN_DECIMALS, ZERO_BIGNUMBER } from '../constants'
-import { toStringFixed } from '../util/bn'
+import { addThousandSeparators, toStringFixed } from '../util/bn'
 
 /**
  * TODO: load rewards via ajax
@@ -22,6 +22,8 @@ import { useAccount, useNetwork, useProvider, useSigner } from 'wagmi'
 import { Card } from '../components/ui/Card'
 import { Button } from '../components/ui/Button'
 import { getShortenedAddress } from '../util/getShortenedAddress'
+import { InfoOutlineIcon } from '@chakra-ui/icons'
+import { RewardObject } from '../types/index'
 
 const RewardPageBlobs = () => (
 	<>
@@ -76,29 +78,65 @@ const TokenClaimInfo = ({
 	claimedAmount,
 }) => {
 	const initialRewardByCategory = {
-		'Early Contributor/backer': 0,
-		Testnet: 0,
-		'Launch partner': 0,
-		Quiz: 0,
-		'DIVA Donate': 0,
-		'888Whales holder': 0,
-		'Other contributions/activity': 0,
-		'Ethereum ecosystem': 0,
+		'Early contributor/backer': {
+			reward: 0,
+			comment: '',
+		},
+		Testnet: {
+			reward: 0,
+			comment: '',
+		},
+		'Launch partner': {
+			reward: 0,
+			comment: '',
+		},
+		Quiz: {
+			reward: 0,
+			comment: '',
+		},
+		'DIVA Donate': {
+			reward: 0,
+			comment: '',
+		},
+		'888Whales holder': {
+			reward: 0,
+			comment: '',
+		},
+		'Other contributions/activity': { reward: 0, comment: '' },
+		'Ethereum ecosystem': { reward: 0, comment: '' },
 	}
 	const [rewardByCategory, setRewardByCategory] = useState(
 		initialRewardByCategory
 	)
 
+	// merging same category into one
+	function mergeRewardsByCategory(arr: RewardObject[]): RewardObject[] {
+		const merged: { [category: string]: RewardObject } = {}
+
+		for (const obj of arr) {
+			if (merged[obj.category]) {
+				merged[obj.category].reward += obj.reward
+			} else {
+				merged[obj.category] = { ...obj }
+			}
+		}
+		return Object.values(merged)
+	}
+
 	useEffect(() => {
 		setRewardByCategory(initialRewardByCategory)
 
 		if (rewardInfo.detailUserReward) {
-			rewardInfo.detailUserReward.map(({ category, reward }) => {
-				setRewardByCategory((rewardByCategory) => {
-					rewardByCategory[category] = reward
-					return rewardByCategory
-				})
-			})
+			mergeRewardsByCategory(rewardInfo.detailUserReward).map(
+				({ category, reward, comment }) => {
+					setRewardByCategory((rewardByCategory) => {
+						rewardByCategory[category].reward = reward
+						rewardByCategory[category].comment = comment
+
+						return rewardByCategory
+					})
+				}
+			)
 		}
 	}, [rewardInfo, userAddress])
 
@@ -119,36 +157,64 @@ const TokenClaimInfo = ({
 			</Stack>
 
 			<Stack className="m-8 font-sans" gap={3}>
-				{Object.entries(rewardByCategory).map(([category, reward]) => (
-					<Stack direction={'row'} justify={'space-between'} key={category}>
-						<div className="opacity-50">{category}</div>
-						{reward > 0 ? <div>{reward}</div> : <div>-</div>}
-					</Stack>
-				))}
+				{Object.entries(rewardByCategory).map(
+					([category, { reward, comment }]) => (
+						<Stack direction={'row'} justify={'space-between'} key={category}>
+							<Stack
+								direction={'row'}
+								alignItems={'center'}
+								className="opacity-50">
+								<div>{category}</div>
+								{category === 'Testnet' && reward === 0 && (
+									<Tooltip
+										label={comment}
+										aria-label={comment}
+										hasArrow
+										className="font-sans opacity-50">
+										<InfoOutlineIcon />
+									</Tooltip>
+								)}
+							</Stack>
+							{reward > 0 ? (
+								<div>{addThousandSeparators(reward)}</div>
+							) : (
+								<div>-</div>
+							)}
+						</Stack>
+					)
+				)}
 			</Stack>
 
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">$DIVA</div>
-					<div>{rewardInfo.reward.toFixed(1)}</div>
+					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
 				</Stack>
 				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Claimable amount:</div>
-					<div>{toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4)}</div>
+					<div className="opacity-50">You already claimed:</div>
+					<div>
+						{addThousandSeparators(
+							toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)
+						)}
+					</div>
 				</Stack>
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">Unclaimed amount:</div>
 					<div>
-						{rewardInfo.reward -
-							Number(toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4))}
+						{addThousandSeparators(
+							rewardInfo.reward -
+								Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4))
+						)}
 					</div>
 				</Stack>
-				{claimedAmount.gt(0) && (
-					<Stack direction={'row'} justify={'space-between'}>
-						<div className="opacity-50">You already claimed:</div>
-						<div> {toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)}</div>
-					</Stack>
-				)}
+				<Stack direction={'row'} justify={'space-between'}>
+					<div className="opacity-50">Claimable amount:</div>
+					<div>
+						{addThousandSeparators(
+							toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4)
+						)}
+					</div>
+				</Stack>
 			</Stack>
 
 			<Stack className="m-8">
@@ -489,20 +555,21 @@ const Rewards = () => {
 						<Stack className="m-8 font-sans w-[450px]" gap={3}>
 							<Stack direction={'row'} justify={'space-between'}>
 								<div className="opacity-50">Subject to linear vesting</div>
-								{rewardInfo.time <= 0 ? (
-									<div>-</div>
+
+								{rewardInfo?.reward ? (
+									<div>{addThousandSeparators(0.6 * rewardInfo.reward)}</div>
 								) : (
-									<div>{`${rewardInfo.time / 31536000} year`}</div>
+									<div>-</div>
 								)}
 							</Stack>
 
 							<Stack direction={'row'} justify={'space-between'}>
 								<div className="opacity-50">Vesting duration</div>
 								{/* Subject to linear vesting" is 60% * amount */}
-								{rewardInfo?.reward ? (
-									<div>{0.6 * rewardInfo.reward}</div>
-								) : (
+								{rewardInfo.time <= 0 ? (
 									<div>-</div>
+								) : (
+									<div>{`${rewardInfo.time / 31536000} year`}</div>
 								)}
 							</Stack>
 						</Stack>
