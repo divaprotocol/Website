@@ -165,7 +165,7 @@ const TokenClaimInfo = ({
 								alignItems={'center'}
 								className="opacity-50">
 								<div>{category}</div>
-								{category === 'Testnet' && reward === 0 && (
+								{category === 'Testnet' && reward === 0 && comment !== '' && (
 									<Tooltip
 										label={comment}
 										aria-label={comment}
@@ -186,7 +186,10 @@ const TokenClaimInfo = ({
 			</Stack>
 
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
-				<Stack direction={'row'} justify={'space-between'}>
+				<Stack
+					direction={'row'}
+					justify={'space-between'}
+					className="font-bold text-lg">
 					<div className="opacity-50">$DIVA</div>
 					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
 				</Stack>
@@ -569,7 +572,9 @@ const Rewards = () => {
 								{rewardInfo.time <= 0 ? (
 									<div>-</div>
 								) : (
-									<div>{`${rewardInfo.time / 31536000} year`}</div>
+									<div>{`${rewardInfo.time / 31536000} ${
+										rewardInfo.time / 31536000 > 1 ? 'years' : 'year'
+									}`}</div>
 								)}
 							</Stack>
 						</Stack>
