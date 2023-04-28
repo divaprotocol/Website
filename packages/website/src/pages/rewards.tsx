@@ -189,7 +189,7 @@ const TokenClaimInfo = ({
 				<Stack
 					direction={'row'}
 					justify={'space-between'}
-					className="font-bold text-lg">
+					className="text-xl">
 					<div className="opacity-50">$DIVA</div>
 					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
 				</Stack>
