@@ -25,7 +25,6 @@ export default async function handler(
     (v) => v.address.toLowerCase() === (address as string).toLowerCase()
   );
 
-
   if (!userReward) {
     res.status(204).send("not registered account");
     return
@@ -57,7 +56,7 @@ export default async function handler(
   const resUserReward = {
     address: userTokenClaim.address,
     reward:
-      Number(toStringFixed(userTokenClaim.amount, DIVA_TOKEN_DECIMALS, 4)),
+      Number(toStringFixed(userTokenClaim.amount, DIVA_TOKEN_DECIMALS, 8)),
     time: userTokenClaim.time
   }
 
