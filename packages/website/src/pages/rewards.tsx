@@ -260,8 +260,6 @@ const Rewards = () => {
 	const [count, setCount] = useState<number>(0)
 	const toast = useToast()
 
-	console.log(chain)
-
 	useEffect(() => {
 		setCount((count) => count + 1)
 		const interval = setInterval(() => {
@@ -408,9 +406,6 @@ const Rewards = () => {
 		if (claimable && claimableAmount.gt(0)) {
 			setIsClaiming(true)
 			try {
-				console.log(rewardBN)
-				console.log(rewardInfo.time)
-				console.log(proof)
 				const tx = await claimDivaLinearVesting.claimTokens(
 					rewardBN,
 					rewardInfo.time,
