@@ -8,3 +8,11 @@ export const toStringFixed = (
 ): string => {
   return Number(formatUnits(bn, decimals)).toFixed(toFixed);
 };
+
+export function addThousandSeparators(num: number | string): string {
+  const parsedNum = typeof num === "string" ? parseFloat(num) : num;
+  const [integerPart, decimalPart] = parsedNum.toFixed(1).toString().split(".");
+  const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return decimalPart !== undefined ? `${formattedIntegerPart}.${decimalPart}` : formattedIntegerPart;
+}
+

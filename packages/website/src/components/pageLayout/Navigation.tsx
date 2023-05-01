@@ -20,6 +20,8 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import { navVariants } from '../../util/motion'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { ConnectWalletButton } from '../ConnectWalletButton'
 interface NavItem {
 	label: string
 	href?: string
@@ -56,6 +58,7 @@ const NAV_ITEMS: Array<NavItem> = [
 
 export default function Navigation() {
 	const { isOpen, onToggle } = useDisclosure()
+	const router = useRouter()
 
 	return (
 		<motion.nav
@@ -106,9 +109,11 @@ export default function Navigation() {
 					</Flex>
 					<Flex
 						justify={'flex-end'}
+						align={'center'}
 						display={{ base: 'none', md: 'flex' }}
 						ml={10}>
 						<DesktopNav />
+						{router.pathname === '/rewards' && <ConnectWalletButton />}
 					</Flex>
 				</Flex>
 
@@ -144,6 +149,8 @@ const DesktopNav = () => {
 }
 
 const MobileNav = () => {
+	const router = useRouter()
+
 	return (
 		<Stack
 			bg={useColorModeValue('transparent', 'gray.800')}
@@ -153,6 +160,7 @@ const MobileNav = () => {
 			{NAV_ITEMS.map((navItem) => (
 				<MobileNavItem key={navItem.label} {...navItem} />
 			))}
+			{router.pathname === '/rewards' && <ConnectWalletButton />}
 		</Stack>
 	)
 }

@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getAddress, parseUnits } from "ethers/lib/utils";
 import MerkleGenerator from "../../../util/merkleGeneratorVesting";
 import { DIVA_TOKEN_DECIMALS } from "../../../constants";
+import { toStringFixed } from '../../../util/bn'
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,9 +21,10 @@ export default async function handler(
   );
 
   const allRewards = JSON.parse(fileContents);
-  const userReward = allRewards.find(
+  const userReward = allRewards.filter(
     (v) => v.address.toLowerCase() === (address as string).toLowerCase()
   );
+
 
   if (!userReward) {
     res.status(204).send("not registered account");
@@ -50,12 +53,28 @@ export default async function handler(
     (v) => v.address.toLowerCase() === (address as string).toLowerCase()
   );
 
+
+  const resUserReward = {
+    address: userTokenClaim.address,
+    reward:
+      Number(toStringFixed(userTokenClaim.amount, DIVA_TOKEN_DECIMALS, 4)),
+    time: userTokenClaim.time
+  }
+
   if (!userTokenClaim) {
     res
       .status(200)
-      .json({ userReward: { ...userReward, time: 0 }, proof: [] });
+      .json({
+        userReward: {
+          ...resUserReward,
+          detailUserReward: [
+            ...userReward
+          ], time: 0
+        }, proof: []
+      });
     return;
   }
+
 
   const generator = new MerkleGenerator(tokenClaimables);
   const { merkleTree } = await generator.process();
@@ -70,5 +89,12 @@ export default async function handler(
   //Return the content of the data file in json format
   res
     .status(200)
-    .json({ userReward: { ...userReward, time: userTokenClaim.time }, proof });
+    .json({
+      userReward: {
+        ...resUserReward,
+        detailUserReward: [
+          ...userReward
+        ], time: userTokenClaim.time
+      }, proof
+    });
 }
