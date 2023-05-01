@@ -226,7 +226,7 @@ const TokenClaimInfo = ({
 						primary
 						className="justify-center from-red-700 to-red-400"
 						onClick={openChainModal}>
-						{`Unsupported Network, Click to change`}
+						{`Switch to Goerli`}
 					</Button>
 				) : (
 					<Button
