@@ -569,9 +569,9 @@ const Rewards = () => {
 								<div className="opacity-50">Subject to linear vesting</div>
 
 								{rewardInfo?.reward ? (
-									<div>{addThousandSeparators(0.6 * rewardInfo.reward)}</div>
+									<div className="opacity-50">{rewardInfo.time > 0 ? addThousandSeparators(0.6 * rewardInfo.reward) : addThousandSeparators(rewardInfo.reward)}</div>
 								) : (
-									<div>-</div>
+									<div className="opacity-50">-</div>
 								)}
 							</Stack>
 
@@ -579,9 +579,9 @@ const Rewards = () => {
 								<div className="opacity-50">Vesting duration</div>
 								{/* Subject to linear vesting" is 60% * amount */}
 								{rewardInfo.time <= 0 ? (
-									<div>-</div>
+									<div className="opacity-50">-</div>
 								) : (
-									<div>{`${rewardInfo.time / 31536000} ${
+									<div className="opacity-50">{`${rewardInfo.time / 31536000} ${
 										rewardInfo.time / 31536000 > 1 ? 'years' : 'year'
 									}`}</div>
 								)}
