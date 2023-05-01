@@ -25,8 +25,11 @@ export function ConnectWalletButton() {
 				<Button
 					primary
 					onClick={openChainModal}
-					className="justify-center items-center from-red-700 to-red-400 font-serifs"
-					innerClassName="bg-[#ff494a]/30">
+					className="justify-center items-center  font-serifs"
+					innerClassName="bg-[#ff494a]/30"
+					style={{
+						backgroundImage: 'linear-gradient(to left, #EF4444, #F87171)',
+					}}>
 					Wrong Network
 				</Button>
 			) : (

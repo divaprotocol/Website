@@ -224,8 +224,11 @@ const TokenClaimInfo = ({
 				{chain?.unsupported ? (
 					<Button
 						primary
-						className="justify-center from-red-700 to-red-400"
-						onClick={openChainModal}>
+						className="justify-center"
+						onClick={openChainModal}
+						style={{
+							backgroundImage: 'linear-gradient(to left, #EF4444, #F87171)',
+						}}>
 						{`Switch to Goerli`}
 					</Button>
 				) : (
