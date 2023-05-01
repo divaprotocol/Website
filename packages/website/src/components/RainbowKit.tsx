@@ -11,7 +11,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import React from 'react'
 
 const { chains, provider, webSocketProvider } = configureChains(
-	[goerli, mainnet],
+	[goerli],
 	[publicProvider()]
 )
 
