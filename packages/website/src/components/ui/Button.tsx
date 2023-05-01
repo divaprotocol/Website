@@ -9,6 +9,7 @@ export interface ButtonProps {
 	innerClassName?: string
 	disabled?: boolean
 	isLoading?: boolean
+	style?: any
 }
 
 export const Button = (props: PropsWithChildren<ButtonProps>) => {
@@ -34,7 +35,8 @@ export const Button = (props: PropsWithChildren<ButtonProps>) => {
 				props.disabled && 'opacity-50 cursor-not-allowed'
 			}`}
 			onClick={props.onClick}
-			disabled={props.disabled}>
+			disabled={props.disabled}
+			style={props.style}>
 			<span className={`${innerClassName} ${props.innerClassName}`}>
 				{props.isLoading ? <Spinner /> : props.children}
 			</span>

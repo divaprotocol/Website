@@ -24,6 +24,7 @@ import { Button } from '../components/ui/Button'
 import { getShortenedAddress } from '../util/getShortenedAddress'
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import { RewardObject } from '../types/index'
+import { useChainModal } from '@rainbow-me/rainbowkit'
 
 const RewardPageBlobs = () => (
 	<>
@@ -108,6 +109,8 @@ const TokenClaimInfo = ({
 	const [rewardByCategory, setRewardByCategory] = useState(
 		initialRewardByCategory
 	)
+	const { chain } = useNetwork()
+	const { openChainModal } = useChainModal()
 
 	// merging same category into one
 	function mergeRewardsByCategory(arr: RewardObject[]): RewardObject[] {
@@ -186,10 +189,7 @@ const TokenClaimInfo = ({
 			</Stack>
 
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
-				<Stack
-					direction={'row'}
-					justify={'space-between'}
-					className="text-xl">
+				<Stack direction={'row'} justify={'space-between'} className="text-xl">
 					<div className="opacity-50">$DIVA</div>
 					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
 				</Stack>
@@ -221,14 +221,23 @@ const TokenClaimInfo = ({
 			</Stack>
 
 			<Stack className="m-8">
-				<Button
-					primary
-					className="justify-center"
-					onClick={() => claim()}
-					disabled={claimableAmount.eq(0)}
-					isLoading={isClaiming}>
-					{claimable ? 'Claim' : '	Rewards available after token launch'}
-				</Button>
+				{chain?.unsupported ? (
+					<Button
+						primary
+						className="justify-center from-red-700 to-red-400"
+						onClick={openChainModal}>
+						{`Unsupported Network, Click to change`}
+					</Button>
+				) : (
+					<Button
+						primary
+						className="justify-center"
+						onClick={() => claim()}
+						disabled={claimableAmount.eq(0)}
+						isLoading={isClaiming}>
+						{claimable ? 'Claim' : '	Rewards available after token launch'}
+					</Button>
+				)}
 			</Stack>
 		</Card>
 	)
@@ -250,6 +259,8 @@ const Rewards = () => {
 	const [claimPeriodStarts, setClaimPeriodStarts] = useState<number>(0)
 	const [count, setCount] = useState<number>(0)
 	const toast = useToast()
+
+	console.log(chain)
 
 	useEffect(() => {
 		setCount((count) => count + 1)

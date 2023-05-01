@@ -6,7 +6,7 @@ import {
 	useAccountModal,
 	useChainModal,
 } from '@rainbow-me/rainbowkit'
-import { Stack, useToast } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 
 export function ConnectWalletButton() {
 	const { address, isConnected } = useAccount()
@@ -16,25 +16,43 @@ export function ConnectWalletButton() {
 	const { chain } = useNetwork()
 
 	return (
-		<Stack flexDirection={'row'} justify={'center'} alignItems={'center'}>
-			{chain?.unsupported === true ? (
-				<Button
-					onClick={openChainModal}
-					className="ml-4 justify-center items-center bg-red-500 font-serif"
-					innerClassName="bg-[#ff494a]/30">
-					Wrong Network
-				</Button>
-			) : (
-				<Button
-					primary={isConnected ? false : true}
-					onClick={isConnected ? openAccountModal : openConnectModal}
-					className="ml-4 justify-center items-center font-serif"
-					innerClassName="">
-					{isConnected
-						? getShortenedAddress(address as string)
-						: 'Connect Wallet'}
-				</Button>
+		<Stack
+			flexDirection={'row'}
+			alignItems={'center'}
+			gap={2}
+			className="ml-2 justify-center items-center">
+			{chain && isConnected && (
+				<>
+					{chain?.unsupported === true ? (
+						<Button
+							primary
+							onClick={openChainModal}
+							className="justify-center items-center from-red-700 to-red-400 font-serifs"
+							innerClassName="bg-[#ff494a]/30">
+							Wrong Network
+						</Button>
+					) : (
+						<Button
+							onClick={openChainModal}
+							className="justify-center items-center font-serifs"
+							innerClassName="">
+							{chain.name}
+						</Button>
+					)}
+				</>
 			)}
+			<Button
+				primary={isConnected ? false : true}
+				onClick={isConnected ? openAccountModal : openConnectModal}
+				className="ml-4 justify-center items-center font-serif "
+				innerClassName="mt-0"
+				style={{
+					marginTop: 0,
+				}}>
+				{isConnected
+					? getShortenedAddress(address as string)
+					: 'Connect Wallet'}
+			</Button>
 		</Stack>
 	)
 }
