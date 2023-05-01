@@ -8,11 +8,12 @@ import Jazzicon from 'react-jazzicon'
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
 import { goerli, mainnet } from 'wagmi/chains'
 import { publicProvider } from 'wagmi/providers/public'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
 import React from 'react'
 
 const { chains, provider, webSocketProvider } = configureChains(
 	[goerli],
-	[publicProvider()]
+	[alchemyProvider({ apiKey: process.env.ALCHEMY_ID }), publicProvider()]
 )
 
 const { connectors } = getDefaultWallets({
