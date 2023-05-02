@@ -152,7 +152,7 @@ const TokenClaimInfo = ({
 			: 0
 
 	return (
-		<Card className="md:w-[500px] min-h-[498px] px-0 py-0 font-sans">
+		<Card className="md:w-[500px] min-h-[498px] px-0 py-0 font-sans z-10">
 			<Stack
 				direction={'row'}
 				alignItems={'center'}
