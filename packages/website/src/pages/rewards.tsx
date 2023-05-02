@@ -567,7 +567,7 @@ const Rewards = () => {
 				{userAddress !== undefined &&
 					rewardInfo.reward !== undefined &&
 					rewardInfo.reward !== '' && (
-						<Stack className="m-8 font-sans w-[450px]" gap={3}>
+						<Stack className="m-8 font-sans w-[100%] md:w-[450px]" gap={3}>
 							<Stack direction={'row'} justify={'space-between'}>
 								<div className="opacity-50">Subject to linear vesting</div>
 
