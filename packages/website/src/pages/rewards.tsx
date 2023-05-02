@@ -143,6 +143,14 @@ const TokenClaimInfo = ({
 		}
 	}, [rewardInfo, userAddress])
 
+	const UnclaimedAmount =
+		rewardInfo.reward -
+			Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)) >
+		0
+			? rewardInfo.reward -
+			  Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4))
+			: 0
+
 	return (
 		<Card className="md:w-[500px] min-h-[498px] px-0 py-0 font-sans">
 			<Stack
@@ -203,12 +211,7 @@ const TokenClaimInfo = ({
 				</Stack>
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">Unclaimed amount:</div>
-					<div>
-						{addThousandSeparators(
-							rewardInfo.reward -
-								Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4))
-						)}
-					</div>
+					<div>{addThousandSeparators(UnclaimedAmount)}</div>
 				</Stack>
 				<Stack direction={'row'} justify={'space-between'}>
 					<div className="opacity-50">Claimable amount:</div>
@@ -569,7 +572,11 @@ const Rewards = () => {
 								<div className="opacity-50">Subject to linear vesting</div>
 
 								{rewardInfo?.reward ? (
-									<div className="opacity-50">{rewardInfo.time > 0 ? addThousandSeparators(0.6 * rewardInfo.reward) : addThousandSeparators(rewardInfo.reward)}</div>
+									<div className="opacity-50">
+										{rewardInfo.time > 0
+											? addThousandSeparators(0.6 * rewardInfo.reward)
+											: addThousandSeparators(rewardInfo.reward)}
+									</div>
 								) : (
 									<div className="opacity-50">-</div>
 								)}
