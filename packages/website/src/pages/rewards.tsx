@@ -241,7 +241,7 @@ const TokenClaimInfo = ({
 						onClick={() => claim()}
 						disabled={claimableAmount.eq(0)}
 						isLoading={isClaiming}>
-						{claimable ? 'Claim' : '	Rewards available after token launch'}
+						{'Claim'}
 					</Button>
 				)}
 			</Stack>
@@ -409,7 +409,7 @@ const Rewards = () => {
 	])
 
 	const claim = useCallback(async () => {
-		if (claimable && claimableAmount.gt(0)) {
+		if (claimableAmount.gt(0)) {
 			setIsClaiming(true)
 			try {
 				const tx = await claimDivaLinearVesting.claimTokens(
@@ -433,7 +433,6 @@ const Rewards = () => {
 			setIsClaiming(false)
 		}
 	}, [
-		claimable,
 		claimableAmount,
 		rewardBN,
 		rewardInfo.time,
