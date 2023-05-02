@@ -20,7 +20,7 @@ export function ConnectWalletButton() {
 			flexDirection={'row'}
 			alignItems={'center'}
 			gap={2}
-			className="ml-2 justify-center items-center">
+			className="ml-2 justify-center items-center z-10">
 			{chain?.unsupported === true ? (
 				<Button
 					primary
