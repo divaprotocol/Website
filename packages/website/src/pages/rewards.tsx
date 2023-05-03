@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Alert, AlertIcon, Stack, Tooltip } from '@chakra-ui/react'
+import { Alert, AlertIcon, Stack } from '@chakra-ui/react'
 import { BigNumber, ethers } from 'ethers'
 import { isAddress, parseUnits } from 'ethers/lib/utils'
-import { useToast, useBreakpointValue } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import Image from 'next/image'
-import Jazzicon from 'react-jazzicon'
+import Skeleton from 'react-loading-skeleton'
+import { useAccount, useNetwork, useSigner } from 'wagmi'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import ClaimDivaLinearVestingABI from '../abi/ClaimDivaLinearVestingABI.json'
 import { config, DIVA_TOKEN_DECIMALS, ZERO_BIGNUMBER } from '../constants'
@@ -14,245 +16,16 @@ import { addThousandSeparators, toStringFixed } from '../util/bn'
  * TODO: load rewards via ajax
  */
 import PageLayout from '../components/pageLayout/PageLayout'
-import { ConnectWalletButton } from '../components/ConnectWalletButton'
 import { Heading } from '../components/typography/Heading'
 import { Paragraph } from '../components/typography/Paragraph'
 import { Highlight } from '../components/typography/Highlight'
-import { useAccount, useNetwork, useSigner } from 'wagmi'
-import { Card } from '../components/ui/Card'
-import { Button } from '../components/ui/Button'
-import { getShortenedAddress } from '../util/getShortenedAddress'
-import { InfoOutlineIcon } from '@chakra-ui/icons'
-import { RewardObject } from '../types/index'
-import { useChainModal } from '@rainbow-me/rainbowkit'
-
-const RewardPageBlobs = () => (
-	<>
-		<div
-			style={{
-				position: 'absolute',
-				width: '726px',
-				height: '594px',
-				left: '1304px',
-				top: 'calc(50% - 594px/2 + 46px)',
-				background:
-					'linear-gradient(116.38deg, rgba(0, 56, 255, 0.2) 6.37%, rgba(22, 227, 216, 0.2) 89.66%)',
-				filter: 'blur(131.902px)',
-				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-			}}
-			className="hidden md:block"></div>
-		<div
-			style={{
-				position: 'absolute',
-				width: '402px',
-				height: '329px',
-				left: '0px',
-				top: 'calc(50% - 329px/2 + 93.5px)',
-				background:
-					'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
-				filter: 'blur(131.902px)',
-				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-			}}></div>
-		<div
-			style={{
-				position: 'absolute',
-				width: '402px',
-				height: '329px',
-				left: '821px',
-				top: 'calc(50% - 329px/2 - 179.5px)',
-				background:
-					'linear-gradient(116.38deg, rgba(0, 56, 255, 0.3) 6.37%, rgba(22, 227, 216, 0.3) 89.66%)',
-				filter: 'blur(131.902px)',
-				transform: 'matrix(-1, 0, 0, 1, 0, 0)',
-			}}
-			className="hidden md:block"></div>
-	</>
-)
-
-const TokenClaimInfo = ({
-	userAddress,
-	rewardInfo,
-	claimable,
-	claim,
-	isClaiming,
-	claimableAmount,
-	claimedAmount,
-}) => {
-	const initialRewardByCategory = {
-		'Early contributor/backer': {
-			reward: 0,
-			comment: '',
-		},
-		Testnet: {
-			reward: 0,
-			comment: '',
-		},
-		'Launch partner': {
-			reward: 0,
-			comment: '',
-		},
-		Quiz: {
-			reward: 0,
-			comment: '',
-		},
-		'DIVA Donate': {
-			reward: 0,
-			comment: '',
-		},
-		'888Whales holder': {
-			reward: 0,
-			comment: '',
-		},
-		'Other contributions/activity': { reward: 0, comment: '' },
-		'Ethereum ecosystem': { reward: 0, comment: '' },
-	}
-	const [rewardByCategory, setRewardByCategory] = useState(
-		initialRewardByCategory
-	)
-	const { chain } = useNetwork()
-	const { openChainModal } = useChainModal()
-
-	// merging same category into one
-	function mergeRewardsByCategory(arr: RewardObject[]): RewardObject[] {
-		const merged: { [category: string]: RewardObject } = {}
-
-		for (const obj of arr) {
-			if (merged[obj.category]) {
-				merged[obj.category].reward += obj.reward
-			} else {
-				merged[obj.category] = { ...obj }
-			}
-		}
-		return Object.values(merged)
-	}
-
-	useEffect(() => {
-		setRewardByCategory(initialRewardByCategory)
-
-		if (rewardInfo.detailUserReward) {
-			mergeRewardsByCategory(rewardInfo.detailUserReward).map(
-				({ category, reward, comment }) => {
-					setRewardByCategory((rewardByCategory) => {
-						rewardByCategory[category].reward = reward
-						rewardByCategory[category].comment = comment
-
-						return rewardByCategory
-					})
-				}
-			)
-		}
-	}, [rewardInfo, userAddress])
-
-	const UnclaimedAmount =
-		rewardInfo.reward -
-			Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)) >
-		0
-			? rewardInfo.reward -
-			  Number(toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4))
-			: 0
-
-	return (
-		<Card className="md:w-[500px] min-h-[498px] px-0 py-0 font-sans z-10">
-			<Stack
-				direction={'row'}
-				alignItems={'center'}
-				className="p-6 rounded-3xl"
-				style={{
-					backgroundColor: 'rgba(255, 255, 255, 0.06)',
-				}}
-				gap={5}>
-				<div className="border-2 rounded-full overflow-hidden flex justify-center items-center p-1">
-					<Jazzicon diameter={88} seed={userAddress} />
-				</div>
-				<div className="text-xl ">{getShortenedAddress(userAddress)}</div>
-			</Stack>
-
-			<Stack className="m-8 font-sans" gap={3}>
-				{Object.entries(rewardByCategory).map(
-					([category, { reward, comment }]) => (
-						<Stack direction={'row'} justify={'space-between'} key={category}>
-							<Stack
-								direction={'row'}
-								alignItems={'center'}
-								className="opacity-50">
-								<div>{category}</div>
-								{category === 'Testnet' && reward === 0 && comment !== '' && (
-									<Tooltip
-										label={comment}
-										aria-label={comment}
-										hasArrow
-										className="font-sans opacity-50">
-										<InfoOutlineIcon />
-									</Tooltip>
-								)}
-							</Stack>
-							{reward > 0 ? (
-								<div>{addThousandSeparators(reward)}</div>
-							) : (
-								<div>-</div>
-							)}
-						</Stack>
-					)
-				)}
-			</Stack>
-
-			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
-				<Stack direction={'row'} justify={'space-between'} className="text-xl">
-					<div className="opacity-50">$DIVA</div>
-					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">You already claimed:</div>
-					<div>
-						{addThousandSeparators(
-							toStringFixed(claimedAmount, DIVA_TOKEN_DECIMALS, 4)
-						)}
-					</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Unclaimed amount:</div>
-					<div>{addThousandSeparators(UnclaimedAmount)}</div>
-				</Stack>
-				<Stack direction={'row'} justify={'space-between'}>
-					<div className="opacity-50">Claimable amount:</div>
-					<div>
-						{addThousandSeparators(
-							toStringFixed(claimableAmount, DIVA_TOKEN_DECIMALS, 4)
-						)}
-					</div>
-				</Stack>
-			</Stack>
-
-			<Stack className="m-8">
-				{chain?.unsupported ? (
-					<Button
-						primary
-						className="justify-center"
-						onClick={openChainModal}
-						style={{
-							backgroundImage: 'linear-gradient(to left, #EF4444, #F87171)',
-						}}>
-						{`Switch to Goerli`}
-					</Button>
-				) : (
-					<Button
-						primary
-						className="justify-center"
-						onClick={() => claim()}
-						disabled={claimableAmount.eq(0)}
-						isLoading={isClaiming}>
-						{'Claim'}
-					</Button>
-				)}
-			</Stack>
-		</Card>
-	)
-}
+import RewardPageBlobs from '../components/RewardPageBlobs'
+import TokenClaimInfo from '../components/TokenClaimInfo'
 
 const Rewards = () => {
 	const { address: userAddress } = useAccount()
 	const { chain } = useNetwork()
-	const { data: signer, isError, isLoading } = useSigner()
+	const { data: signer } = useSigner()
 	const [rewardInfo, setRewardInfo] = useState<any>({})
 	const [proof, setProof] = useState<string[]>([])
 	const [isClaiming, setIsClaiming] = useState<boolean>(false)
@@ -265,6 +38,7 @@ const Rewards = () => {
 	const [claimPeriodStarts, setClaimPeriodStarts] = useState<number>(0)
 	const [count, setCount] = useState<number>(0)
 	const toast = useToast()
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	useEffect(() => {
 		setCount((count) => count + 1)
@@ -343,6 +117,7 @@ const Rewards = () => {
 	// fetching the reward info from API
 	useEffect(() => {
 		const get = async () => {
+			setIsLoading(true)
 			const res = await fetch(`/api/rewards/${userAddress}`, {
 				method: 'GET',
 			})
@@ -350,7 +125,9 @@ const Rewards = () => {
 				const json = await res.json()
 				setRewardInfo(json.userReward)
 				setProof(json.proof)
+				setIsLoading(false)
 			}
+			setIsLoading(false)
 		}
 		if (isAddress(userAddress)) {
 			get()
@@ -443,66 +220,84 @@ const Rewards = () => {
 
 	return (
 		<PageLayout>
-			<Stack
+			<div
 				style={{
-					flexDirection: 'column',
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					alignContent: 'center',
-					color: 'white',
-					textAlign: 'center',
-					zIndex: 10,
-				}}
-				minHeight={['90vh']}
-				spacing={8}
-				marginTop={rewardInfo.reward !== '' ? 20 : 0}
-				className="overflow-hidden">
-				<div className="z-10">
-					<Stack className="justify-center items-center">
-						<Image
-							src="/icons/DivaTokenClaim.svg"
-							alt="diavToken"
-							height={128}
-							width={127}
-							className="mb-10"
+					position: 'relative',
+					zIndex: '1',
+				}}>
+				<Stack
+					style={{
+						flexDirection: 'column',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						alignContent: 'center',
+						color: 'white',
+						textAlign: 'center',
+						zIndex: 2,
+					}}
+					minHeight={['90vh']}
+					spacing={8}
+					marginTop={rewardInfo.reward !== '' ? 20 : 0}
+					className="overflow-hidden">
+					<div className="z-10">
+						<Stack className="justify-center items-center">
+							<Image
+								src="/icons/DivaTokenClaim.svg"
+								alt="diavToken"
+								height={128}
+								width={127}
+								className="mb-10"
+							/>
+						</Stack>
+						<Heading as="h2" size="lg">
+							$DIVA Token
+							<Highlight> Claim</Highlight>
+						</Heading>
+						{userAddress === undefined && (
+							<>
+								<Paragraph className="mt-8 opacity-60 ">
+									$DIVA is the governance token of DIVA Protocol. Connect your
+									wallet to determine your eligibility.
+								</Paragraph>
+							</>
+						)}
+					</div>
+					{isLoading ? (
+						<Skeleton
+							width={500}
+							height={498}
+							baseColor="#202020"
+							highlightColor="#444"
+							style={{
+								borderRadius: '12px',
+								opacity: '0.5', // 50% opacity
+							}}
+							className="bg-opacity-5"
 						/>
-					</Stack>
-					<Heading as="h2" size="lg">
-						$DIVA Token
-						<Highlight> Claim</Highlight>
-					</Heading>
-					{userAddress === undefined && (
+					) : (
 						<>
-							<Paragraph className="mt-8 opacity-60 ">
-								$DIVA is the governance token of DIVA Protocol. Connect your
-								wallet to determine your eligibility.
-							</Paragraph>
-						</>
-					)}
-				</div>
+							{userAddress !== undefined && rewardInfo == null && (
+								<div>
+									<Alert
+										status="error"
+										variant="subtle"
+										className="text-black rounded-xl">
+										<AlertIcon />
+										Connected account was not registered for the testnet
+									</Alert>
+								</div>
+							)}
 
-				{userAddress !== undefined && rewardInfo == null && (
-					<div>
-						<Alert
-							status="error"
-							variant="subtle"
-							className="text-black rounded-xl">
-							<AlertIcon />
-							Connected account was not registered for the testnet
-						</Alert>
-					</div>
-				)}
+							{userAddress !== undefined && rewardInfo.reward === '' && (
+								<div>
+									<div className="rounded-xl bg-[#472709] px-10 py-2 text-[#F2994A]">
+										{'You are not eligible. Reason: ' + rewardInfo.comment}
+									</div>
+								</div>
+							)}
 
-				{userAddress !== undefined && rewardInfo.reward === '' && (
-					<div>
-						<div className="rounded-xl bg-[#472709] px-10 py-2 text-[#F2994A]">
-							{'You are not eligible. Reason: ' + rewardInfo.comment}
-						</div>
-					</div>
-				)}
-
-				{/* {userAddress !== undefined &&
+							{/* {userAddress !== undefined &&
 					rewardInfo.reward !== undefined &&
 					rewardInfo.reward !== '' && (
 						<div>
@@ -537,65 +332,73 @@ const Rewards = () => {
 						</div>
 					)} */}
 
-				{userAddress !== undefined && rewardInfo.reward === undefined && (
-					<div>
-						<Alert
-							status="error"
-							variant="subtle"
-							className="text-black rounded-xl">
-							<AlertIcon />
-							<Paragraph>You were not registered</Paragraph>
-						</Alert>
-					</div>
-				)}
+							{userAddress !== undefined && rewardInfo.reward === undefined && (
+								<div>
+									<Alert
+										status="error"
+										variant="subtle"
+										className="text-black rounded-xl">
+										<AlertIcon />
+										<Paragraph>You were not registered</Paragraph>
+									</Alert>
+								</div>
+							)}
 
-				{userAddress !== undefined &&
-					rewardInfo.reward !== undefined &&
-					rewardInfo.reward !== '' && (
-						<TokenClaimInfo
-							userAddress={userAddress}
-							rewardInfo={rewardInfo}
-							claimable={claimable}
-							claim={claim}
-							isClaiming={isClaiming}
-							claimableAmount={claimableAmount}
-							claimedAmount={claimedAmount}
-						/>
-					)}
-
-				{userAddress !== undefined &&
-					rewardInfo.reward !== undefined &&
-					rewardInfo.reward !== '' && (
-						<Stack className="m-8 font-sans w-[100%] md:w-[450px]" gap={3}>
-							<Stack direction={'row'} justify={'space-between'}>
-								<div className="opacity-50">Subject to linear vesting</div>
-
-								{rewardInfo?.reward ? (
-									<div className="opacity-50">
-										{rewardInfo.time > 0
-											? addThousandSeparators(0.6 * rewardInfo.reward)
-											: addThousandSeparators(rewardInfo.reward)}
-									</div>
-								) : (
-									<div className="opacity-50">-</div>
+							{userAddress !== undefined &&
+								rewardInfo.reward !== undefined &&
+								rewardInfo.reward !== '' && (
+									<TokenClaimInfo
+										userAddress={userAddress}
+										rewardInfo={rewardInfo}
+										claim={claim}
+										isClaiming={isClaiming}
+										claimableAmount={claimableAmount}
+										claimedAmount={claimedAmount}
+									/>
 								)}
-							</Stack>
 
-							<Stack direction={'row'} justify={'space-between'}>
-								<div className="opacity-50">Vesting duration</div>
-								{/* Subject to linear vesting" is 60% * amount */}
-								{rewardInfo.time <= 0 ? (
-									<div className="opacity-50">-</div>
-								) : (
-									<div className="opacity-50">{`${rewardInfo.time / 31536000} ${
-										rewardInfo.time / 31536000 > 1 ? 'years' : 'year'
-									}`}</div>
+							{userAddress !== undefined &&
+								rewardInfo.reward !== undefined &&
+								rewardInfo.reward !== '' && (
+									<Stack
+										className="m-8 font-sans w-[100%] md:w-[450px]"
+										gap={3}>
+										<Stack direction={'row'} justify={'space-between'}>
+											<div className="opacity-50">
+												Subject to linear vesting
+											</div>
+
+											{rewardInfo?.reward ? (
+												<div className="opacity-50">
+													{rewardInfo.time > 0
+														? addThousandSeparators(0.6 * rewardInfo.reward)
+														: addThousandSeparators(rewardInfo.reward)}
+												</div>
+											) : (
+												<div className="opacity-50">-</div>
+											)}
+										</Stack>
+
+										<Stack direction={'row'} justify={'space-between'}>
+											<div className="opacity-50">Vesting duration</div>
+											{/* Subject to linear vesting" is 60% * amount */}
+											{rewardInfo.time <= 0 ? (
+												<div className="opacity-50">-</div>
+											) : (
+												<div className="opacity-50">{`${
+													rewardInfo.time / 31536000
+												} ${
+													rewardInfo.time / 31536000 > 1 ? 'years' : 'year'
+												}`}</div>
+											)}
+										</Stack>
+									</Stack>
 								)}
-							</Stack>
-						</Stack>
+						</>
 					)}
-			</Stack>
-			<RewardPageBlobs />
+				</Stack>
+				<RewardPageBlobs />
+			</div>
 		</PageLayout>
 	)
 }

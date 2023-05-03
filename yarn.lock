@@ -8982,6 +8982,11 @@ react-jazzicon@^1.0.4:
   dependencies:
     mersenne-twister "^1.1.0"
 
+react-loading-skeleton@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-loading-skeleton/-/react-loading-skeleton-3.3.0.tgz#c2470768308dc758d51586500a23a968d60ef13d"
+  integrity sha512-+jwXoz7hA3kyNHzRyz/vjZx8lA/Vt91f6zB8gaygFZY8eLvbZyQiJC4ckYPWxqvfp2OiiwSs/fXTbZ7NyL3IrQ==
+
 react-particles@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/react-particles/-/react-particles-2.5.3.tgz#eb6d50e98054c74bc523aacb7cfa37d1c106c237"
