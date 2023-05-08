@@ -1,16 +1,19 @@
 import { InfoOutlineIcon } from '@chakra-ui/icons'
-import { Stack, Tooltip } from '@chakra-ui/react'
+import { Stack, Tooltip, useToast } from '@chakra-ui/react'
 import { useChainModal } from '@rainbow-me/rainbowkit'
 import { useState, useEffect } from 'react'
 import Jazzicon from 'react-jazzicon'
 import { useNetwork } from 'wagmi'
+import { fetchToken } from '@wagmi/core'
 
-import { DIVA_TOKEN_DECIMALS } from '../constants'
+import { DIVA_TOKEN_DECIMALS, config } from '../constants'
 import { toStringFixed, addThousandSeparators } from '../util/bn'
 import { getShortenedAddress } from '../util/getShortenedAddress'
 import { Card } from './ui/Card'
 import { RewardObject } from '../types/index'
 import { Button } from './ui/Button'
+import Image from 'next/image'
+import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 
 const TokenClaimInfo = ({
 	userAddress,
@@ -53,6 +56,8 @@ const TokenClaimInfo = ({
 	)
 	const { chain } = useNetwork()
 	const { openChainModal } = useChainModal()
+	const connector = new MetaMaskConnector()
+	const toast = useToast()
 
 	// merging same category into one
 	function mergeRewardsByCategory(arr: RewardObject[]): RewardObject[] {
@@ -66,6 +71,42 @@ const TokenClaimInfo = ({
 			}
 		}
 		return Object.values(merged)
+	}
+
+	const handleAddMetaMask = async () => {
+		const token = await fetchToken({
+			address: config[chain.id].divaToken as any,
+		})
+
+		const provider = await connector.getProvider()
+
+		try {
+			await provider.request({
+				method: 'wallet_watchAsset',
+				params: {
+					type: 'ERC20',
+					options: {
+						address: token.address,
+						symbol: token.symbol,
+						decimals: token.decimals,
+						image:
+							'https://res.cloudinary.com/dphrdrgmd/image/upload/v1641730802/image_vanmig.png',
+					},
+				} as any,
+			})
+		} catch (error) {
+			if (error?.code === 4001) {
+				toast({
+					title: 'User rejected the request.',
+					status: 'error',
+					position: 'bottom-right',
+					duration: 4000,
+					isClosable: true,
+					variant: 'top-accent',
+				})
+			}
+			console.error('Error in HandleAddMetaMask', error)
+		}
 	}
 
 	useEffect(() => {
@@ -140,7 +181,19 @@ const TokenClaimInfo = ({
 
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
 				<Stack direction={'row'} justify={'space-between'} className="text-xl">
-					<div className="opacity-50">$DIVA</div>
+					<div className="opacity-50 flex gap-2">
+						$DIVA
+						<Tooltip label="Add to metamask">
+							<button onClick={() => handleAddMetaMask()}>
+								<Image
+									src="/icons/AddIcon.svg"
+									alt="add-icons"
+									width={18}
+									height={18}
+								/>
+							</button>
+						</Tooltip>
+					</div>
 					<div>{addThousandSeparators(rewardInfo.reward.toFixed(1))}</div>
 				</Stack>
 				<Stack direction={'row'} justify={'space-between'}>
