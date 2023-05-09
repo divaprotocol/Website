@@ -15,9 +15,12 @@ export enum SupportedChainId {
 export const config = {
   [SupportedChainId.MAINNET]: {
     claimDivaLinearVestingAddress: "",
+    divaToken: ''
+
   },
   [SupportedChainId.GOERLI]: {
     claimDivaLinearVestingAddress:
       "0x2758f311a61e84A3b4305962E10C9393d89128C8",
+    divaToken: '0xcA68992Db9d413eAd58Bd73e84E4997537C879F9'
   },
 };
