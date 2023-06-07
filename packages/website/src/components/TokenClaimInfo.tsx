@@ -227,7 +227,7 @@ const TokenClaimInfo = ({
 						style={{
 							backgroundImage: 'linear-gradient(to left, #EF4444, #F87171)',
 						}}>
-						{`Switch to Goerli`}
+						{`Switch to Sepolia`}
 					</Button>
 				) : (
 					<Button
