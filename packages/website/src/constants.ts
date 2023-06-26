@@ -9,18 +9,18 @@ export const ZERO_BIGNUMBER = BigNumber.from(0);
 
 export enum SupportedChainId {
   MAINNET = 1,
-  GOERLI = 5,
+  SEPOLIA = 11155111,
 }
 
 export const config = {
   [SupportedChainId.MAINNET]: {
-    claimDivaLinearVestingAddress: "",
-    divaToken: ''
+    claimDivaLinearVestingAddress: "0x0EA38F96D25FD7eaEe04E5Be0CDD1E196FEa312C",
+    divaToken: '0x4B7fFCB2b92fB4890f22f62a52Fb7A180eaB818e'
 
   },
-  [SupportedChainId.GOERLI]: {
+  [SupportedChainId.SEPOLIA]: {
     claimDivaLinearVestingAddress:
-      "0x2758f311a61e84A3b4305962E10C9393d89128C8",
-    divaToken: '0xcA68992Db9d413eAd58Bd73e84E4997537C879F9'
+      "0x703c35da76f9B5bB0ca1BB55B9C22b2F41bAB252",
+    divaToken: '0x4B7fFCB2b92fB4890f22f62a52Fb7A180eaB818e'
   },
 };
