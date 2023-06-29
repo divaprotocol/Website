@@ -85,7 +85,7 @@ export default async function handler(
   const resUserReward = {
     address: userTokenClaim.address,
     reward:
-      Number(toStringFixed(userTokenClaim.amount, DIVA_TOKEN_DECIMALS, 8)),
+      Number(toStringFixed(userTokenClaim.amount, DIVA_TOKEN_DECIMALS, 9)),
     time: userTokenClaim.time
   }
 
