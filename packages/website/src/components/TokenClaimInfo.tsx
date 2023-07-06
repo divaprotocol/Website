@@ -14,6 +14,7 @@ import { RewardObject } from '../types/index'
 import { Button } from './ui/Button'
 import Image from 'next/image'
 import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
+import constants from '../constants/index'
 
 const TokenClaimInfo = ({
 	userAddress,
@@ -182,7 +183,13 @@ const TokenClaimInfo = ({
 			<Stack className="m-8 mt-4 border-t-[1px] pt-6 border-white/5" gap={3}>
 				<Stack direction={'row'} justify={'space-between'} className="text-xl">
 					<div className="opacity-50 flex gap-2">
-						$DIVA
+						<div
+							className="cursor-pointer"
+							onClick={() => {
+								navigator.clipboard.writeText(constants.divaTokenAddress)
+							}}>
+							<Tooltip label={constants.divaTokenAddress}>$DIVA</Tooltip>
+						</div>
 						<Tooltip label="Add to metamask">
 							<button onClick={() => handleAddMetaMask()}>
 								<Image

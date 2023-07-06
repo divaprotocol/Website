@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Grid } from '@chakra-ui/react'
 import constants from '../../constants/index'
-import { motion } from 'framer-motion'
 
 export function Footer() {
 	return (
@@ -80,7 +79,7 @@ export function Footer() {
 }
 
 const SocialMediaContainer = () => (
-	<Stack vertical>
+	<Stack vertical className="items-center">
 		<a target={'_blank'} rel="noreferrer" href={constants.twitterLink}>
 			<Image src="/logos/twitter.svg" height="24" width="24" alt="Twitter" />
 		</a>
@@ -89,6 +88,9 @@ const SocialMediaContainer = () => (
 		</a>
 		<a target={'_blank'} rel="noreferrer" href={constants.githubLink}>
 			<Image src="/logos/github.svg" height="22" width="22" alt="Github" />
+		</a>
+		<a target={'_blank'} rel="noreferrer" href={constants.mailLink}>
+			<Image src="/logos/mail.svg" height="32" width="32" alt="mail" />
 		</a>
 	</Stack>
 )
