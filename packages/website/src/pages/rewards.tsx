@@ -257,7 +257,7 @@ const Rewards = () => {
 						{userAddress === undefined && (
 							<>
 								<Paragraph className="mt-8 opacity-60 ">
-									$DIVA is the governance token of DIVA Protocol. Connect your
+									<a href="https://etherscan.io/token/0x4b7ffcb2b92fb4890f22f62a52fb7a180eab818e" style={{ color: '#14b8a6' }}>$DIVA</a> is the governance token of DIVA Protocol. Connect your
 									wallet to determine your eligibility.
 								</Paragraph>
 							</>
