@@ -2,9 +2,9 @@
 title: DIVA App Launch
 description: DIVA App Launch
 date: 2023-07-11T18:37:00.284Z
-coverImage: diva_token.png
+coverImage: diva_app_layouts2.jpg
 coverImageDescription: DIVA App Launch
-coverImageWidth: 1500
+coverImageWidth: 800
 coverImageHeight: 600
 author: Walodja1987
 ---
@@ -19,8 +19,8 @@ This blog post covers everything you need to know about the DIVA App.
 
 The DIVA App is harnessing the power of decentralized finance by combining three protocols to offer users a seamless and fully trustless 
 experience for managing the entire lifecycle of derivative contracts:
-1. [DIVA Protocol](https://www.divaprotocol.io/) - for the creation and settlement of derivative markets
-2. [0x Protocol](https://0x.org/) - for trading the corresponding derivative assets
+1. [DIVA Protocol](https://www.divaprotocol.io/) - for the creation and settlement of derivative contracts
+2. [0x Protocol](https://0x.org/) - for trading the corresponding derivative positions
 3. [Tellor Protocol](https://tellor.io/) - for outcome reporting
 
 The best part is that users retain full custody of their assets at all times, unlike centralized solutions.
@@ -31,10 +31,8 @@ DIVA Protocol offers unparalleled customization options when it comes to creatin
 With DIVA Protocol, users have the freedom to select virtually any metric as the underlying and can choose from a diverse 
 range of payoff profiles including different slopes, barriers, and ranges.
 
-Head over to the [Create](https://app.diva.finance/Create) to discover the flexibility.
-
-DIVA Protocol offers two types for market creation:
-* **Pre-funded** (“CREATE POOL”): By fully funding the derivative contract, the creator receives both position tokens, 
+DIVA Protocol offers two ways for creating derivative contracts / markets:
+* **Pre-funded** (“CREATE POOL”): With this option, the creator of the derivative contract fully funds the contract and receives both position tokens - LONG and SHORT - in return, 
 rendering them fully hedged. This option is useful for market makers seeking to provide liquidity on both sides 
 of the derivative market.
 * **Priced offer** (“CREATE OFFER”): In this option, the creator specifies the contribution from each party 
@@ -42,6 +40,8 @@ to the derivative contract and commits to the offer terms by signing it with the
 off-chain process. The derivative contract is created on-chain only if a counterparty is found, thereby 
 optimizing gas efficiency for users. This functionality particularly caters to use cases centered around 
 bets and predictions.
+
+Head over to the [Create](https://app.diva.finance/Create) page in the DIVA App to try it out yourself.
 
 <p align="center">
   <img src="/images/posts/step1_create_offer.png" />
@@ -76,7 +76,7 @@ The DIVA App is using 0x Protocol, a decentralized limit order protocol, to faci
 Leveraging an off-chain matching mechanism and an on-chain settlement process, users can create limit orders without 
 incurring any gas fees (note that approving token transfers may involve a one-time gas cost, though).
 
-One of the key advantages of using 0x Protocol for trading is that users retain full custody of their assets, unlike centralized solutions.
+Check out one example market [here](https://app.diva.finance/0xe70276f9f60b4b81f920b1b0416e7aa4c671ad829dc5b7ec8228a48d090b5635/long).
 
 <p align="center">
   <img src="/images/posts/diva_app_trading.png" />
@@ -100,14 +100,6 @@ limited to BTC/USD, ETH/USD and TRB/USD, with the Tellor adapter as the only ora
 The team plans to extend the range of underlyings based on community feedback over time. Users that wish to 
 create custom markets on Polygon should reach out in our [Discord](https://discord.gg/8fAvUspmv3).
 
-## ⚓ Open-source Development
-
-The DIVA App is [open-source](https://github.com/divaprotocol/diva-monorepo/tree/main/packages/diva-app), inviting developers to contribute to the existing repository or draw inspiration 
-for building similar applications on top of the DIVA Protocol.
-
-If you're interested in contributing to the DIVA App, we encourage you to reach out in our [Discord](https://discord.gg/8fAvUspmv3) and get involved 
-in our development community. Collaborate, share ideas, and be a part of shaping the future of decentralized finance.
-
 ## 🔒 Decentralized frontend hosting
 
 Many Web3 frontends are hosted on centralized platforms like Vercel, which exposes them to various risks such as censorship, phishing, and DNS hacks. To eliminate those risks, the DIVA App frontend
@@ -121,6 +113,14 @@ Each release of the DIVA App is associated with a unique IPFS hash, providing a 
 New releases of the DIVA App will be associated with different IPFS hashes, which we will regularly publish. 
 To improve the user experience, the dAppling team is actively working on a solution to provide a stable naming system using IPNS, ensuring even easier access to the IPFS version of the DIVA App in the future.
 
+## ⚓ Open-source Development
+
+The DIVA App is [open-source](https://github.com/divaprotocol/diva-monorepo/tree/main/packages/diva-app), inviting developers to contribute to the existing repository or draw inspiration 
+for building similar applications on top of DIVA Protocol.
+
+If you're interested in contributing to the DIVA App, we encourage you to reach out in our [Discord](https://discord.gg/8fAvUspmv3) and get involved 
+in our development community. Collaborate, share ideas, and be a part of shaping the future of decentralized finance.
+
 ## 🛣️ What’s Next?
 
 In the upcoming weeks, we have exciting plans to launch diverse derivative markets, engaging our community and 
@@ -133,13 +133,11 @@ If you encounter any challenges while exploring the app, don't hesitate to reach
 
 ## 🌔 Conclusion
 
-The mainnet launch of DIVA Protocol opened up new possibilities in the world of decentralized finance. With the introduction of the DIVA App, users can now fully 
-unlock and explore the features and capabilities that DIVA Protocol has to offer. 
-Whether you're an individual seeking to create and trade derivative contracts or a crypto platform looking to expand your client offerings, the DIVA App empowers 
-you to embrace the potential of decentralized finance. 
+With the launch of the DIVA App, users can now fully unlock the possibilities offered by DIVA Protocol. 
+Whether you're an individual seeking to create and trade derivatives or a business seeking to expand your service offerings with bespoke derivative solutions, 
+the DIVA App is your gateway to a secure and non-custodial derivatives platform.
 
-The DIVA App represents just one example of the diverse range of applications that can be built on top of DIVA Protocol. Join us on this exciting 
-journey and help us to unlock a world of innovative financial applications.
+The DIVA App marks the beginning of an exciting journey. Join us and help us unlock a world of innovative derivative financial applications fueled by DIVA Protocol. 🚀
 
 ## 📃 Disclaimer
 
