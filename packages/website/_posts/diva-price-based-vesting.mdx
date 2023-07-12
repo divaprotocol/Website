@@ -1,0 +1,82 @@
+---
+title: Price-based vesting - Powered by DIVA Protocol
+description: Price-based vesting - Powered by DIVA Protocol
+date: 2023-07-08T13:37:00.284Z
+coverImage: diva_token.png
+coverImageDescription: Price-based vesting - Powered by DIVA Protocol
+coverImageWidth: 1500
+coverImageHeight: 600
+author: Walodja1987
+---
+
+**TLDR;** this article presents a novel price-based vesting approach leveraging DIVA Protocol. The goal is to achieve a more balanced token 
+market activity after listing and to improve the alignment of incentives among different project stakeholders.
+
+<p align="center">
+  <img src="/images/posts/drake_meme_vesting.png" />
+</p>
+
+Vesting has emerged as a crucial element in token distribution models, enabling the gradual release of investor and funding team token 
+allocations over a predetermined period. The primary objective of vesting is to manage sell pressure in the market by spreading it 
+out over an extended timeframe.
+
+While time-based vesting appears sound in theory, it assumes that buy demand will sufficiently counterbalance increasing sell pressure 
+over time. If a token fails to gain traction, the price will decline. 
+
+A more effective approach to vesting involves basing it on the project's token price. Under this model, tokens are unlocked only when 
+the price surpasses a specific level. This means that **sell demand becomes linked to realized buy demand**. The unlocking process occurs 
+at regular intervals, such as once a month, based on an oracle-reported outcome such as the average price during the designated period. 
+Any unreleased tokens would automatically roll over for an additional month.
+
+## ⚙️ Implementation
+
+The implementation of a price-based vesting can be realized by a simple smart contract, referred to as “vesting contract” in the following, 
+that interfaces with [DIVA Protocol](https://www.divaprotocol.io/), a highly versatile smart contract-based system for creating and 
+managing derivative contracts peer-to-peer.
+
+The envisaged process is as follows:
+* **Funding:** The vesting contract is funded with the project’s token.
+* **Specifying unlock conditions:** The project team specifies the price-based payout conditions, observation period, and the oracle 
+responsible for reporting the outcome (e.g., the existing integration with Tellor Protocol). These payout conditions can be static or 
+dynamically adjusted over time following predetermined patterns.
+* **Token unlock:** The vesting contract deposits the project tokens into the DIVA Protocol smart contract and releases the payout 
+associated with the LONG side of the contingent pool - the side that benefits from an upward movement in the token's price - to the 
+eligible parties upon price reporting by the oracle.
+* **Roll:** Any unreleased payout, as represented by the SHORT side of the contingent pool, is re-deposited into DIVA Protocol and 
+released in the same manner after the specified observation period. This process continues until there are no tokens remaining to roll.
+
+A couple of technical considerations that are worth noting:
+* As the eligible parties are not holding any SHORT or LONG position tokens directly, the issuance of new position tokens 
+resulting from rolling unreleased tokens into a new contingent pool is not a problem.
+* The parties eligible for payout claims can be stored within a mapping inside the vesting contract or derived based on the more gas-efficient 
+approach of using Merkle proofs, particularly useful for a large number of participants.
+* The rolling of the unreleased tokens into a new contingent pool may be triggered automatically when the first party claims their payout from the vesting contract.
+* Payouts that remain unclaimed in one period will accrue to the next period.
+
+## ✨ Key benefits
+
+* **Balanced market:** The price-based vesting model ensures a more balanced and healthy token market by allowing tokens to be sold only after there is realized buy demand.
+* **Long-term oriented:** By linking token unlockings to the token success, the price-based vesting model incentivizes project stakeholders to remain engaged and committed for the long term.
+* **Market maker protection:** Price-based vesting provides protection against large token sell-offs, enabling a favorable environment for market makers, including liquidity providers 
+in automated market makers (AMMs). This protection incentivizes market makers to offer increased liquidity, enhancing the overall market depth.
+
+## 🪡 Risks
+
+* **Miscalibration:** Tying payouts to overly ambitious price targets may result in no payout for project stakeholders. Careful consideration of achievable price levels is essential.
+* **Extended lock-up:** Despite setting realistic price targets initially, a bear market can extend the lock-up period for tokens, keeping them locked for longer than 
+anticipated. Incorporating a dynamic approach to the payout conditions may be used to respond to changing market conditions.
+
+## 🌔 Conclusion
+
+The adoption of a price-based vesting model represents an innovative and market-driven approach to token unlocking. By aligning incentives and fostering a 
+sustainable ecosystem that grows in accordance with buy demand, this model promotes a balanced and healthy token market. We firmly believe that this use case 
+holds significant potential for numerous projects seeking to enhance the alignment of incentives among project stakeholders and ensure a successful token launch.
+
+
+## 🔗 Links
+
+- 🌐 Website: [divaprotocol.io/](https://www.divaprotocol.io/)
+- 🍏 Github: [github.com/divaprotocol/diva-protocol-v1](https://github.com/divaprotocol/diva-protocol-v1)
+- 📚 Docs: [docs.divaprotocol.io/](https://docs.divaprotocol.io/)
+- 🦜 Twitter: [twitter.com/divaprotocol_io](https://twitter.com/divaprotocol_io)
+- 🤖 Discord: [discord.gg/8fAvUspmv3](https://discord.gg/8fAvUspmv3)
