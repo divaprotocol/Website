@@ -1,0 +1,153 @@
+---
+title: Introducing the ETH Gas Price Market - Hedging Against Rising Gas Costs
+description: Introducing the ETH Gas Price Market - Hedging Against Rising Gas Costs
+date: 2023-07-19T21:00:00.284Z
+coverImage: eth_gas_market_header.png
+coverImageDescription: ETH Gas Market
+coverImageWidth: 1500
+coverImageHeight: 600
+featured: true
+author: Walodja1987
+---
+
+**TL;DR: This article introduces an innovative product that offers insurance against rising gas costs on Ethereum, powered by DIVA Protocol.**
+
+Gas serves as the fuel that powers the Ethereum ecosystem. With each transaction conducted on the Ethereum network, users are required to pay 
+for the consumption of gas. However, the price of gas is far from stable and fluctuates based on transaction demand. In times of heightened 
+economic activity, gas prices soar, placing a burden on network participants. 
+
+Recognizing the need for a solution to offset the rising gas costs, we are proud to introduce the ETH Gas Price market, an innovative solution 
+powered by [DIVA Protocol](https://www.divaprotocol.io/) that offers network participants insurance coverage against rising gas prices.
+
+## ⛽ Understanding Gas on Ethereum
+
+Gas is a metric that quantifies the computational effort needed to execute transactions on the Ethereum network. The amount of gas required 
+depends on the complexity of the transaction. Simple transfers demand less gas compared to more complex operations. Gas prices are denominated 
+in Gwei, which represents a fraction (1e-9) of Ether, Ethereum’s native currency.
+
+The Ethereum network imposes a limit on the amount of gas available for each block, currently set at 
+[30 million](https://ycharts.com/indicators/ethereum_average_gas_limit#:~:text=Ethereum%20Average%20Gas%20Limit%20is,0.01%25%20from%20one%20year%20ago.). 
+This capacity restriction causes the gas price to fluctuate based on the level of economic activity within the network.
+
+The chart below illustrates the average gas price per month, starting from 2019 (Source: [Etherscan](https://etherscan.io/chart/gasprice) as of 11 July 2023):
+
+<p align="center">
+  <img src="/images/posts/historical_eth_gas_price_monthly.png" />
+</p>
+
+
+In 2019, the average gas price was around 16 Gwei. The “DeFi summer”, that started in the second half of 2020, brought unprecedented activity, 
+leading to a significant surge in monthly gas prices, reaching levels between 50 and 190 Gwei for the most part. The collapse of LUNA, 3AC, 
+and FTX in the second half of 2022 sent shockwaves throughout the crypto space, leading to a decline in economic activity on Ethereum and a 
+retreat of gas prices to the range of 20 to 30 Gwei, which has persisted until the present day.
+
+On a daily basis, gas prices may exhibit more significant fluctuations, typically as the result of increased transaction activity surrounding 
+highly anticipated events, such as long-awaited NFT mints or token sales, or liquidations. This is demonstrated in the chart below for the same 
+period (Source: [Etherscan](https://etherscan.io/chart/gasprice) as of 11 July 2023):
+
+<p align="center">
+  <img src="/images/posts/historical_eth_gas_price_daily.png" />
+</p>
+
+## 🤕 Problem
+
+The increasing costs of gas on the Ethereum network have substantial implications for frequent users. One notable example are centralized 
+exchanges that process thousands of on-chain withdrawals on a daily basis.
+
+According to data from [Nansen](https://pro.nansen.ai/gas-tracker) as of 19th July 2023, Binance, one of the largest crypto exchanges, has incurred a total of 320 ETH in fees 
+in processing withdrawals over a 7-day period. This equates to approximately $600,000 per week and extrapolates to $2,400,000 per month.
+
+<p align="center">
+  <img src="/images/posts/gas_spender_entities.png" />
+</p>
+
+These figures are significant considering the current low fee environment where gas fees range between 20 and 30 Gwei. During times of heightened network 
+congestion where gas fees can spike to levels of 50-100 Gwei or even higher, these amounts can quickly escalate.
+
+To accurately reflect actual cost, centralized exchanges regularly [update their withdrawal fees](https://www.binance.com/en/feed/post/513097) to align with the prevailing fees on the network. However, 
+frequent adjustments and, notably, significant increases in fees, such as those observed in [2018](https://coingape.com/binance-raises-gas-price-on-withdrawals/) and 
+[2020](https://cointelegraph.com/news/binance-doubles-eth-withdraw-fees-firing-up-crypto-traders) by Binance, are generally unpopular with users and 
+can result in challenges in attracting new clients. In addition, withdrawal fee increases coupled with the inherent volatility of fees poses a risk of overcharging 
+clients, further contributing to their dissatisfaction.
+
+## 💡 Solution
+
+To address the challenge of fluctuating gas costs, an effective solution is the introduction of an insurance product that provides compensation to users 
+when the gas price exceeds a predetermined threshold, thereby stabilizing overall costs and mitigating risks associated with price spikes.
+
+The following chart illustrates an example product with a linearly increasing coverage payout in the range of 50 to 100 Gwei:
+
+<p align="center">
+  <img src="/images/posts/payoff_eth_gas_insurance_taker.png" />
+</p>
+
+By purchasing this insurance product, network participants such as Binance can effectively offset 
+increasing gas costs within that range. This reduces the need for frequent updates to withdrawal fees in response to gas price spikes, providing stability and predictability 
+for both Binance and its users.
+
+## 🤝 Counterparties
+
+To enable insurance coverage, there needs to be a party, known as the "insurer", who is willing to provide insurance cover of up to $1 per contract in exchange for a premium. 
+
+Visually, the insurer's payoff is the reverse of the insurance taker's and is illustrated in the chart below:
+
+<p align="center">
+  <img src="/images/posts/payoff_eth_gas_insurer.png" />
+</p>
+
+The following market participants may serve as natural counterparties to insurance buyers:
+* **Validators:** Ethereum validators anticipating low gas prices can sell their potential upside participation in the event of increased network activity and higher gas fees. 
+If gas prices remain low, validators retain the premium received from selling the insurance cover. If the gas price surges, the increased revenue from gas fees will be offset 
+by a loss in their position, thereby limiting their upside potential.
+* **Yield seekers:** Individuals who believe that the bear market will continue and economic activity on Ethereum will remain low.
+
+
+## 📈 Market creation
+
+DIVA Protocol was used to launch the first ETH Gas price market with the following specification:
+* **Underlying:** The arithmetic mean of the [average daily gas prices](https://etherscan.io/chart/gasprice) on Ethereum in Gwei during the specified timeframe, starting from the calendar day associated with 
+the start time and ending on the day before the calendar day associated with the end time. _Note: The underlying description is stored as a json file on 
+[IPFS](https://bafybeid7w5h37ofgdyxf4zplvdvh6dfzdhehijabbnwsevyaa2ayehd5vi.ipfs.w3s.link/ETH-AvgDailyGasPrice%20(in%C2%A0Gwei).json) and referenced as the reference asset in DIVA Protocol._
+* **Payoff:** Linear in the range of 50-100 Gwei
+* **Duration:** 1 month
+* **Start time:** 19 July 2023, xxx UTC
+* **End time:** 19 August 2023, xxx UTC
+* **Oracle:** [Tellor protocol](https://github.com/divaprotocol/oracles/blob/main/docs/Tellor.md)
+Collateral asset: USDT
+Network: Polygon
+
+Each side of the market (insurance taker and insurer) is represented by an ERC20 token, allowing for seamless integration and tradability within existing decentralized infrastructures. 
+The DIVA App serves as a user-friendly platform for trading these insurance contracts, powered by the 0x Protocol, a decentralized limit order book protocol.
+
+Users who are interested in purchasing insurance coverage can either fill existing sell orders (Ask) or place their own limit orders (Bid) in the LONG token market. [Add link]
+
+<p align="center">
+  <img src="/images/posts/eth_gas_price_trade_page_long.png" />
+</p>
+
+Users who are interested in providing insurance coverage can either fill existing sell orders (Ask) or place their own limit orders (Bid) in the SHORT token market. [Add link]
+
+<p align="center">
+  <img src="/images/posts/eth_gas_price_trade_page_short.png" />
+</p>
+
+
+## 🌔 Conclusion
+
+The introduction of the ETH Gas Price market on DIVA Protocol brings much-needed relief to Ethereum users affected by rising gas costs. By offering an insurance product as 
+a hedge against gas price fluctuations, DIVA Protocol empowers projects and individuals to protect themselves from the financial burden associated with on-chain operations.
+
+
+## 📃 Disclaimer
+
+The ETH Gas Price market is designed to offer insurance coverage and hedging options to users. As with any financial instrument, participants should conduct their own research 
+and exercise caution when engaging in trading activities. DIVA Protocol does not guarantee any specific outcomes or returns and encourages users to make informed decisions 
+based on their own risk tolerance and objectives.
+
+## 🔗 Links
+
+- 🌐 Website: [divaprotocol.io/](https://www.divaprotocol.io/)
+- 🍏 Github: [github.com/divaprotocol/diva-protocol-v1](https://github.com/divaprotocol/diva-protocol-v1)
+- 📚 Docs: [docs.divaprotocol.io/](https://docs.divaprotocol.io/)
+- 🦜 Twitter: [twitter.com/divaprotocol_io](https://twitter.com/divaprotocol_io)
+- 🤖 Discord: [discord.gg/8fAvUspmv3](https://discord.gg/8fAvUspmv3)
