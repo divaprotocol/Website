@@ -1,0 +1,195 @@
+---
+title: DIVA Donate completes pilot campaign with Mercy Corps Ventures
+description: DIVA Donate - Reflections on the pilot, the outcome and the key learnings.
+date: 2024-01-15T08:00:00.284Z
+coverImage: arid-mud-landscape-broken-tree-sunset-season-generated-by-ai.jpg
+coverImageDescription: Pastoralists
+coverImageWidth: 1200
+coverImageHeight: 400
+featured: true
+author: Walodja1987
+---
+
+**TL;DR: The [pilot campaign with pastoralists in Kenya](https://www.divaprotocol.io/posts/diva-conditional-donations-mcv-pilot), 
+launched in October on [DIVA Donate](https://www.divadonate.xyz/) in collaboration with Mercy Corps Ventures, has ended on 1st January 2024.
+A total of USD 11’271 (net of all costs), or 56% of the deposited funds, were released and distributed to 262 pastoralists as financial support 
+ahead of the upcoming dry season. This article reflects on the pilot, the outcome and the key learnings.**
+
+To recap, the goal of the pilot was to leverage blockchain technology to provide anticipatory cash transfers to pastoralists in Kenya, 
+specifically in the counties of Kajiado and Laikipia, in the event that the vegetation growth during the rainy season in October-November-December 
+2023 is deemed insufficient to provide necessary pasture for livestock in the coming dry season.
+
+To measure the vegetation level, the average [Normalized Difference Vegetation Index](https://en.wikipedia.org/wiki/Normalized_difference_vegetation_index) (NDVI) was used (shifted by 1 for technical reasons). 
+Higher NDVI values indicate a greater density of healthy vegetation, while lower values indicate drought stress. The following donation 
+profiles were [calibrated](https://www.divaprotocol.io/posts/diva-donate-trigger-selection-methodology) for the two counties based on historical data.
+
+<p align="center">
+  <img src="/images/posts/payoff_profile_kajiado.jpg" />
+</p>
+
+<p align="center">
+  <img src="/images/posts/payoff_profile_laikipia.jpg" />
+</p>
+
+## 💰 Deposits
+
+A total of USDT 20’235 were deposited into the campaign, which were automatically split 50/50 between the two programmatic 
+escrows created for each county. Thereof, USDT 20’000 was provided by Mercy Corps Ventures and the remainder by 10 external participants.
+
+A post-deposit survey revealed that users were satisfied with the overall donation experience on DIVA Donate, providing an average rating of 9.6 out of 10.0. 
+
+>Super experience, well done, really! Makes you want more. 
+This is how donating is fun and meaningful.” - Florian
+
+As a token of appreciation, depositors received a digital certificate (so-called POAP) to commemorate their contribution which they can view [here](https://collectors.poap.xyz/en-us/scan). 
+Donations of $75 or more received the golden-ring POAP. Smaller contributions were rewarded with the silver POAP.
+
+<p align="center">
+  <img src="/images/posts/poap_pastoralists_mcv.png" />
+</p>
+
+
+
+## 💧 Outcome reporting
+
+On 2nd January 2024, shortly after midnight between 02:19:37 AM and 02:21:54 AM UTC, the [Shamba oracle](https://shamba.network/) automatically reported the following average NDVIs for the two counties:
+* [1.4771](https://polygonscan.com/tx/0xe79e39fe3840283a5e8583340239fa85391a4ad91ea370db1b21e2aaa8234c63) for Kajiado
+* [1.5136](https://polygonscan.com/tx/0xd338cf26a515dae31baf3a9bf7083f3d784b5d2b09038e42e0f12809798b4697) for Laikipia
+
+According to the defined payoff profiles, this resulted in a donation amount of [USDT 1’657.05](https://polygonscan.com/tx/0xd8d48752af1dd2f8731b2673f7bc78b295523d90350a1901f95fa4bf6a7d5333) 
+(16.43% of deposited funds) for Kajiado and [USDT 10’087.35](https://polygonscan.com/tx/0xd8d48752af1dd2f8731b2673f7bc78b295523d90350a1901f95fa4bf6a7d5333) (100% of deposited funds) for 
+Laikipia (net of 0.25% DIVA Protocol fee and 0.05% reporting reward, gross of mPesa transfer and currency exchange costs). 
+
+The remaining USDT 8’430.31 can be claimed back by participants from the [DIVA Donate website](https://www.divadonate.xyz/) and redeployed into future campaigns. In particular, any unreleased funds from Mercy Corps Ventures as well as the DIVA Protocol fee and reporting reward of USDT 60.71 will be rolled into the next campaign planned for the March-April-May rainy season.
+
+## 🪙 Fund disbursement
+
+The funds held within DIVA Protocol were made available shortly after midnight on 5th January, following the completion of the 3-day dispute period post-reporting. 
+During this period, the accuracy of the reported data was verified and no objections were raised.
+
+On the same day between 06:51:09 PM and 06:51:25 PM UTC, approximately 14.5 hours after the funds were released in DIVA Protocol, the funds were disbursed to 
+eligible pastoralists via mPesa, Kenya’s mobile payment system. Compared to our [7-10 days baseline](https://www.fao.org/3/cc5062en/cc5062en.pdf), this represents a 
+**>90% faster fund distribution compared to traditional methods**. The time lag between fund release and disbursement can be further improved by 
+aligning the oracle reporting time with daytime hours.
+
+
+## 🍀 Beneficiaries
+
+At the outset of the campaign, local village champions registered 297 pastoralists. After the removal of duplicate entries and the exclusion of individuals 
+without an mPesa mobile wallet or livestock, the total number reduced to 266 eligible pastoralists, in line with the pilot’s target. Out of 266 attempted 
+disbursements via mPesa, four failed due to unregistered mPesa numbers. Consequently, the final disbursement reached 262 pastoralists, broken down as follows:
+
+<p align="center">
+  <img src="/images/posts/table_participating_pastoralists_mcv.png" />
+</p>
+
+The total disbursement amounted to **KES 1'724'463 (USD 11'271)**, with an mPesa transfer cost of KES 2'589.00 (USD 16.92) and a currency exchange cost of KES 33'580.44 (USD 219.48). 
+The unspent balance of KES 36'261 (USD 237) from the four unregistered numbers will be rolled into the subsequent campaign starting in March.
+Before the mPesa disbursement, each pastoralist received a notification message SMS in [Swahili](https://en.wikipedia.org/wiki/Swahili_language), translating to: _"Dear Pastoralist, DIVA Donate is 
+pleased to let you know, you qualify for a donation to buy fodder. Pasture levels between Oct to Dec '23 fell below our trigger."_
+
+## 📊 Outcome Analysis
+The payout presented a surprise, considering the robust rainfall attributed to the El Niño phenomenon over the last couple of weeks. In fact, NDVI levels recorded in December 
+reached 12-year highs for both counties. This is illustrated in the following charts which compare the October-November-December 2023 data (pink line) with previous years. 
+
+<p align="center">
+  <img src="/images/posts/outcome_ndvi_kajiado_mcv.png" />
+</p>
+
+<p align="center">
+  <img src="/images/posts/outcome_ndvi_laikipia_mcv.png" />
+</p>
+
+The main reason identified for this outcome was an unusual development in the NDVI curve coupled with the use of the arithmetic mean in the reference metric (1 + Average NDVI).
+
+As can be seen from the charts, NDVI values towards the end of October / early November were exceptionally low, especially in Laikipia. In fact, the early warning reports 
+for October indicated a delayed onset of the rainy season in Kajiado ([source](http://knowledgeweb.ndma.go.ke/Content/LibraryDocuments/Kajiado_DEW_Bulletin_-_October_202320231117135136.pdf)) 
+and vegetation greenness being significantly below the long-term average in Laikipia ([source](http://knowledgeweb.ndma.go.ke/Public/Resources/ResourceDetails.aspx?doc=16c97a02-8ac4-462b-aefa-b34a0559ef3c)). 
+
+Furthermore, there were unusual spikes during the initial phase of the observation period, attributed to cloud coverage, which hindered accurate vegetation measurements 
+by satellites. These spikes in data were likely correlated with the onset of storms and heavy rainfall.
+
+This unusual behavior in the NDVI curves has significantly influenced the calculation of the arithmetic mean, which is known to be susceptible to outlier bias, 
+thereby skewing it toward lower values.
+
+## ✍️ Key learnings
+
+We draw the following key learnings from this pilot:
+
+**Using the average NDVI may lead to unexpected outcomes and may not properly reflect the actual situation on the ground:**
+
+The rationale behind choosing the average NDVI value over the last recorded value during the observation period was to address 
+scenarios where the final reported value might be unavailable or influenced by cloud coverage bias. A potentially more precise 
+alternative could involve using the peak NDVI value recorded in the observation period. This would likely offer a closer representation 
+of the actual vegetative state and could prevent unnecessary disbursements. However, this approach relies on an assumption of generally 
+increasing NDVI values, which is not always the case, as evidenced in the year 2021. Therefore, we recognize the need for further detailed 
+analysis and backtesting to develop a more reliable and robust NDVI measurement strategy.
+
+**The oracle’s reporting timing can be optimized to further accelerate the release of funds:**
+
+The campaign officially concluded and became available for oracle reporting on January 1st, 2024, at 10 am UTC, within standard business hours. 
+However, due to the Shamba oracle's configuration to check expired pools just once daily after midnight, the final NDVI report was delayed 
+until 2am on January 2nd, resulting in a 14-hour lag. Adjusting the oracle's configuration to report promptly post-expiration could have 
+eliminated this delay. Moreover, for platforms like DIVA Donate that run multiple campaigns using a common oracle such as Shamba, synchronizing 
+their expiration times within the same daytime hours is recommended for operational efficiency.
+
+**Improve the assessment of eligibility criteria during the pastoralists onboarding process:**
+
+The beneficiary selection process has underscored the importance of refining our beneficiary screening methods. We faced challenges such 
+as duplicate entries and the inclusion of participants lacking essential qualifications such as access to an mPesa wallet or ownership of livestock.
+
+**The fund distribution process worked seamlessly:**
+
+Despite the unexpected outcome of the pilot, it provided us with an opportunity to test the fund distribution process for the first time, which 
+proved efficient and significantly faster compared to traditional methods.
+
+**Onboarding people to crypto-related use cases presents a challenge:**
+
+Only 10 external users participated in the campaign. One of the main reasons was the significant hurdle to get started with transacting on the blockchain. 
+Specifically, to participate in the campaign, users were required to have a crypto wallet, such as [Metamask](https://metamask.io/), installed and funded with MATIC to cover 
+gas fees on the Polygon blockchain, as well as USDT for campaign deposits.
+
+We explored various fiat-to-crypto on-ramp options to facilitate the donor onboarding process. However, all of these options typically demanded KYC procedures, 
+even for small transactions, which contradicted our objective of simplifying the process. One of the more promising solutions identified was [Coinbase Pay](https://www.coinbase.com/de/cloud/products/pay-sdk), 
+which would eliminate the need for KYC since Coinbase has already completed this step, but would be only available to registered Coinbase users.
+
+## 🌔 Conclusion
+
+The pilot campaign conducted in collaboration with Mercy Corps Ventures on DIVA Donate has successfully concluded. USDT 11’271, or 56% of the deposited funds, 
+were efficiently distributed to 262 pastoralists in Kenya, preparing them for the upcoming dry season. The unexpected outcome provided valuable insights into 
+the use of NDVI as the underlying metric. The fund distribution process demonstrated remarkable efficiency, highlighting the potential of blockchain technology 
+in humanitarian efforts. This pilot has equipped us with essential knowledge and experiences as we continue our mission to support pastoralists in the face of 
+climate change challenges.
+
+
+## 💎 Join the cause
+
+If you represent a charity or non-profit organization passionate about the concept of parametric conditional donations, [reach 
+out](http://wladimir.weinbender@divadonate.xyz) and join forces to provide more efficient and effective support to vulnerable communities worldwide. Given the versatile 
+nature of DIVA Protocol, the donation payout can be linked to virtually any metric and the donation release profile can be tailored to reflect the specific needs and objectives.
+
+## About DIVA Donate
+
+DIVA Donate is an innovative platform that leverages blockchain technology to enable parametric conditional donations. It is a 
+joint initiative between three entities united around the mission of empowering vulnerable communities affected by climate change:
+1. [**Fortune Credit**](https://fortunecredit.co.ke/): a microfinance institution in Kenya which provides credit, insurance & other financial services to 50k+ customers including small-holder farmers & pastoralists,
+2. [**Shamba Network**](https://shamba.network/): an oracle which brings ecological/remotely-sensed data on-chain, and
+3. [**DIVA Technologies AG**](https://www.divaprotocol.io/): developer of DIVA Protocol, a smart contract-based system for creating and managing custom derivative contracts peer-to-peer.
+
+## About Mercy Corps Ventures
+
+[Mercy Corps Ventures](https://www.mercycorps.org/what-we-do/ventures) (MCV) invests in and catalyzes venture-led solutions to increase the resilience of underserved individuals and communities. 
+Founded in 2015 as the impact investing arm of Mercy Corps, MCV supported 43 early-stage ventures to scale and raised over $396.7 million 
+in follow-on funding. In September 2023, MCV [announced](https://agfundernews.com/mercy-corps-ventures-pilots-the-blockchain-to-get-cash-transfers-to-communities-ahead-of-climate-shock) 
+a partnership with DIVA Donate to test anticipatory cash transfers to communities ahead of climate shocks leveraging blockchain technology.
+
+## 🔗 Links
+
+* DIVA Donate: [Website](https://www.divadonate.xyz/) | [Twitter](https://twitter.com/DIVADonate_xyz) | [Campaign](https://www.divadonate.xyz/campaign/pastoralists-mcv) 
+* DIVA Protocol: [Website](https://www.divaprotocol.io/) | [Github](https://github.com/divaprotocol/diva-protocol-v1) | [Docs](https://docs.divaprotocol.io/) | [Twitter](https://twitter.com/divaprotocol_io) | [Discord](https://discord.gg/8fAvUspmv3)
+* Fortune Connect: [Website](https://fortunecredit.co.ke/) | [Twitter](https://twitter.com/fortuneconnectk)
+* Shamba Network: [Website](https://shamba.network/) | [Twitter](https://twitter.com/shambanetwork)
+* Mercy Corps Ventures: [Website](https://www.mercycorps.org/what-we-do/ventures) | [Twitter](https://twitter.com/MCSocialVenture)
+
+
+
