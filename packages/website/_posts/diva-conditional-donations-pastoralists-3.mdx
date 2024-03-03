@@ -1,0 +1,168 @@
+---
+title: Empowering pastoralists in Kenya - The third DIVA Donate campaign
+description: Empowering pastoralists in Kenya - The third DIVA Donate campaign
+date: 2024-03-02T23:37:00.284Z
+coverImage: pastoralists_mar_may_2024.jpg
+coverImageDescription: Pastoralists
+coverImageWidth: 900
+coverImageHeight: 628
+featured: true
+author: Walodja1987
+---
+
+Following the successful conditional donation campaign for the October-November-December 2023 rainy season in collaboration with Mercy Corps Ventures, 
+we are excited to announce the launch of the third pilot campaign under the DIVA Donate initiative. Building upon our experiences and 
+the insights gained from the previous campaigns, this new campaign introduces a more robust NDVI metric that corrects for cloud coverage 
+and atmospheric contamination and tests the outcome reporting via the decentralized Tellor oracle system. 
+
+Let’s dive in.
+
+## ✨ About the campaign
+
+In our third campaign, we remain dedicated to providing anticipatory cash transfers to pastoralist communities in Kenya, which are disproportionately affected by 
+climate-change-induced drought.
+
+The campaign’s objective is to assess vegetation health using the [Normalized Difference Vegetation Index](https://de.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index) (NDVI) 
+following the March-April-May 2024 rainy season and disburse funds to participating pastoralists if the NDVI at the end of this period suggests insufficient vegetation to support 
+livestock during the upcoming dry season.
+
+Given a more focused fundraising target of $10’000, compared to $25’000 in the previous campaign, the campaign concentrates on Kajiado county solely. This region was a 
+beneficiary in the last campaign and received 16.4% of the contributed funds.
+
+## 📊 Enhanced NDVI metric
+
+The NDVI, sourced from satellite imagery, remains our key metric to evaluate the vegetation health on the ground. This time, however, we are utilizing a smoothed dataset from the 
+[USGS Famine Early Warning System Network (FEWS)](https://earlywarning.usgs.gov/fews/product/902#documentation) that corrects for cloud coverage and atmospheric contamination.
+
+By leveraging this enhanced dataset, we can directly use the NDVI values recorded at the end of the observation period, eliminating the need for average calculations to 
+address the problem of contamination. The switch to this new dataset is a response to our last campaign's experience, where relying on average NDVI values led to skewed 
+outcomes due to the influence of outliers. A comprehensive analysis and the key learnings from the previous pilot campaign are still being finalized and will be published 
+in a separate article.
+
+<p align="center">
+  <img src="/images/posts/kajiado_county_location.jpg" />
+</p>
+
+## 🔮 Outcome reporting
+
+The reliability of the data reporting system is of utmost importance. In this campaign, we are adopting Tellor Oracle, 
+a decentralized system that allows smart contracts to securely and reliably access data from off-chain sources. Tellor uses a decentralized network of 
+staked reporters to provide this data, ensuring network integrity and discouraging false reporting. In addition, by decentralizing the data provision, 
+we effectively eliminate the risk of a single point of failure, ensuring the system's resilience and reliability.
+
+We will release a comprehensive guide specifically for Tellor reporters over the coming weeks, detailing the process for data retrieval and reporting.
+
+## 🧑‍🎓 Payoff calibration
+
+The payoff calibration process involves identifying the NDVI thresholds indicative of drought conditions to trigger disbursements to pastoralists. 
+The first step is to look at the NDVI data. Below chart shows the FEWS NDVI data for Kajiado county, updated every 5 days and covering the last 12 years.
+
+<p align="center">
+  <img src="/images/posts/pastoralists_3_historical_data.jpg" />
+</p>
+_Source: [FEWS](https://earlywarning.usgs.gov/fews/ewx/index.html)_
+
+The chart illustrates a recurring pattern: an increase in NDVI during the March-April-May rainy season, indicating improved vegetation, 
+followed by a decline until the end of September as the dry season progresses. Low NDVI values at the end of May imply reduced fodder 
+for pastoralists' livestock, forecasting tougher survival conditions through the dry months.
+
+The chart highlights the NDVI values on 31 May for the last 12 years. The values vary between 0.45 in 2014, and 0.74 in 2018, with an 
+average NDVI value of 0.59. Without additional information, it is not possible to tell whether 0.45 represents a low or high level.
+
+To make this assessment, we have leveraged the Vegetation Condition Index (VCI) maps published by the 
+[National Drought Management Authority (NDMA)](http://knowledgeweb.ndma.go.ke/Public/Resources/ResourceDetails.aspx?doc=3e0a4f40-b6a7-4393-9296-be1b2a972e73) in their monthly county reports.
+
+<p align="center">
+  <img src="/images/posts/vci_kajiado.jpg" />
+</p>
+_Source: [Kajiado DEW Bulletin-December 2023](http://knowledgeweb.ndma.go.ke/Public/Resources/ResourceDetails.aspx?doc=3e0a4f40-b6a7-4393-9296-be1b2a972e73)_
+
+The VCI measures the average NDVI over a 3-month period, mapping the current vegetation health to its historical range, expressed as a percentage from 
+0% to 100%. Lower VCI values indicate that vegetation health is near the historical minimum, whereas higher values indicate levels closer to the 
+historical maximum. More specifically, VCI values below 20% mark severe drought conditions (highlighted by a red box), values between 20% and 35% 
+indicate moderate drought (highlighted by a yellow box), and values above 35% reflect normal to optimal vegetation conditions (highlighted by a green box).
+
+The presence of yellow or red boxes during the dry season months June, July, August, and September, suggests insufficient vegetation build-up during the 
+preceding rainy season.
+
+With this approach, we identify 2009, 2011, 2014, 2017 and 2022 as the years that experienced drought conditions. Specifically, we can see moderate 
+drought conditions in 2014, 2017 and 2022 associated with NDVI levels of 0.45, 0.50, and 0.49, respectively, by the end of May. For the years 2009 
+and 2011 no specific data is available, however, the presence of red boxes suggests that NDVI levels must have been even lower. Based on these 
+insights, we have set a full fund release for NDVI levels at or below 0.50.
+
+To create a more equitable payout structure, we implemented a linearly increasing payout profile, starting at 0.57, slightly below the 2012-2023 
+average of 0.59. Historically, this selected payout structure would have distributed 100% of the contributed funds in 3 out of 12 cases and 0% 
+in 7 out of 12 cases, underscoring the need-based approach. In the remaining two cases, the payout would have fallen within a range of 0% to 100%, 
+following the linear payout curve.
+
+The chosen payout profile for the campaign is depicted below (note that the NDVI value was shifted by +1 for technical reasons):
+
+<p align="center">
+  <img src="/images/posts/payoff_profile_pastoralists_mar_may_2024.png" />
+</p>
+
+## ♻️ Recycling contributions
+
+Any unreleased funds contributed by the DIVA Donate team to the previous campaign ($8’430) will be recycled and redirected to support the new campaign. 
+In addition, the DIVA delegate has committed himself to contribute the fees withheld by DIVA Protocol at the time of payout claim during the previous 
+campaign (~$50) to the new campaign, thereby emphasizing the flexibility inherent in DIVA Protocol‘s governance model.
+
+Participants from the prior campaign are encouraged to claim any unreleased funds and amplify their impact by supporting the new campaign. If you 
+haven’t claimed the funds from the previous campaign yet, learn how to do it in [this video](https://www.loom.com/share/6a37d6ac32034af4a128308c1a56f789).
+
+## 🏆 Rewards
+
+Consistent with previous campaigns, participants will receive a digital certificate (POAP) to commemorate their contribution. Donations of $75 or 
+more will receive the golden-ring POAP. Smaller contributions will be rewarded with the silver POAP.
+
+<p align="center">
+  <img src="/images/posts/Front - Gold (1).png" style={{ width: '45%', height: 'auto', display: 'inline-block', padding: '20px' }}/>
+  <img src="/images/posts/Front - Silver (1).png" style={{ width: '45%', height: 'auto', display: 'inline-block', padding: '20px' }}/>
+</p>
+
+## 🛠️ Technical campaign details
+
+Below are the technical details of the campaign setup, enabling everyone to monitor the fund flows and the reporting process on the Polygon blockchain:
+* Donor token: [0xF253278A45fD1EB0F2B16260C9314b8740Fa94cf](https://polygonscan.com/address/0xF253278A45fD1EB0F2B16260C9314b8740Fa94cf)
+* Beneficiary token: [0xC6426753264774EAB988d91DD29CfE6a626b14a0](https://polygonscan.com/address/0xC6426753264774EAB988d91DD29CfE6a626b14a0)
+* PoolId: [0x8c85108a28a163d1722c2140eea57f9d1cb7f83f69dfc04eb0d9e51298dea2b6](https://polygonscan.com/tx/0x6090358798710828fa20c63f42fcf4be3cc8f91e90e1aa31ac7ced48e0d17e60)
+* [Reference asset description stored on IPFS](https://bafybeibdjwmxn3r7cxx4bqqolqp3qib6l2co6mdrqh46ry2ab7cgbsamtu.ipfs.w3s.link/tellor_reference_asset_kajiado.json)
+* Tellor oracle adapter: [0x7950DB13cc37774614B0AA406e42a4C4f0BF26a6](https://polygonscan.com/address/0x7950DB13cc37774614B0AA406e42a4C4f0BF26a6)
+
+The cost for [creating the programmatic escrow](https://polygonscan.com/tx/0x6090358798710828fa20c63f42fcf4be3cc8f91e90e1aa31ac7ced48e0d17e60) on DIVA Protocol on the Polygon network amounted to $0.06.
+
+## 🔢 DIVA Donate Statistics
+
+Below provides the key DIVA Donate statistics since inception:
+* Number campaigns: 2
+* Contributed: $25’602
+* Donated: $11’744 (45.9%)
+
+## 💎 Join the cause
+
+The DIVA Donate team is actively seeking partners who share our vision of harnessing blockchain technology to launch parametric conditional donation campaigns. 
+Given the versatile nature of DIVA Protocol, the donation payout can be linked to virtually any metric. If you represent a charity or NGO passionate about this 
+concept, [reach out](http://wladimir.weinbender@divadonate.xyz) and join forces to provide more efficient and effective support to vulnerable communities worldwide.
+
+## 🌔 Conclusion
+
+The third campaign emphasizes our commitment to mitigate the impact of climate change on pastoralist communities in Kenya. By enhancing the NDVI metric, 
+we aim to provide more precise and impactful support. The incorporation of the Tellor oracle for outcome reporting reflects our dedication to improving 
+the reliability of our solution. We are grateful for the continued support of our donors and partners and look forward to making a meaningful difference 
+in the lives of those we serve. Together, we can continue to empower communities and foster resilience against the challenges posed by climate change.
+
+## 🍀 About DIVA Donate
+
+DIVA Donate is an innovative platform that leverages blockchain technology to enable parametric conditional donations. It is a 
+joint initiative between two entities united around the mission of empowering vulnerable communities affected by climate change:
+1. [**Fortune Credit**](https://fortunecredit.co.ke/): a microfinance institution in Kenya which provides credit, insurance & other financial services to 50k+ customers including small-holder farmers & pastoralists, and
+2. [**DIVA Technologies AG**](https://www.divaprotocol.io/): developer of DIVA Protocol, a smart contract-based system for creating and managing custom derivative contracts peer-to-peer.
+
+## 🔗 Links
+
+* DIVA Donate: [Website](https://www.divadonate.xyz/) | [Twitter](https://twitter.com/DIVADonate_xyz)
+* DIVA Protocol: [Website](https://www.divaprotocol.io/) | [Github](https://github.com/divaprotocol/diva-protocol-v1) | [Docs](https://docs.divaprotocol.io/) | [Twitter](https://twitter.com/divaprotocol_io) | [Discord](https://discord.gg/8fAvUspmv3)
+* Fortune Connect: [Website](https://fortunecredit.co.ke/) | [Twitter](https://twitter.com/fortuneconnectk)
+
+
+
