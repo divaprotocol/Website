@@ -1,0 +1,132 @@
+---
+title: Flash loans in DIVA Protocol
+description: Flash loans in DIVA Protocol
+date: 2024-03-16T20:37:00.284Z
+coverImage: prediction_market.jpeg
+coverImageDescription: Chart
+coverImageWidth: 900
+coverImageHeight: 628
+author: Walodja1987
+---
+
+
+**TL;DR: This article explores the use of flash loans in prediction markets built on top of DIVA Protocol, aiming to enhance user 
+experience and optimize market making activities. This idea is inspired by a prediction market app currently under development.**
+
+In prediction market applications, ease of use for participants is key. Users should be able to easily place bets on outcomes and close 
+their positions with a simple click.
+
+This simplicity is achieved by limiting users to market buys and sells of the corresponding outcome shares, reserving the complexity 
+of limit orders for advanced market participants like market makers.
+
+In DIVA Protocol, market makers are essential for liquidity, as they mint position tokens to sell them on the market for a profit. 
+This process involves (i) depositing funds into DIVA Protocol to mint equal quantities of LONG and SHORT position tokens (which 
+combined represent a claim on the deposited funds) and (ii) placing sell limit orders via decentralized protocols such as 0x Protocol, 
+facilitating market buys for users. The goal is to sell these tokens to two independent users for an amount exceeding the initial deposit.
+
+> **Example:** Bob deposits $100 into DIVA Protocol to mint 100 LONG and 100 SHORT Tokens. He then lists the 100 LONG tokens 
+for sale at a total price of $60 and the 100 SHORT tokens at $45. With Charlie buying the LONG tokens and Emily the SHORT tokens, 
+Bob earns a profit of $5.
+
+Furthermore, in order to enable users to close their positions via market sell, market makers must provide buy limit orders 
+for both tokens. Consequently, a market maker would have to maintain a four-sided market to achieve the desired simplicity 
+for users. This is adding complexity and operational burden. 
+
+The following sections will detail how integrating flash loans can significantly reduce this complexity, offering a more 
+streamlined approach for market makers.
+
+## 💎 Closing positions with opposite outcome token
+
+The first step towards reducing the complexity for market makers is to realize that instead of selling their position, users can 
+buy an equivalent amount of the opposite outcome token and redeem them for collateral via DIVA Protocol.
+
+> **Example:** Let's say Alice has 100 LONG tokens, each priced at 20c. Directly selling these tokens would yield her $20. Alternatively, 
+Alice could achieve the same outcome by buying 100 SHORT tokens, trading at an implied price of 80c each, for a total of $80, and 
+redeeming both for $100 from DIVA Protocol, netting her $20.
+
+Yet, an issue arises since Alice needs funds ($80 in our example) to purchase the opposite token, which may not be always available.
+
+What if Alice could briefly borrow the necessary funds to buy the opposite token and immediately repay the loan upon redeeming the 
+collateral from DIVA Protocol? That’s where flash loans come in.
+
+## ⚡ Flash loans
+
+Flash loans introduce an innovative form of lending unique to the blockchain world. These loans do not require collateral but must be 
+repaid within the span of a single smart contract transaction. Failure to do so results in the reversal of the entire transaction, 
+thus eliminating any repayment risk.
+
+To grasp the concept of flash loans, particularly for individuals that come from traditional finance, it's essential to understand the 
+atomic nature of smart contract transactions. Essentially, a smart contract transaction comprises a sequence of instructions executed as 
+one unit. Should any part of this sequence fail, the entire transaction is undone, leaving the blockchain unchanged.
+
+A flash loan is integrated as a specific instruction within a smart contract transaction. It involves borrowing funds at the transaction's 
+start and repaying them by its conclusion. Overcollateralized lending protocols like Aave, Compound or MakerDAO have flash lending 
+capabilities integrated into their protocols for public use.
+
+To illustrate, consider Alice’s situation again: She owns 100 LONG tokens valued at 20c each and aims to liquidate her position. 
+With an implied SHORT token price of 80c, the following steps are executed as part of a single smart contract transaction:
+* Borrow $80 from Aave
+* Purchase 100 SHORT tokens with the $80
+* Redeem 100 LONG and 100 SHORT tokens from DIVA Protocol for $100
+* Repay the $80 loan, retaining $20 as the net proceeds, mirroring the direct sale of LONG tokens
+
+The example shows how the flash loan instructions (steps 1 & 4) encapsulate the transaction's other operations (steps 2 & 3), 
+allowing for their replacement with any other operations, such as exploiting arbitrage opportunities or refinancing outstanding loans.
+
+## 🫰 Presence of fees
+
+In our previous example, we omitted flash loan fees, trading fees and redemption fees for the sake of simplicity. However, in 
+reality, those fees are not zero. Aave charges a 0.09% interest on the flash loan, DIVA Protocol applies a 0.25% upon redemption, 
+the trading fee is also typically non-zero.
+
+Intuitively, in the presence of fees the net dollar amount received at the end of a transaction will be lower, introducing the 
+possibility that the flash loan cannot be repaid.
+
+To illustrate the impact of fees, let’s revisit our previous example, assuming the standard Aave and DIVA fees and a 1% trading fee:
+
+**Scenario 1:** Alice intends to liquidate her LONG tokens, which are traded at 20c and the implied SHORT token price being 80c.
+* Borrow $80.80 from Aave to cover the $80 purchase price for 100 SHORT tokens and the trading fee of $0.80, leading to a repayment amount of $80.80*1.0009 = $80.8727
+* Purchase 100 SHORT tokens for $80.80 including trading fee
+* Redeem 100 LONG and 100 SHORT tokens from DIVA Protocol for $100*(1-0.0025) = $99.75 after the redemption fee
+* Repay the $80.8727 loan, yielding $18.8773 net proceeds after all fees (vs. $20 in the absence of fees)
+
+Here, the funds available after fees ($99.75) suffice for loan repayment ($80.8727), ensuring the transaction concludes successfully. In mathematical terms we have: $99.75 - $80.8727 >= 0.
+
+**Scenario 2:** Now let’s consider a scenario where Alice’s LONG token is valued at 1c, with the SHORT token priced at 99c.
+* Borrow $99.99 from Aave to cover the $99 purchase price for 100 SHORT tokens and the trading fee of $0.99, leading to a repayment amount of $99.99*1.0009 = $100.08
+* Purchase 100 SHORT tokens for $99.99 including trading fee
+* Redeem 100 LONG and 100 SHORT tokens from DIVA Protocol for $100*(1-0.0025) = $99.75 after the redemption fee
+
+In this case, loan repayment is not possible since the available funds after step 3 ($99.75) are less than the required repayment amount ($100.08), 
+leading to a transaction failure. In mathematical terms we have: $99.75 - $100.08 < 0.
+
+From these reflections, we can derive a general formula to calculate the threshold price of the opposite token that ensures loan repayment:
+
+<p align="center">
+  <img src="/images/posts/formula_threshold_price_1.jpg" />
+</p>
+
+where _p_ represents the price of the opposite token, and _m_ the quantity of the owned token being liquidated (100 in our previous example).
+
+Simplifying this formula yields:
+
+<p align="center">
+  <img src="/images/posts/formula_threshold_price_2.jpg" />
+</p>
+
+Under the assumed fee structure, the threshold price _p_ would be $0.986736, meaning that the flash loan will succeed if the price of the SHORT token 
+is less than or equal to $0.986736.
+
+## 💡 Additional considerations
+
+In a scenario where a user has sufficient funds to buy the opposite side, no flash loan is needed. To address instances where a user has partial funds, 
+the smart contract function that triggers the flash loan based liquidation operations could be designed to accept the loan amount as an input parameter.
+
+## 🌔 Conclusion
+
+This article explored a flash loan-based approach for liquidating derivative positions created on DIVA Protocol, aimed at enhancing the user experience 
+and streamlining market-making processes.
+
+If this concept piques your interest, we invite you to join us in the development of this (small) smart contract adapter to expand the DIVA infrastructure 
+ecosystem.
+
