@@ -1,0 +1,226 @@
+---
+title: DIVA Donate - 3rd campaign completes
+description: DIVA Donate - 3rd campaign completes
+date: 2024-06-23T23:37:00.284Z
+coverImage: pastoralists-780x439.jpg
+coverImageDescription: Pastoralists
+coverImageWidth: 900
+coverImageHeight: 628
+featured: true
+author: Walodja1987
+---
+
+**TL;DR:** The [third campaign](https://www.divaprotocol.io/posts/diva-conditional-donations-pastoralists-3)
+concluded on 10 June 2024. No donation payment was triggered due to favorable vegetation
+conditions. **All participants can claim back their contributions, totaling $8'632.60.**
+
+## 🌍 Outcome
+
+The [NDVI](https://de.wikipedia.org/wiki/Normalized_Difference_Vegetation_Index) value as of 31 May 2024, used to assess vegetation and drought conditions at the
+onset of the dry season, was recorded at 0.72 on 10 June 2024, the time when the outcome reporting commenced. 
+This value significantly exceeded the threshold value of 0.57, marking it as the second highest in recorded history.
+According to the predefined criteria for donation release payouts, no payout was triggered 
+(the shift by 1 in the NDVI value is for technical reasons and does not affect the outcome).
+
+<p align="center">
+  <img src="/images/posts/donation-chart-outcome-kajiado-3.png" />
+</p>
+
+Below is a graphic that puts the outcome into historical context by comparing it to previous
+years that would have triggered a payout due to drought conditions (2014, 2015, 2017, 2022,
+2023) according to the established payoff profile, alongside the maximum value recorded in
+2018 (0.74).
+
+<p align="center">
+  <img src="/images/posts/FEWS Outcome.png" />
+</p>
+<p style={{ fontSize: 'smaller', color: 'rgba(255, 255, 255, 0.6)' }}>
+  <em>Please note that due to the smoothing algorithm used by FEWS, past values may be revised
+  retroactively. For instance, the NDVI value for May 31, 2024, was initially reported at 0.72
+  on June 10. It was later adjusted to 0.71 on June 12, and reduced further to 0.69 by June 23.</em>
+</p>
+
+The outcome aligns with the assessments from Kenya's National Drought Management Authority
+(NDMA) detailed in their monthly reports for [March](http://knowledgeweb.ndma.go.ke/Public/Resources/ResourceDetails.aspx?doc=ae30158c-9ef7-436c-b441-a0f5b2e35c15), 
+[April](http://knowledgeweb.ndma.go.ke/Content/LibraryDocuments/Kajiado_DEW_Bulletin-_April_2024.20240521152125.pdf), and [May](http://knowledgeweb.ndma.go.ke/Public/Resources/ResourceDetails.aspx?doc=9681f74b-546b-4552-b11b-92605e8f10db). 
+An excerpt from the April report, the peak month of the "Long Rains" season, describes the conditions on the ground:
+
+> Due to continued enhanced rainfall during the month, water is adequately available. Open water sources are 
+90%-100% recharged, silted too due to floods; rivers overflowing to vicinity. They are expected to last for 
+about four to five months. Vegetation condition above normal. Pasture and browse conditions are very good, 
+but heavily flooded. Livestock body condition is very good. Milk production slightly above normal due to 
+increased calving. No migration, but moved to higher grounds due to floods in some areas. No Livestock mortalities due to drought.
+
+## ✨ Contributions
+
+A total of $8'632.60 was contributed to the campaign, with the majority consisting of Mercy Corps Ventures (MCV)
+funds rolled over from the previous campaign by the DIVA Donate team. Additionally, $70 was
+contributed by two external users from the DIVA Protocol community.
+
+## 🔮 Outcome reporting via Tellor
+
+The third campaign tested the use of the [Tellor Oracle](https://tellor.io/) for outcome reporting. Tellor is a
+decentralized oracle system employing a network of reporters to relay off-chain data to the blockchain.
+Reporters are required to post a financial bond of approximately $10,000 prior to reporting,
+which may be forfeited in the event of inaccurate reporting, ensuring data accuracy and
+integrity. Crucially, using a decentralized oracle system eliminates the risk of a single point of failure, 
+enhancing the system's resilience and reliability.
+
+A comprehensive [guide](https://docs.divaprotocol.io/technical-blog/ndvi-outcome-reporting-guide-for-tellor-reporters) on how to source and report the NDVI value was published for Tellor
+reporters before campaign expiry.
+
+The timeline of the outcome reporting related events is summarized below:
+- The campaign expired on 10 June 2024, at 06:00:00 PM UTC, opening a 7-day window for outcome
+reporting.
+- Just 16 minutes later, the NDVI value was reported by a Tellor reporter ([tx link](https://polygonscan.com/tx/0xac50ec16204a6fe3fb7e75a89453a1a5f74ea106440e6919401e9cade676af42)).
+- After remaining undisputed for 12 hours, a key requirement to ensure data accuracy, the value
+was confirmed and pushed to DIVA Protocol for settlement ([tx link](https://polygonscan.com/tx/0x70496cff069b1448b375f58e1385e071bea72bdcd20b2b6e7e6e594e968b36a7)).
+
+The reporting via Tellor Protocol went smoothly, eliminating the 14-hour delay experienced in
+the previous campaign due to suboptimal timing configuration in the oracle. Combined with
+Tellor's shorter 12-hour dispute period versus DIVA Protocol's conservative three-day period,
+this improvement significantly reduced the time for final value confirmation to 12 hours, down
+from 86 hours previously.
+
+## 🏆 POAPs
+
+As a token of appreciation, participants received a digital certificate (so-called POAP) to
+commemorate their contribution which can be viewed [here](https://collectors.poap.xyz/en-us/scan). Donations of $75 or more received the golden-ring POAP.
+Smaller contributions were rewarded with the silver POAP.
+
+<p align="center">
+  <img src="/images/posts/Front - Gold (1).png" style={{ width: '45%', height: 'auto', display: 'inline-block', padding: '20px' }}/>
+  <img src="/images/posts/Front - Silver (1).png" style={{ width: '45%', height: 'auto', display: 'inline-block', padding: '20px' }}/>
+</p>
+
+## 💰 Claim your funds
+To reclaim your funds, navigate to [divadonate.xyz](https://www.divadonate.xyz) and select
+**"My Donations"** from the top navigation menu. Click on **"Claim Unfunded Amount"** and confirm the
+transaction in your wallet.
+
+The reclaimed MCV funds are earmarked for redeposit into the fourth campaign planned for October-November-December
+2024. This third iteration of fund utilization underscores the magnified impact of every dollar contributed.
+
+## 💡 Key Learnings
+
+This section summarizes the key takeaways from the third campaign.
+
+### Smooth reporting process via Tellor Oracle:
+The integration of the Tellor Oracle improved final value confirmation times by over 80%,
+reducing disbursement delays in the event of a payout.
+
+### Carefully study new datasets before using them as trigger metrics:
+
+The campaign utilized the publicly available, smoothed NDVI dataset from the [USGS Famine
+Early Warning System Network (FEWS)](https://earlywarning.usgs.gov/fews/product/902#documentation), 
+which corrects for cloud coverage and atmospheric contamination. Post-launch, it was discovered that 
+the dataset’s smoothing algorithm retroactively adjusts historical observations. For example, the NDVI 
+value for May 31, 2024, initially reported at 0.72 on June 10, subsequently dropped to 0.71 by June 12 
+and further to 0.69 by June 23.
+
+To mitigate confusion and prevent costly disputes, we highlighted this fact in the [Tellor reporting guide](https://docs.divaprotocol.io/technical-blog/ndvi-outcome-reporting-guide-for-tellor-reporters) 
+and provided additional instructions on which value to report, including a recommendation to document 
+submissions through video recording. The recording from the Tellor reporter who submitted the NDVI value 
+of 0.72 for the third campaign can be found [here](https://www.loom.com/share/f5849a5edc9c44e88c5ad4352b8f4d3b). For future campaigns utilizing the FEWS dataset, these 
+details should be clarified in the [reference asset specifications](https://bafybeibdjwmxn3r7cxx4bqqolqp3qib6l2co6mdrqh46ry2ab7cgbsamtu.ipfs.w3s.link/tellor_reference_asset_kajiado.json) already.
+
+This situation emphasizes the importance of fully understanding the dataset and clearly communicating 
+the reporting requirements to avoid costly disputes.
+
+### Challenges in user onboarding:
+
+Participation was limited to only two external users with a total amount of $70, primarily 
+due to low marketing activities and the barrier of requiring web3 knowledge for participation. 
+Moving forward, we will focus on forming partnerships with NGOs and securing grant funding 
+to engage fewer, but more impactful, participants who can contribute more substantially in 
+terms of dollar amounts to the campaigns. However, we want to emphasize that external users 
+will still be able to participate in the campaigns.
+
+### Clarifying expectations for beneficiaries
+
+Despite prior explanations about the conditional nature of the program, pastoralists onboarded for the 
+campaign anticipated guaranteed payouts, mistaking the onboarding process for a pledge of funds at season’s end. 
+To prevent such misunderstandings, we plan to transition to group onboarding strategies. This method distributes 
+funds to established groups representing the pastoralists, who then allocate the funds internally, simplifying the 
+process for future campaigns by reducing the frequency of individual onboarding.
+
+### Add protection against flooding:
+
+While rainfall is generally beneficial for vegetation, excessive rainfall, like that observed in April, 
+can lead to flooding. To provide protection against excessive rainfall, the campaign payout could be 
+structured to cover both scenarios – too little and too much rain. This dual-trigger strategy will be 
+explored in future campaigns to better protect against the two extremes.
+
+## 🔍 Transparency
+
+While this article focuses on the outcomes and insights from our third campaign, it also presents an opportunity 
+to underscore the transparent nature of the processes at DIVA Donate. Given the 
+inherent transparency of blockchain technology, all details and transactions related to the campaign 
+can be independently verified. Please note that some information may be encoded in a format that is 
+not directly interpretable without specific knowledge or decoding tools (e.g., 1720000000000000000 
+corresponds to 1.72).
+
+### Campaign setup
+
+The campaign parameters, including the [reference asset](https://bafybeibdjwmxn3r7cxx4bqqolqp3qib6l2co6mdrqh46ry2ab7cgbsamtu.ipfs.w3s.link/tellor_reference_asset_kajiado.json), payout profile, data provider, and expiry time, 
+are specified upfront and cannot be altered after campaign launch. These details are accessible 
+on the blockchain explorer [louper.dev](https://louper.dev/diamond/0x2C9c47E7d254e493f02acfB410864b9a86c28e1D?network=polygon#read) by following these steps:
+1. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Navigate to **Read**,</span>
+2. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Select **GetterFacet** in the Choose Facet dropdown on the right,</span>
+3. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Expand **getPoolParameters** function,</span>
+4. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Enter the campaign identifier **0x8c85108a28a163d17222c2140eea57f9d1cb7f83f69dfc04eb0d9e51298dea2b6** into the _poolId field,</span>
+5. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Click the **Query** button.</span>
+The parameters floor, inflection, cap, and gradient define the shape of the payoff curve. For interpretation 
+of these parameters, consult the [DIVA Protocol documentation](https://docs.divaprotocol.io/introduction/what-is-diva-protocol/how-it-works/payoff-curves).
+
+<p align="center">
+  <img src="/images/posts/Campaign details-3_1.jpg" />
+</p>
+
+### Outcome reporting steps
+
+The two transactions involved in the outcome reporting via the Tellor Oracle can be accessed here:
+* [NDVI value submission to Tellor Protocol](https://polygonscan.com/tx/0xac50ec16204a6fe3fb7e75a89453a1a5f74ea106440e6919401e9cade676af42): 
+This is the initial step where the NDVI value is submitted to the Tellor Protocol by Tellor reporters.
+* [NDVI value submission from Tellor Protocol to DIVA Protocol](https://polygonscan.com/tx/0x70496cff069b1448b375f58e1385e071bea72bdcd20b2b6e7e6e594e968b36a7): 
+If a reported NDVI value remains undisputed for at least 12 hours, anyone can trigger the push of the value from Tellor Protocol to DIVA Protocol for final processing.
+
+### Reported outcome
+
+The final value (finalReferenceValue) and the respective payouts for beneficiaries (payoutShort) and participants 
+(payoutLong) can be verified in the [same location](https://louper.dev/diamond/0x2C9c47E7d254e493f02acfB410864b9a86c28e1D?network=polygon#read) as the campaign setup.
+
+<p align="center">
+  <img src="/images/posts/Campaign outcome-3_2.jpg" />
+</p>
+
+### Contributions
+Details on all contributions, including contributing accounts, amounts, are available [here](https://polygonscan.com/token/0xF253278A45fD1EB0F2B16260C9314b8740Fa94cf) 
+(transactions labelled **createContingentPool** and **addLiquidity**).
+
+### Claim back
+All claim back transactions following the campaign's expiry can be viewed in the [same section as contributions](https://polygonscan.com/token/0xF253278A45fD1EB0F2B16260C9314b8740Fa94cf) 
+(transactions labelled **batchRedeemPositionToken**).
+
+## 🌔 Conclusion
+
+The successful completion of the third DIVA Donate campaign highlights our ongoing commitment to increasing the climate resilience of vulnerable communities through technology. By integrating the Tellor Oracle, we've significantly improved outcome 
+reporting times and reliability. We look forward to leveraging these insights to refine future initiatives and 
+effectively address extreme weather conditions. Thank you to all participants for your support and contribution 
+towards making a meaningful difference in our target communities.
+
+## 🍀 About DIVA Donate
+
+DIVA Donate is an innovative platform that leverages blockchain technology to enable parametric conditional donations. It is a 
+joint initiative between two entities united around the mission of empowering vulnerable communities affected by climate change:
+1. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>[**Fortune Credit**](https://fortunecredit.co.ke/): a microfinance institution in Kenya which provides credit, insurance & other financial services to 50k+ customers including small-holder farmers & pastoralists, and </span>
+2. <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>[**DIVA Technologies AG**](https://www.divaprotocol.io/): developer of DIVA Protocol, a smart contract-based system for creating and managing custom derivative contracts peer-to-peer.</span>
+
+## 🔗 Links
+
+* DIVA Donate: [Website](https://www.divadonate.xyz/) | [Twitter](https://twitter.com/DIVADonate_xyz)
+* DIVA Protocol: [Website](https://www.divaprotocol.io/) | [Github](https://github.com/divaprotocol/diva-protocol-v1) | [Docs](https://docs.divaprotocol.io/) | [Twitter](https://twitter.com/divaprotocol_io) | [Discord](https://discord.gg/8fAvUspmv3)
+* Fortune Credit: [Website](https://fortunecredit.co.ke/) | [Twitter](https://twitter.com/fortuneconnectk)
+
+
+
