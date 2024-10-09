@@ -68,7 +68,7 @@ the Federal Reserve, with the total support eventually amounting to approximatel
 **The key takeaway from this section is that in a fractional reserve system, the burden of covering a shortfall from excess 
 claims is shifted to another party, knowingly or unknowingly.**
 
-In the next section how we can enable a similar risk transfer mechanism in DeFi while maintaining full collateralization.
+In the next section, we will explore how we can enable a similar risk transfer mechanism in DeFi while maintaining full collateralization.
 
 ## 🎨 Applying fractional reserve principles to enhance capital efficiency in DeFi
 
@@ -92,10 +92,14 @@ The payout of the synthetic asset mirrors the amount of collateral recovered fro
 payouts under the four possible scenarios:
 
 <p align="center">
-  <img src="/images/posts/outcome_table.png" />
+  <img src="/images/posts/outcome_table.png" width="100%" />
 </p>
 
 The synthetic asset returns $2,000 if no claims are triggered, $1,000 if one policy triggers, and $0 if both trigger. This is depicted in the following chart.
+
+<p align="center">
+  <img src="/images/posts/Fractional Reserve_recoverable_collateral_with_bg.drawio.png" width="100%" />
+</p>
 
 This intrinsic value of the synthetic asset enables it to be used as collateral to secure a loan from a lender willing to accept the risk of a 
 total loss arising from the synthetic asset becoming worthless when both policies trigger.
@@ -104,7 +108,7 @@ In three of the four scenarios - (0,0), (1,0), and (0,1) - the synthetic asset w
 the asset becomes worthless, resulting in a total loss for the lender. 
 
 To compensate for the risk of loss, the lender could offer Vlad $950 and expect a repayment of $1,000 when the policies expire, earning a yield 
-of 5.26%. This could be an attractive deal if the probability of both policies triggering simultaneously is estimated to be low (e.g., 1%). 
+of 5.26%. This could be an attractive arrangement if the probability of both policies triggering simultaneously is estimated to be low (e.g., 1%). 
 The pricing of these risks is a complex topic and beyond the scope of this article.
 
 This strategy could be scaled to any number of policies that Vlad has underwritten. For example, with 1000 policies, each pre-funded with $1,000, 
@@ -112,7 +116,7 @@ Vlad could opt to transfer the risk of claims exceeding $600,000, effectively fr
 premium demanded by the lender). 
 
 **In this section we have seen how securitizing the recoverable collateral from a portfolio of fully collateralized positions and then borrowing against 
-the resulting synthetic asset provides an effective way to enhance capital efficiency in DeFi, while preserving the assurance that all future 
+the resulting synthetic asset provides an effective way to recover a portion of the pre-funded amount, while preserving the assurance that all future 
 policyholder claims will be honored.** This concept extends beyond insurance and can be applied in prediction markets or other DeFi 
 applications that demand full collateralization.
 
@@ -125,12 +129,15 @@ In this section, we will walk through the technical steps required to implement 
 in conjunction with a lending protocol like [Myso v2](https://github.com/mysofinance/v2), [Morpho](https://morpho.org/) or [Euler v2](https://www.euler.finance/blog/euler-v2-the-new-modular-age-of-defi).
 
 The implementation involves the following key steps:
-1. **Create** insurance policies and pre-fund them with the insurance cover amount.
-2. **Bundle and securitize** the positions representing the recoverable collateral into a single synthetic asset.
-3. **Borrow** funds using the synthetic asset as collateral.
-4. **Recover** any remaining collateral from the policies.
-5. **Repay** the lender.
-6. **Transfer** any excess funds to the borrower.
+
+<div style={{ paddingLeft: '20px' }}>
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>1. **Create** insurance policies and pre-fund them with the insurance cover amount.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>2. **Bundle and securitize** the positions representing the recoverable collateral into a single synthetic asset.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>3. **Borrow** funds using the synthetic asset as collateral.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>4. **Recover** any remaining collateral from the policies.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>5. **Repay** the lender.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>6. **Transfer** any excess funds to the borrower.</span>
+</div>
 
 ### Create
 Using DIVA Protocol, an insurance policy can be created by specifying the policy parameters including the trigger conditions 
@@ -138,12 +145,15 @@ Using DIVA Protocol, an insurance policy can be created by specifying the policy
 stablecoin such as USDT or USDC.
 
 This process results in the issuance of two conditional claims on the funds, both represented as ERC20 tokens: 
-1. **Token A**, representing the insurance policy, which is sold to the insurance taker (e.g., Alice or Bob) and redeemable if a harvest loss occurs.
-2. **Token B**, representing the insurer’s position, which is inversely related to Token A and redeemable if no harvest loss occurs. 
-This token effectively grants the right to recover any remaining collateral.
+
+<div style={{ paddingLeft: '20px' }}>
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>1. **Token A**, representing the insurance policy, which is sold to the insurance taker (e.g., Alice or Bob) and redeemable if a harvest loss occurs.</span><br />
+  <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>2. **Token B**, representing the insurer's position, which is inversely related to Token A and redeemable if no harvest loss occurs. 
+  This token effectively grants the right to recover any remaining collateral.</span>
+</div>
 
 <p align="center">
-  <img src="/images/posts/Fractional Reserve_Create.drawio.png" />
+  <img src="/images/posts/Fractional Reserve_Create_with_bg.drawio.png" width="100%" />
 </p>
 
 By repeating this step for every new policy, a diverse portfolio of B tokens is built up, with each token distinctly connected to an individual policy.
@@ -155,7 +165,7 @@ One approach is to transfer each B token after policy creation individually to a
 Once consolidated, a synthetic asset can be issued against that vault, representing a claim on the collateral amount recoverable from the bundled positions.
 
 <p align="center">
-  <img src="/images/posts/Fractional Reserve_Bundle.drawio.png" />
+  <img src="/images/posts/Fractional Reserve_Bundle_with_bg.drawio.png" width="100%" />
 </p>
 
 A more cost-effective approach is to designate the vault directly as the recipient of the B tokens at the moment of policy creation. This 
@@ -170,10 +180,10 @@ The next step is to find a lender willing to issue a loan against the synthetic 
 can facilitate this process.
 
 <p align="center">
-  <img src="/images/posts/Fractional Reserve_Borrow.drawio.png" />
+  <img src="/images/posts/Fractional Reserve_Borrow_with_bg.drawio.png" width="100%" />
 </p>
 
-Two essential features for the chosen lending protocol include:
+Two essential features are required for the chosen lending protocol:
 * The ability to accept any ERC20 token as collateral, allowing the synthetic asset to be used for this purpose.
 * The absence of a liquidation mechanism, allowing the lender to incur a loss if the collateral value falls below the loan amount.
 
@@ -209,7 +219,7 @@ scaling these solutions. For those interested in discussing, contributing to, or
 
 DIVA Protocol is a universal smart contract-based system for creating and managing derivative financial contracts peer-to-peer. It provides the foundation 
 for enabling a wide range of financial applications including insurance, prediction markets, conditional donations, structured products, swaps, bets, and more, all operated fully 
-automatically and without central intermediaries. As an open-source protocol, DIVA is freely accessible, empowering developers to innovate and build applications that 
+automatically and without central intermediaries. As an open-source protocol, DIVA is freely accessible, empowering everyone to innovate and build applications that 
 contribute to a more robust financial ecosystem.
 
 
@@ -221,5 +231,9 @@ contribute to a more robust financial ecosystem.
 - 🦜 Twitter: [twitter.com/divaprotocol_io](https://twitter.com/divaprotocol_io)
 - 🤖 Discord: [discord.gg/8fAvUspmv3](https://discord.gg/8fAvUspmv3)
 
+## 📘 Other articles that you may like
+- [Flash loans in DIVA Protocol](https://www.divaprotocol.io/posts/diva-flash-loans)
+- [Empowering pastoralists in Kenya - The third DIVA Donate campaign](https://www.divaprotocol.io/posts/diva-conditional-donations-pastoralists-3)
+- [Introducing the ETH Gas Price Market - Hedging Against Rising Gas Costs](https://www.divaprotocol.io/posts/diva-eth-gas-market-launch)
 
 
