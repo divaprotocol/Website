@@ -1,0 +1,225 @@
+---
+title: Enhancing capital efficiency in DeFi
+description: Enhancing capital efficiency in DeFi
+date: 2024-10-09T23:37:00.284Z
+coverImage: gold_vault.jpeg
+coverImageDescription: Gold vault
+coverImageWidth: 900
+coverImageHeight: 628
+featured: true
+author: Walodja1987
+---
+
+_**TL;DR:** DeFi is often criticized by traditional finance folks for being capital inefficient due to the full 
+collateralization requirement. This article explores how traditional finance achieves capital efficiency through the 
+practice of fractional reserve and presents a comparable mechanism to enhance capital efficiency in DeFi. The 
+described mechanism offers improved transparency and enhanced protection for end-users and taxpayers compared to traditional setups. 
+While this article uses insurance built on top of [DIVA Protocol](https://docs.divaprotocol.io/) as an example use case, the model can be extended to prediction markets 
+and any other DeFi application requiring full collateralization._
+
+## ✨ Introduction
+
+Traditional insurance companies operate on a fractional reserve basis, maintaining only a portion of the maximum potential 
+liabilities in reserve. This practice capitalizes on the uncorrelated nature of risks, making it highly unlikely that an 
+excessive number of insurance claims will be triggered simultaneously, leading to a default.
+
+In contrast, Decentralized Finance (DeFi) protocols, such as DIVA Protocol, require users to fully collateralize their 
+future obligations upfront. While this ensures that all potential claims are covered, thus reinforcing the trustless 
+nature of DeFi, it also greatly limits capital efficiency, reducing the number of policies that can be underwritten 
+relative to traditional settings. This fundamental difference poses a significant challenge for traditional financial 
+institutions considering DeFi integration.
+
+In this article, we will examine the concept of fractional reserve and then derive a comparable mechanism to achieve 
+capital efficiency in DeFi, using insurance as an example use case. Additionally, we will provide a high-level technical 
+implementation guide.
+
+## 🎬 Setting the stage
+
+Vlad plans to build an agricultural insurance business using DIVA Protocol, an open decentralized finance infrastructure 
+to create and manage conditional payment agreements without using banking rails. He issues two harvest loss insurance 
+policies, each fully collateralized with $1,000, and sells them to Bob, a farmer in India, and Alice, a farmer living 
+in Kenya, for $150 each. Vlad collects a total of $300 in premiums and locks up $2,000 in collateral.
+
+In comparison, a traditional insurance company that operates on a 50% fractional reserve basis, would only keep $1,000 
+in reserve, allowing it to underwrite twice as many policies as Vlad, earning $600 using the same amount of collateral. 
+This highlights the perceived capital inefficiency of DeFi.
+
+## 🧪 Understanding fractional reserve
+
+By running a fractional reserve, traditional insurance companies effectively bet that the total claims submitted will 
+not exceed a certain threshold. For instance, if they sell coverage totaling $2,000 but maintain only $1,000 in reserve, 
+they essentially bet that claims will not surpass $1,000. If an excessive number of claims is filed at once though, the 
+insurance company would not be able to cover its liabilities, resulting in a default.
+
+**Who absorbs the insurer’s shortfall risk? Who will step in to cover the deficit if a shortfall occurs?**
+
+In an ideal scenario, the insurance company buys insurance against such an event from a reinsurance company specialized 
+in assessing and consciously accepting those types of risks. However, often it is either the policyholders themselves who 
+will not receive their promised payout or the government, and by extension the taxpayers, who will step in to compensate 
+the policyholders.
+
+One of the most significant examples is the bailout of American International Group (AIG), a global insurance corporation, 
+during the 2008 financial crisis. AIG faced severe liquidity issues due to its exposure to credit default swaps and other 
+risky financial products. The U.S. government intervened to prevent a collapse affecting the global financial system. This 
+intervention included an [initial bailout of $85 billion](https://www.nytimes.com/2008/09/17/business/17insure.html) from 
+the Federal Reserve, with the total support eventually amounting to approximately 
+[$182 billion](https://www.livemint.com/Politics/B132DlCABbziw3ahadw33M/US-to-sell-off-all-its-AIG-stock-ending-182-bn-rescue.html?facet=amp).
+
+**The key takeaway from this section is that in a fractional reserve system, the burden of covering a shortfall from excess 
+claims is shifted to another party, knowingly or unknowingly.**
+
+In the next section how we can enable a similar risk transfer mechanism in DeFi while maintaining full collateralization.
+
+## 🎨 Applying fractional reserve principles to enhance capital efficiency in DeFi
+
+Vlad‘s goal is to unlock a portion of the $2,000 collateral tied up in the two policies in order to be able to underwrite additional policies. 
+By releasing $1,000, he would still have $1,000 in reserve, sufficient to cover obligations in three out of the four possible scenarios. 
+
+However, Vlad is programmatically prohibited from withdrawing any funds from DIVA Protocol prior to the policies‘ expiration. This prevents 
+him from silently transferring shortfall risk to policyholders or taxpayers, a common practice in traditional settings. Consequently, his only 
+option is to transfer the risk to a party that is willing to cover the shortfall.
+
+Setting up a reinsurance policy using DIVA Protocol, similar to the original insurance policies, which would cover the shortfall by paying out 
+$1,000 if both policies trigger is not an option as the funds would be locked inside DIVA Protocol until the policy‘s expiry, leaving Vlad 
+without the immediate liquidity he needs to underwrite additional policies.
+
+**To address both needs, transferring shortfall risk and receiving immediate capital, Vlad can bundle and securitize the collateral recoverable 
+from the policies into a synthetic asset and use it as collateral to secure a loan.**
+
+### Illustrating the payout structure of the synthetic asset
+
+The payout of the synthetic asset mirrors the amount of collateral recovered from the two policies combined. Below table illustrates the 
+payouts under the four possible scenarios:
+
+<p align="center">
+  <img src="/images/posts/outcome_table.png" />
+</p>
+
+The synthetic asset returns $2,000 if no claims are triggered, $1,000 if one policy triggers, and $0 if both trigger. This is depicted in the following chart.
+
+This intrinsic value of the synthetic asset enables it to be used as collateral to secure a loan from a lender willing to accept the risk of a 
+total loss arising from the synthetic asset becoming worthless when both policies trigger.
+
+In three of the four scenarios - (0,0), (1,0), and (0,1) - the synthetic asset would generate enough payout to repay the lender. However, in the (1,1) scenario, 
+the asset becomes worthless, resulting in a total loss for the lender. 
+
+To compensate for the risk of loss, the lender could offer Vlad $950 and expect a repayment of $1,000 when the policies expire, earning a yield 
+of 5.26%. This could be an attractive deal if the probability of both policies triggering simultaneously is estimated to be low (e.g., 1%). 
+The pricing of these risks is a complex topic and beyond the scope of this article.
+
+This strategy could be scaled to any number of policies that Vlad has underwritten. For example, with 1000 policies, each pre-funded with $1,000, 
+Vlad could opt to transfer the risk of claims exceeding $600,000, effectively freeing up nearly $400,000 in capital (a bit less due to the risk 
+premium demanded by the lender). 
+
+**In this section we have seen how securitizing the recoverable collateral from a portfolio of fully collateralized positions and then borrowing against 
+the resulting synthetic asset provides an effective way to enhance capital efficiency in DeFi, while preserving the assurance that all future 
+policyholder claims will be honored.** This concept extends beyond insurance and can be applied in prediction markets or other DeFi 
+applications that demand full collateralization.
+
+This concludes the theoretical discussion. Next, we will examine the practical implementation of this mechanism by combining various DeFi building blocks. 
+
+
+## 🧰 Technical implementation
+
+In this section, we will walk through the technical steps required to implement the presented mechanism using [DIVA Protocol](https://docs.divaprotocol.io/) 
+in conjunction with a lending protocol like [Myso v2](https://github.com/mysofinance/v2), [Morpho](https://morpho.org/) or [Euler v2](https://www.euler.finance/blog/euler-v2-the-new-modular-age-of-defi).
+
+The implementation involves the following key steps:
+1. **Create** insurance policies and pre-fund them with the insurance cover amount.
+2. **Bundle and securitize** the positions representing the recoverable collateral into a single synthetic asset.
+3. **Borrow** funds using the synthetic asset as collateral.
+4. **Recover** any remaining collateral from the policies.
+5. **Repay** the lender.
+6. **Transfer** any excess funds to the borrower.
+
+### Create
+Using DIVA Protocol, an insurance policy can be created by specifying the policy parameters including the trigger conditions 
+(e.g. harvest loss) and expiration, and then pre-funding it with the insurance cover amount, denominated in a USD-pegged 
+stablecoin such as USDT or USDC.
+
+This process results in the issuance of two conditional claims on the funds, both represented as ERC20 tokens: 
+1. **Token A**, representing the insurance policy, which is sold to the insurance taker (e.g., Alice or Bob) and redeemable if a harvest loss occurs.
+2. **Token B**, representing the insurer’s position, which is inversely related to Token A and redeemable if no harvest loss occurs. 
+This token effectively grants the right to recover any remaining collateral.
+
+<p align="center">
+  <img src="/images/posts/Fractional Reserve_Create.drawio.png" />
+</p>
+
+By repeating this step for every new policy, a diverse portfolio of B tokens is built up, with each token distinctly connected to an individual policy.
+
+### Bundle and securitize
+
+The second step involves bundling the B tokens in a vault and securitizing its payout into a single synthetic asset, represented as an ERC20 token. 
+One approach is to transfer each B token after policy creation individually to a vault, such as [thirdweb‘s multiwrap contract](https://portal.thirdweb.com/contracts/explore/pre-built-contracts/multiwrap). 
+Once consolidated, a synthetic asset can be issued against that vault, representing a claim on the collateral amount recoverable from the bundled positions.
+
+<p align="center">
+  <img src="/images/posts/Fractional Reserve_Bundle.drawio.png" />
+</p>
+
+A more cost-effective approach is to designate the vault directly as the recipient of the B tokens at the moment of policy creation. This 
+method eliminates the need for separate transfer transactions, thereby reducing transaction costs.
+
+For optimal efficiency, it is recommended that all policies are pre-funded with the same stablecoin, streamlining the financial operations 
+associated with borrowing and repayment.
+
+### Borrow 
+
+The next step is to find a lender willing to issue a loan against the synthetic asset. Existing lending protocols like Myso v2, Morpho or Euler v2 
+can facilitate this process.
+
+<p align="center">
+  <img src="/images/posts/Fractional Reserve_Borrow.drawio.png" />
+</p>
+
+Two essential features for the chosen lending protocol include:
+* The ability to accept any ERC20 token as collateral, allowing the synthetic asset to be used for this purpose.
+* The absence of a liquidation mechanism, allowing the lender to incur a loss if the collateral value falls below the loan amount.
+
+The specifics of the borrowing process will vary depending on the chosen protocol. Typically, it involves either receiving a 
+signed loan offer from potential lenders or placing a borrow offer at desired terms. Once an offer is accepted, the synthetic 
+asset is deposited and locked in an on-chain escrow, where it remains until the loan reaches maturity, and the loan funds are transferred to the borrower.
+
+### Claim, repay and transfer
+Upon the expiration of the policies, the B tokens must first be redeemed/liquidated for the underlying stablecoin from DIVA Protocol. 
+These funds are then used to repay the loan, with any surplus returned to the borrower.
+
+The implementation of the repayment mechanism necessitates the development of an adapter contract that interacts with both DIVA Protocol and the lending protocol. 
+If you are interested in contributing to its creation, please reach out on our [Discord](https://discord.gg/8fAvUspmv3).
+
+
+## 🌔 Conclusion
+
+This article has presented a framework for enhancing capital efficiency in a fully collateralized DeFi system by applying the principles of fractional 
+reserve systems in a decentralized context. By pre-funding insurance policies and refinancing them through lenders, an insurer can return a portion of 
+the collateral initially locked to back the policies, thus enabling the underwriting of additional policies. Crucially, this approach maintains the 
+trustless nature of the system, ensuring that all positions remain fully collateralized.
+
+This framework has broader applications beyond the insurance sector. It can be adapted to prediction markets, which can also be facilitated by DIVA Protocol, 
+and other DeFi applications that require full collateralization.
+
+Adopting such models could significantly enhance transparency, improve protection for end-users, and potentially ease the regulatory burden for insurers. 
+However, the success of this mechanism largely depends on the presence of sophisticated lenders who can effectively assess and manage the associated 
+risks. As this sector continues to evolve, there is a significant opportunity for community involvement and development, especially in refining and 
+scaling these solutions. For those interested in discussing, contributing to, or implementing this model, please reach out on our [Discord](https://discord.gg/8fAvUspmv3).
+
+
+## 📈 About DIVA Protocol
+
+DIVA Protocol is a universal smart contract-based system for creating and managing derivative financial contracts peer-to-peer. It provides the foundation 
+for enabling a wide range of financial applications including insurance, prediction markets, conditional donations, structured products, swaps, bets, and more, all operated fully 
+automatically and without central intermediaries. As an open-source protocol, DIVA is freely accessible, empowering developers to innovate and build applications that 
+contribute to a more robust financial ecosystem.
+
+
+## 🔗 Links
+
+- 🌐 Website: [divaprotocol.io/](https://www.divaprotocol.io/)
+- 🍏 Github: [github.com/divaprotocol/diva-protocol-v1](https://github.com/divaprotocol/diva-protocol-v1)
+- 📚 Docs: [docs.divaprotocol.io/](https://docs.divaprotocol.io/)
+- 🦜 Twitter: [twitter.com/divaprotocol_io](https://twitter.com/divaprotocol_io)
+- 🤖 Discord: [discord.gg/8fAvUspmv3](https://discord.gg/8fAvUspmv3)
+
+
+
