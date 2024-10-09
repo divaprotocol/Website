@@ -193,7 +193,11 @@ asset is deposited and locked in an on-chain escrow, where it remains until the 
 
 ### Claim, repay and transfer
 Upon the expiration of the policies, the B tokens must first be redeemed/liquidated for the underlying stablecoin from DIVA Protocol. 
-These funds are then used to repay the loan, with any surplus returned to the borrower.
+These funds are then used to repay the loan, with any surplus returned to the borrower (the insurer).
+
+<p align="center">
+  <img src="/images/posts/Fractional Reserve_Claim_with_bg.drawio.png" width="100%" />
+</p>
 
 The implementation of the repayment mechanism necessitates the development of an adapter contract that interacts with both DIVA Protocol and the lending protocol. 
 If you are interested in contributing to its creation, please reach out on our [Discord](https://discord.gg/8fAvUspmv3).
